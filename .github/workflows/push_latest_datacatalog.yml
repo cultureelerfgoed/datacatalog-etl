@@ -1,31 +1,42 @@
-# This is a basic workflow to help you get started with Actions
-
-name: RCE Datacatalog ETL 
+name: 'RCE Datacatalog ETL' 
 
 env:
-  ARTIFACT_PATH: 'artifact-data.json'
-  GRAPH_ID: 'muurschilderingen-latest-graph'
+  BASE_URI: 'https://kennis.cultureelerfgoed.nl/api.php'
+  ARTIFACT_PATH: 'artifact-data.ttl'
+  GRAPH_ID: 'datacatalog-latest-graph'
+  DATASET_NAME: ''
 
-
-# Controls when the workflow will run
 on:
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   get-latest-datacatalog:
     runs-on: ubuntu-latest 
     steps:
-    - name: get-latest-datacatalog 
-      run: curl --data-urlencode "query=[[Categorie:Datasets]]|limit=500|?Dataset type|?Zichtbaar in Erfgoedatlas|?Dataset domein|?Waar te vinden" --data-urlencode "format=json" https://kennis.cultureelerfgoed.nl/api.php?action=ask >> datasetregister.json  
+    - name: Checkout repository
+      uses: actions/checkout@v6
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Get latest data from Muurschilderingendatabase
+      run: |
+        python src/datacatalog_service.py
+      env:
+        BASE_URI: ${{ env.BASE_URI }}
+        PROJECT_NAME: ${{ env.PROJECT_NAME }}
+        TARGET_FILEPATH: ${{ env.ARTIFACT_PATH }}
+        GRAPH_ID: ${{ env.GRAPH_ID }}   
     - name: Upload data artifact
       uses: actions/upload-artifact@v4
       with:
         name: data-artifact
         path: ${{ env.ARTIFACT_PATH }}
         overwrite: true
-        retention-days: 1
 
   push-to-triply:
     runs-on: ubuntu-latest
@@ -35,7 +46,6 @@ jobs:
       uses: actions/download-artifact@v4
       with:
           name: data-artifact
-          path: data
     - name: Install dependencies
       run: |
         wget 'https://static.triply.cc/cli/triplydb-linux'
@@ -44,11 +54,11 @@ jobs:
     - name: Push changes to TriplyDB API via CLI
       run: |
         ./triplydb-linux import-from-file \ 
-        --dataset "Muurschilderingen" \
+        --dataset "${{ env.DATASET_NAME }}" \
         --token "${{ secrets.LDV_API_TOKEN }}" \ 
         --account "rce" \
         --url "https://api.linkeddata.cultureelerfgoed.nl" \ 
-        --default-graph-name "https://linkeddata.cultureelerfgoed.nl/rce/Muurschilderingen/graphs/${{ env.GRAPH_ID }}" \
+        --default-graph-name "https://linkeddata.cultureelerfgoed.nl/rce/${{ env.DATASET_NAME }}/graphs/${{ env.GRAPH_ID }}" \
         --mode "overwrite" ${{ env.ARTIFACT_PATH }} ||  { 
             echo "::error::TriplyDB push failed"
             exit 1
