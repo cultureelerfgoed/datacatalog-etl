@@ -47,10 +47,10 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
 
     datacatalog_node = URIRef('https://linkeddata.cultureelerfgoed.nl/rce/datacatalog-rce/')
     graph.add((datacatalog_node, RDF.type, DCAT.catalog))
-    graph.add((datacatalog_node, DCAT.contactPoint, 'j.s.blok@cultureelerfgoed.nl'))
-    graph.add((datacatalog_node, DCTERMS.description,'RCE Datalog of datasets'))
-    graph.add((datacatalog_node, DCTERMS.publisher, 'https://linkeddata.cultureelerfgoed.nl/'))
-    graph.add((datacatalog_node, DCTERMS.title, 'RCE Datacatalog'))
+    graph.add((datacatalog_node, DCAT.contactPoint, Literal('j.s.blok@cultureelerfgoed.nl')))
+    graph.add((datacatalog_node, DCTERMS.description,Literal('RCE Datalog of datasets')))
+    graph.add((datacatalog_node, DCTERMS.publisher, Literal('https://linkeddata.cultureelerfgoed.nl/')))
+    graph.add((datacatalog_node, DCTERMS.title, Literal('RCE Datacatalog')))
 
     for result in dc_json['query']['results']:
         dataset_node = URIRef(dc_json['query']['results'][result]['fullurl'])
