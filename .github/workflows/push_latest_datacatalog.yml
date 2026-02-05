@@ -2,9 +2,9 @@ name: 'RCE Datacatalog ETL'
 
 env:
   BASE_URI: 'https://kennis.cultureelerfgoed.nl/api.php'
-  ARTIFACT_PATH: 'artifact-data.ttl'
+  ARTIFACT_PATH: 'artifact-data.jsonld'
   GRAPH_ID: 'datacatalog-latest-graph'
-  DATASET_NAME: ''
+  DATASET_NAME: 'datacatalog-rce'
 
 on:
   workflow_dispatch:
