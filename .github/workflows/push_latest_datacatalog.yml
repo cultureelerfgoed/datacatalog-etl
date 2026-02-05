@@ -23,12 +23,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Get latest data from Muurschilderingendatabase
+    - name: Get latest datacatalog 
       run: |
         python src/datacatalog_service.py
       env:
         BASE_URI: ${{ env.BASE_URI }}
-        PROJECT_NAME: ${{ env.PROJECT_NAME }}
         TARGET_FILEPATH: ${{ env.ARTIFACT_PATH }}
         GRAPH_ID: ${{ env.GRAPH_ID }}   
     - name: Upload data artifact
