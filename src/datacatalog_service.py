@@ -29,7 +29,6 @@ def save_graph(graph: Graph, filepath: str, fileformat: str) -> None:
     )
     logger.info('Saved graph to %s (%s bytes)', filepath, os.path.getsize(filepath))
 
-
 # --- Get query response from URI ---
 def get_query_response(from_url: str, query: str) -> any:
     get_params = {
@@ -49,7 +48,6 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
     graph.add((datacatalog_node, RDF.type, DCAT.catalog))
     graph.add((datacatalog_node, DCAT.contactPoint, Literal('thesauri@cultureelerfgoed.nl')))
     graph.add((datacatalog_node, DCTERMS.description,Literal('RCE Datalog of datasets')))
-    graph.add((datacatalog_node, DCTERMS.publisher, Literal('https://linkeddata.cultureelerfgoed.nl/')))
     graph.add((datacatalog_node, DCTERMS.title, Literal('RCE Datacatalog')))
 
     for result in dc_json['query']['results']:
@@ -59,26 +57,27 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
         graph.add((dataset_node, DCTERMS.title, Literal(dataset_properties['Naam'][0])))
         graph.add((dataset_node, DCTERMS.description, Literal(dataset_properties['Omschrijving'][0])))
         graph.add((dataset_node, DCAT.theme, Literal(dataset_properties['Dataset type'][0])))
-        graph.add((dataset_node, DCTERMS.publisher, URIRef('https://www.cultureelerfgoed.nl')))
-        graph.add((dataset_node, DCAT.servesDataset, URIRef('https://linkeddata.cultureelerfgoed.nl/catalog')))
         graph.add((dataset_node, DCAT.keyword, Literal(dataset_properties['Dataset domein'][0])))
         graph.add((dataset_node, PROV.wasGeneratedBy, Literal(dataset_properties['Dataset creatie'][0])))
-        graph.add((dataset_node, DCAT.accessURL, Literal(dataset_properties['Bronurl'])))
+
+        try:
+            graph.add((dataset_node, DCAT.accessURL, Literal(dataset_properties['Bronurl'][0])))
+        except IndexError as e:
+            graph.add((dataset_node, DCAT.accessURL, Literal(dataset_properties['Bronurl'])))
+
         if 'Ja' in dataset_properties['Zichtbaar in Erfgoedatlas']: 
             graph.add((dataset_node, DCTERMS.isReferencedBy, URIRef('https://rce.webgis.nl/nl/map/erfgoedatlas')))
+
         graph.add((dataset_node, DCAT.distribution, Literal(dataset_properties['Dataset'])))
         graph.add((dataset_node, DCAT.keyword, Literal(dataset_properties['Dataset rubriek'][0])))
         if 'Nee' in dataset_properties['Dataset beperkingen']:
             graph.add((dataset_node, DCTERMS.accessRights, ('https://creativecommons.org/licenses/by/4.0/')))
         graph.remove((dataset_node, None, Literal('[]')))
         graph.add((datacatalog_node, DCAT.dataset, dataset_node))
-        #"cc-by4.0"
     return graph
 
 def main():
     datacatalog_json = get_query_response(BASE_URI, '[[Categorie:Datasets]]|limit=500|?Status|?Batch|?Naam|?Dataset type|?Omschrijving|?Zichtbaar in Erfgoedatlas|?Dataset|?Bronurl|?Dataset creatie|?Dataset domein|?Dataset rubriek|?Dataset beperkingen')
-    #with open('datacatalog.json') as f:
-    #    datacatalog_json = json.load(f)
     graph = parse_json_to_graph(datacatalog_json, GRAPH_ID)
     save_graph(graph, TARGET_FILEPATH, OUTPUT_FILE_FORMAT)
 
