@@ -56,18 +56,18 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
         dataset_node = URIRef(dc_json['query']['results'][result]['fullurl'])
         dataset_properties = dc_json['query']['results'][result]['printouts']
         graph.add((dataset_node, RDF.type, DCAT.Dataset))
-        graph.add((dataset_node, DCTERMS.title, Literal(dataset_properties['Naam'])))
-        graph.add((dataset_node, DCTERMS.description, Literal(dataset_properties['Omschrijving'])))
-        graph.add((dataset_node, DCAT.theme, Literal(dataset_properties['Dataset type'])))
+        graph.add((dataset_node, DCTERMS.title, Literal(dataset_properties['Naam'][0])))
+        graph.add((dataset_node, DCTERMS.description, Literal(dataset_properties['Omschrijving'][0])))
+        graph.add((dataset_node, DCAT.theme, Literal(dataset_properties['Dataset type'][0])))
         graph.add((dataset_node, DCTERMS.publisher, URIRef('https://www.cultureelerfgoed.nl')))
         graph.add((dataset_node, DCAT.servesDataset, URIRef('https://linkeddata.cultureelerfgoed.nl/catalog')))
-        graph.add((dataset_node, DCAT.keyword, Literal(dataset_properties['Dataset domein'])))
-        graph.add((dataset_node, PROV.wasGeneratedBy, Literal(dataset_properties['Dataset creatie'])))
-        graph.add((dataset_node, DCAT.accessURL, Literal(dataset_properties['Bronurl']))) # moet eigenlijk onder dcat distribution
+        graph.add((dataset_node, DCAT.keyword, Literal(dataset_properties['Dataset domein'][0])))
+        graph.add((dataset_node, PROV.wasGeneratedBy, Literal(dataset_properties['Dataset creatie'][0])))
+        graph.add((dataset_node, DCAT.accessURL, Literal(dataset_properties['Bronurl'])))
         if 'Ja' in dataset_properties['Zichtbaar in Erfgoedatlas']: 
             graph.add((dataset_node, DCTERMS.isReferencedBy, URIRef('https://rce.webgis.nl/nl/map/erfgoedatlas')))
         graph.add((dataset_node, DCAT.distribution, Literal(dataset_properties['Dataset'])))
-        graph.add((dataset_node, DCAT.keyword, Literal(dataset_properties['Dataset rubriek'])))
+        graph.add((dataset_node, DCAT.keyword, Literal(dataset_properties['Dataset rubriek'][0])))
         if 'Nee' in dataset_properties['Dataset beperkingen']:
             graph.add((dataset_node, DCTERMS.accessRights, ('https://creativecommons.org/licenses/by/4.0/')))
         graph.remove((dataset_node, None, Literal('[]')))
