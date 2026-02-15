@@ -3,14 +3,14 @@ import os
 import logging
 import requests
 from rdflib import BNode, Graph, Literal, URIRef
-from rdflib.namespace import DCTERMS, DCAT, RDF, PROV
+from rdflib.namespace import RDF, SDO
 
 GRAPH_ID = os.getenv('GRAPH_ID', 'default')
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
 TARGET_FILEPATH = os.getenv('TARGET_FILEPATH', 'datacatalog.jsonld')
 BASE_URI = os.getenv('BASE_URI', 'https://kennis.cultureelerfgoed.nl/api.php')
 ENCODING = os.getenv('ENCODING', 'utf-8')
-WHITELIST_PATH = os.getenv('WHITELIST_PATH', 'whitelist.jsonld')
+WHITELIST_PATH = os.getenv('WHITELIST_PATH', 'datacatalog-whitelist.jsonld')
 
 # --- Logging ---
 logger = logging.getLogger(__name__)
@@ -18,18 +18,6 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)-8s %(message)s',
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S')
-
-# --- Save graph to file ---
-def save_graph(graph: Graph, filepath: str, fileformat: str) -> None:
-    """Save RDF graph to file."""
-    graph.serialize(
-        format=fileformat,
-        destination=filepath,
-        encoding=ENCODING,
-        auto_compact=True
-    )
-    logger.info('Saved graph to %s (%s bytes)', filepath, os.path.getsize(filepath))
-
 
 # --- Get query response from URI ---
 def get_query_response(from_url: str, query: str) -> any:
@@ -43,61 +31,62 @@ def get_query_response(from_url: str, query: str) -> any:
     return json.loads(response.text)
 
 # --- Return graph from JSON dict  ---
-def parse_json_to_graph(dc_json: dict, graph_id: str, whitelist: Graph=None) -> Graph:
+def parse_json_to_graph(dc_json: dict, graph_id: str, whitelist: Graph) -> Graph:
     graph = Graph(identifier=graph_id)
 
+    # organization information
+    organization_node = URIRef('https://www.cultureelerfgoed.nl')
+    graph.add((organization_node, RDF.type, SDO.Organization))
+    graph.add((organization_node, SDO.name, Literal('Rijksdienst voor het Cultureel Erfgoed', lang='nl')))
+    graph.add((organization_node, SDO.sameAs, URIRef('https://standaarden.overheid.nl/owms/terms/Rijksdienst_voor_het_Cultureel_Erfgoed')))
+    cp_node = BNode()
+    graph.add((cp_node, RDF.type, SDO.ContactPoint))
+    graph.add((cp_node, SDO.name, Literal('Infodesk van de RCE', lang='nl')))
+    graph.add((cp_node, SDO.email, Literal('info@cultureelerfgoed.nl')))
+    graph.add((organization_node, SDO.contactPoint, cp_node))
+    graph.add((organization_node, SDO.identifier, Literal('NL-AmfRCE')))
+    graph.add((organization_node, SDO.alternateName, Literal('Cultural Heritage Agency of the Netherlands', lang='en')))
+    
     # datacatalog definition
     datacatalog_node = URIRef('https://linkeddata.cultureelerfgoed.nl/rce/datacatalog-rce/')
-    graph.add((datacatalog_node, RDF.type, DCAT.catalog))
-    graph.add((datacatalog_node, DCAT.contactPoint, Literal('thesauri@cultureelerfgoed.nl')))
-    graph.add((datacatalog_node, DCTERMS.description,Literal('RCE Datalog of datasets')))
-    graph.add((datacatalog_node, DCTERMS.publisher, Literal('https://linkeddata.cultureelerfgoed.nl/')))
-    graph.add((datacatalog_node, DCTERMS.title, Literal('RCE Datacatalog')))
+    graph.add((datacatalog_node, RDF.type, SDO.DataCatalog))
+    graph.add((datacatalog_node, SDO.name, Literal('RCE Datacatalogus', lang='nl')))
+    graph.add((datacatalog_node, SDO.publisher, organization_node))
 
-    
     for result in dc_json['query']['results']:
         # dataset definition
         dataset_node = URIRef(dc_json['query']['results'][result]['fullurl'])
-        dataset_properties = dc_json['query']['results'][result]['printouts']
-        graph.add((dataset_node, RDF.type, DCAT.Dataset))
-        graph.add((dataset_node, DCTERMS.title, Literal(dataset_properties['Naam'][0])))
-        graph.add((dataset_node, DCTERMS.description, Literal(dataset_properties['Omschrijving'][0])))
-        graph.add((dataset_node, DCAT.theme, Literal(dataset_properties['Dataset type'][0])))
-        graph.add((dataset_node, DCTERMS.publisher, URIRef('https://data.cultureelerfgoed.nl/term/id/cht/1576adc6-1af1-44d0-9d46-593eb6bcad09')))
-        graph.add((dataset_node, DCAT.servesDataset, URIRef('https://linkeddata.cultureelerfgoed.nl/datacatalog-rce')))
-        graph.add((dataset_node, DCAT.keyword, Literal(dataset_properties['Dataset domein'][0])))
-        graph.add((dataset_node, PROV.wasGeneratedBy, Literal(dataset_properties['Dataset creatie'][0])))
-        graph.add((dataset_node, DCAT.landingPage, URIRef(dc_json['query']['results'][result]['fullurl'])))
-        
-        # distribution definition
-        distribution_node = BNode()
-        graph.add((distribution_node, RDF.type, DCAT.Distribution))
-        graph.add((distribution_node, DCAT.downloadURL, URIRef(dataset_properties['Bronurl'][0])))
-        graph.add((dataset_node, DCAT.distribution, distribution_node))
+        if (dataset_node, RDF.type, SDO.DataDownload) in whitelist:
+            logger.info('Found dataset %s in whitelist.', str(dataset_node))
 
-        # access URL uit config?
-        if (dataset_node, RDF.type, DCAT.Dataset) in whitelist:
-            logger.info('Found accessURL entry in whitelist.')
-            #graph.add((distribution_node, DCAT.accessURL, whitelist.get ?
+            dataset_properties = dc_json['query']['results'][result]['printouts']
+            if 'Nee' or 'Geen' in dataset_properties['Dataset beperkingen']:
+                graph.add((dataset_node, SDO.license, URIRef('https://creativecommons.org/licenses/by/4.0/')))
+            else: 
+                logger.info('No License: %s', dataset_properties['Dataset beperkingen'])
 
-        if 'Ja' in dataset_properties['Zichtbaar in Erfgoedatlas']: 
-            graph.add((dataset_node, DCTERMS.isReferencedBy, URIRef('https://rce.webgis.nl/nl/map/erfgoedatlas')))
-        graph.add((dataset_node, DCAT.keyword, Literal(dataset_properties['Dataset rubriek'][0])))
-        if 'Nee' in dataset_properties['Dataset beperkingen']:
-            graph.add((dataset_node, DCTERMS.accessRights, URIRef('https://creativecommons.org/licenses/by/4.0/')))
-        graph.remove((dataset_node, None, Literal('[]')))
-        graph.add((datacatalog_node, DCAT.dataset, dataset_node))
-        #"cc-by4.0"
+            graph.add((dataset_node, RDF.type, SDO.Dataset))
+            graph.add((dataset_node, SDO.name, Literal(dataset_properties['Naam'][0], lang='nl')))
+            graph.add((dataset_node, SDO.publisher, organization_node))
+
+            dl_distribution_node = URIRef(dataset_properties['Bronurl'][0])
+            graph.add((dl_distribution_node, RDF.type, SDO.DataDownload))
+            graph.add((dl_distribution_node, SDO.encodingFormat, Literal('application/sparql-results+xml')))
+            graph.add((dl_distribution_node, SDO.contentUrl, URIRef(whitelist.value(dataset_node, SDO.contentUrl) or dataset_properties['Bronurl'][0])))
+            graph.add((dataset_node, SDO.distribution, dl_distribution_node))
+            graph.add((datacatalog_node, SDO.dataset, dataset_node))
+
     return graph
 
 def main():
-    datacatalog_json = get_query_response(BASE_URI, '[[Categorie:Datasets]]|limit=500|?Status|?Batch|?Naam|?Dataset type|?Omschrijving|?Zichtbaar in Erfgoedatlas|?Dataset|?Bronurl|?Dataset creatie|?Dataset domein|?Dataset rubriek|?Dataset beperkingen')
+    datacatalog_json = get_query_response('https://kennis.cultureelerfgoed.nl/api.php', '[[Categorie:Datasets]]|limit=500|?Status|?Batch|?Naam|?Dataset type|?Omschrijving|?Zichtbaar in Erfgoedatlas|?Dataset|?Bronurl|?Dataset creatie|?Dataset domein|?Dataset rubriek|?Dataset beperkingen')
     
     try:
         whitelist = Graph()
         whitelist.parse(WHITELIST_PATH)
-        graph = parse_json_to_graph(datacatalog_json, GRAPH_ID)
-        save_graph(graph, TARGET_FILEPATH, OUTPUT_FILE_FORMAT)
+        graph = parse_json_to_graph(datacatalog_json, GRAPH_ID, whitelist)
+        graph.serialize(format=OUTPUT_FILE_FORMAT, destination=TARGET_FILEPATH, encoding=ENCODING, auto_compact=True)  
+        logger.info('Saved graph to %s (%s bytes)', TARGET_FILEPATH, os.path.getsize(TARGET_FILEPATH))  
     except FileNotFoundError as fnfe:
         logger.warning('No whitelist found: %s', fnfe)
 
