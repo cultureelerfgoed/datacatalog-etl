@@ -3,12 +3,12 @@ from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO
 
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
-WHITELIST_PATH = os.getenv('TARGET_FILEPATH', 'datacatalog-whitelist.jsonld')
+ALLOWLIST_PATH = os.getenv('ALLOWLIST_PATH', 'allowlist.jsonld')
 ENCODING = os.getenv('ENCODING', 'utf-8')
 
-# --- Make whitelist graph  ---
-def generate_whitelist() -> Graph:
-    graph = Graph(identifier='https://linkeddata.cultureelerfgoed.nl/datacatalog-whitelist')
+# --- Make allowlist graph  ---
+def generate_allowlist() -> Graph:
+    graph = Graph(identifier='https://linkeddata.cultureelerfgoed.nl/datacatalog-allowlist')
     # datacatalog definition
     graph.add((URIRef('https://kennis.cultureelerfgoed.nl/index.php/Dataset/45'), RDF.type, SDO.DataDownload))
     graph.add((URIRef('https://kennis.cultureelerfgoed.nl/index.php/Dataset/45'), SDO.contentUrl, Literal('https://api.linkeddata.cultureelerfgoed.nl/datasets/thesauri/cht/services/cht-jena/sparql')))
@@ -19,8 +19,8 @@ def generate_whitelist() -> Graph:
     return graph
 
 def main():
-    graph = generate_whitelist()
-    graph.serialize(format=OUTPUT_FILE_FORMAT, destination=WHITELIST_PATH, encoding=ENCODING, auto_compact=True)    
+    graph = generate_allowlist()
+    graph.serialize(format=OUTPUT_FILE_FORMAT, destination=ALLOWLIST_PATH, encoding=ENCODING, auto_compact=True)    
 
 if __name__ == '__main__':
     main()

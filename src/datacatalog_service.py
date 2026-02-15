@@ -10,7 +10,7 @@ OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
 TARGET_FILEPATH = os.getenv('TARGET_FILEPATH', 'datacatalog.jsonld')
 BASE_URI = os.getenv('BASE_URI', 'https://kennis.cultureelerfgoed.nl/api.php')
 ENCODING = os.getenv('ENCODING', 'utf-8')
-WHITELIST_PATH = os.getenv('WHITELIST_PATH', 'datacatalog-whitelist.jsonld')
+ALLOWLIST_PATH = os.getenv('ALLOWLIST_PATH', 'allowlist.jsonld')
 
 # --- Logging ---
 logger = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ def get_query_response(from_url: str, query: str) -> any:
     return json.loads(response.text)
 
 # --- Return graph from JSON dict  ---
-def parse_json_to_graph(dc_json: dict, graph_id: str, whitelist: Graph) -> Graph:
+def parse_json_to_graph(dc_json: dict, graph_id: str, allowlist: Graph) -> Graph:
     graph = Graph(identifier=graph_id)
 
     # organization information
@@ -56,8 +56,8 @@ def parse_json_to_graph(dc_json: dict, graph_id: str, whitelist: Graph) -> Graph
     for result in dc_json['query']['results']:
         # dataset definition
         dataset_node = URIRef(dc_json['query']['results'][result]['fullurl'])
-        if (dataset_node, RDF.type, SDO.DataDownload) in whitelist:
-            logger.info('Found dataset %s in whitelist.', str(dataset_node))
+        if (dataset_node, RDF.type, SDO.DataDownload) in allowlist:
+            logger.info('Found dataset %s in allowlist.', str(dataset_node))
 
             dataset_properties = dc_json['query']['results'][result]['printouts']
             if 'Nee' or 'Geen' in dataset_properties['Dataset beperkingen']:
@@ -72,7 +72,7 @@ def parse_json_to_graph(dc_json: dict, graph_id: str, whitelist: Graph) -> Graph
             dl_distribution_node = URIRef(dataset_properties['Bronurl'][0])
             graph.add((dl_distribution_node, RDF.type, SDO.DataDownload))
             graph.add((dl_distribution_node, SDO.encodingFormat, Literal('application/sparql-results+xml')))
-            graph.add((dl_distribution_node, SDO.contentUrl, URIRef(whitelist.value(dataset_node, SDO.contentUrl) or dataset_properties['Bronurl'][0])))
+            graph.add((dl_distribution_node, SDO.contentUrl, URIRef(allowlist.value(dataset_node, SDO.contentUrl) or dataset_properties['Bronurl'][0])))
             graph.add((dataset_node, SDO.distribution, dl_distribution_node))
             graph.add((datacatalog_node, SDO.dataset, dataset_node))
 
@@ -82,13 +82,13 @@ def main():
     datacatalog_json = get_query_response('https://kennis.cultureelerfgoed.nl/api.php', '[[Categorie:Datasets]]|limit=500|?Status|?Batch|?Naam|?Dataset type|?Omschrijving|?Zichtbaar in Erfgoedatlas|?Dataset|?Bronurl|?Dataset creatie|?Dataset domein|?Dataset rubriek|?Dataset beperkingen')
     
     try:
-        whitelist = Graph()
-        whitelist.parse(WHITELIST_PATH)
-        graph = parse_json_to_graph(datacatalog_json, GRAPH_ID, whitelist)
+        allowlist = Graph()
+        allowlist.parse(ALLOWLIST_PATH)
+        graph = parse_json_to_graph(datacatalog_json, GRAPH_ID, allowlist)
         graph.serialize(format=OUTPUT_FILE_FORMAT, destination=TARGET_FILEPATH, encoding=ENCODING, auto_compact=True)  
         logger.info('Saved graph to %s (%s bytes)', TARGET_FILEPATH, os.path.getsize(TARGET_FILEPATH))  
     except FileNotFoundError as fnfe:
-        logger.warning('No whitelist found: %s', fnfe)
+        logger.warning('No allowlist found: %s', fnfe)
 
 if __name__ == '__main__':
     main()
