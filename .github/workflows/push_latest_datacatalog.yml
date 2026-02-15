@@ -25,7 +25,7 @@ jobs:
         pip install -r requirements.txt
     - name: Generate allowlist 
       run: |
-        python src/generate_allowlist.py
+        python src/allowlist_generator.py
     - name: Get latest datacatalog 
       run: |
         python src/datacatalog_service.py
