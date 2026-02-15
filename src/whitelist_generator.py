@@ -1,12 +1,9 @@
-import json
 import os
-import logging
-import requests
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO
 
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
-TARGET_FILEPATH = os.getenv('TARGET_FILEPATH', 'datacatalog-whitelist.jsonld')
+WHITELIST_PATH = os.getenv('TARGET_FILEPATH', 'datacatalog-whitelist.jsonld')
 ENCODING = os.getenv('ENCODING', 'utf-8')
 
 # --- Make whitelist graph  ---
@@ -23,7 +20,7 @@ def generate_whitelist() -> Graph:
 
 def main():
     graph = generate_whitelist()
-    graph.serialize(format=OUTPUT_FILE_FORMAT, destination=TARGET_FILEPATH, encoding=ENCODING, auto_compact=True)    
+    graph.serialize(format=OUTPUT_FILE_FORMAT, destination=WHITELIST_PATH, encoding=ENCODING, auto_compact=True)    
 
 if __name__ == '__main__':
     main()
