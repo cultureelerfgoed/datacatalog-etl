@@ -91,7 +91,7 @@ def parse_json_to_graph(dc_json: dict, graph_id: str, allowlist: Graph) -> Graph
 
     return graph
 
-def validate(url: str, graph: Graph) -> any:
+def validate(url: str, graph: Graph) -> Graph:
     headers = {
         'accept': 'application/ld+json',
         'Content-Type': 'application/ld+json'}
@@ -107,8 +107,7 @@ def validate(url: str, graph: Graph) -> any:
         rpath = validationgraph.value(subj, SH.resultPath)
         rmsg = validationgraph.value(subj, SH.resultMessage)
         rval = validationgraph.value(subj, SH.focusNode)
-        rsev = validationgraph.value(subj, SH.resultSeverity)
-        logger.info('<%s> %s:%s <%s>', str(rpath), str(rsev.n3), str(rmsg), str(rval))
+        logger.info('<%s> %s <%s>', str(rpath), str(rmsg), str(rval))
 
     return validationgraph
 
@@ -123,7 +122,7 @@ def main():
         graph.serialize(format=OUTPUT_FILE_FORMAT, destination=TARGET_FILEPATH, encoding=ENCODING, auto_compact=True)  
         logger.info('Saved graph to %s (%s bytes)', TARGET_FILEPATH, os.path.getsize(TARGET_FILEPATH))  
         vgraph = validate('https://datasetregister.netwerkdigitaalerfgoed.nl/api/datasets/validate', graph)
-        if SH.Violation not in vgraph:
+        if SH.Violation not in vgraph.objects(subject=SH.ValidationResult, predicate=SH.resultSeverity):
             graph.serialize(format=OUTPUT_FILE_FORMAT, destination=TARGET_FILEPATH, encoding=ENCODING, auto_compact=True)  
             logger.info('Saved graph to %s (%s bytes)', TARGET_FILEPATH, os.path.getsize(TARGET_FILEPATH))  
     except FileNotFoundError as fnfe:
