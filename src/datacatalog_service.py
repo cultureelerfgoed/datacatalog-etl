@@ -53,10 +53,10 @@ def parse_json_to_graph(dc_json: dict, graph_id: str, allowlist: Graph) -> Graph
     graph.add((organization_node, SDO.alternateName, Literal('Cultural Heritage Agency of the Netherlands', lang='en')))
     
     # datacatalog definition
-    datacatalog_node = URIRef('https://linkeddata.cultureelerfgoed.nl/rce/datacatalog-rce/')
-    graph.add((datacatalog_node, RDF.type, SDO.DataCatalog))
-    graph.add((datacatalog_node, SDO.name, Literal('RCE Datacatalogus', lang='nl')))
-    graph.add((datacatalog_node, SDO.publisher, organization_node))
+    #datacatalog_node = URIRef('https://linkeddata.cultureelerfgoed.nl/rce/datacatalog-rce')
+    #graph.add((datacatalog_node, RDF.type, SDO.DataCatalog))
+    #graph.add((datacatalog_node, SDO.name, Literal('RCE Datacatalogus', lang='nl')))
+    #graph.add((datacatalog_node, SDO.publisher, organization_node))
 
     for result in dc_json['query']['results']:
         # dataset definition
@@ -79,12 +79,16 @@ def parse_json_to_graph(dc_json: dict, graph_id: str, allowlist: Graph) -> Graph
                 graph.add((dataset_node, SDO.keywords, Literal('Monumenten; Landschap; Kunstcollecties; Archeologie; Gebouwd; Roerend', lang='nl')))
 
             graph.remove((dataset_node, None, Literal('')))
-            dl_distribution_node = URIRef(dataset_properties['Bronurl'][0])
+            dl_distribution_node = BNode() # URIRef(dc_json['query']['results'][result]['bronurl'])
             graph.add((dl_distribution_node, RDF.type, SDO.DataDownload))
             graph.add((dl_distribution_node, SDO.encodingFormat, Literal('application/sparql-results+xml')))
             graph.add((dl_distribution_node, SDO.contentUrl, URIRef(str(allowlist.value(dataset_node, SDO.contentUrl) or dataset_properties['Bronurl'][0]))))
+            #graph.add((dl_distribution_node, SDO.contentUrl, allowlist.value(dataset_node, SDO.contentUrl)))
             graph.add((dataset_node, SDO.distribution, dl_distribution_node))
-            graph.add((datacatalog_node, SDO.dataset, dataset_node))
+            #graph.add((dataset_node, SDO.includedInDataCatalog, datacatalog_node))
+            #graph.add((datacatalog_node, SDO.dataset, dataset_node))
+
+    
 
     return graph
 
