@@ -1,7 +1,7 @@
 import os
 import logging
 import requests
-from rdflib import Graph
+from rdflib import Graph, Node
 from rdflib.namespace import RDF, SH
 
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
@@ -22,32 +22,38 @@ def validate(url: str, graph: Graph) -> Graph:
         'Content-Type': 'application/ld+json'}
     strgraph = graph.serialize(format=OUTPUT_FILE_FORMAT)
     response = requests.post(url, headers=headers, data=strgraph, timeout=100)
-    logger.info('Validation API <%s> response status code: %s', url, response.status_code)
+    
+    if response.status_code == 200:
+        logger.info('Validation API <%s> response status code: %s', url, response.status_code)
+    elif response.status_code == 400:
+        logger.error('Validation API <%s> response status code: %s', url, response.status_code)
+
     validationgraph = Graph()
     validationgraph.parse(data=response.text, format='application/ld+json')
 
-    for subj, pred, obj in validationgraph.triples((None, RDF.type, SH.ValidationResult)):
-        rpath = validationgraph.value(subj, SH.resultPath)
-        rmsg = validationgraph.value(subj, SH.resultMessage)
-        rval = validationgraph.value(subj, SH.focusNode)
-        logger.info('<%s> %s <%s>', str(rpath), str(rmsg), str(rval))
-
     return validationgraph
+
+def get_logstring(targetgraph: Graph, validationgraph: Graph, subject_node: Node):
+    rmsg = validationgraph.value(subject_node, SH.resultMessage)
+    fnode = validationgraph.value(subject_node, SH.focusNode)
+    fnode_type = targetgraph.value(fnode, RDF.type)
+    return f'{str(fnode_type)}: {str(rmsg)}'
 
 def main():
     """ main runner for workflow """
-    try:
-        graph = Graph()
-        graph.parse(source=TARGET_FILEPATH, format=OUTPUT_FILE_FORMAT)
-        vgraph = validate(VALIDATION_API, graph)
-        if vgraph.subjects(predicate=SH.resultSeverity, object=SH.Violation):
-            logger.info('No Shacl violations found in datacatalog.')
-            graph.serialize(format=OUTPUT_FILE_FORMAT, destination=TARGET_FILEPATH, encoding=ENCODING, auto_compact=True)
-            logger.info('Saved graph to %s (%s bytes)', TARGET_FILEPATH, os.path.getsize(TARGET_FILEPATH))
-        else:
+    tgraph = Graph()
+    tgraph.parse(source=TARGET_FILEPATH, format=OUTPUT_FILE_FORMAT)
+    vgraph = validate(VALIDATION_API, tgraph)
+    
+    for subj, pred, obj in vgraph.triples((None, RDF.type, SH.ValidationResult)):
+        if vgraph.value(subj, SH.resultSeverity) == SH.Info:
+            logger.info(get_logstring(tgraph, vgraph, subj))                
+        elif vgraph.value(subj, SH.resultSeverity) == SH.Warning:
+            logger.warning(get_logstring(tgraph, vgraph, subj))
+        elif vgraph.value(subj, SH.resultSeverity) == SH.Violation:
             logger.error('Invalid datacatalog, Shacl violations found.')
-    except FileNotFoundError as fnfe:
-        logger.warning('No allowlist found: %s', fnfe)
+            logger.error(get_logstring(tgraph, vgraph, subj))
+            raise ValueError(f'Failed Shacl validation: {str(vgraph.value(subj, SH.focusNode))}')
     
 if __name__ == '__main__':
     main()
