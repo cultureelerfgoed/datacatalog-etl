@@ -9,8 +9,8 @@ Deze ETL voert de volgende stappen uit:
 graph LR;
     ETL<--"ophalen datasetregister"-->kb[RCE Kennisbank];
     ETL<--"valideren transformatie"-->vl[NDE Validatie API];
-    ETL--"publicatie"-->ldv[Linked Data Voorziening];
-    ldv<-->nde[NDE Datasetregister];
+    ETL--"publiceren als linked data"-->ldv[Linked Data Voorziening];
+    ldv<--"opname"-->nde[NDE Datasetregister];
 ```
 
 # Installatie
