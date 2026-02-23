@@ -1,20 +1,39 @@
 import os
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO
+import endpoint_info_service 
 
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
 ALLOWLIST_PATH = os.getenv('ALLOWLIST_PATH', 'allowlist.jsonld')
 ENCODING = os.getenv('ENCODING', 'utf-8')
+ALLOWLIST = {'https://kennis.cultureelerfgoed.nl/index.php/Dataset/45': 'cht',
+             'https://kennis.cultureelerfgoed.nl/index.php/Dataset/5': 'archeologischbasisregister',
+             'https://kennis.cultureelerfgoed.nl/index.php/Dataset/147': 'referentienetwerk',
+             'https://kennis.cultureelerfgoed.nl/index.php/Dataset/105': 'Rijksmonumenten-sdo',
+             'https://kennis.cultureelerfgoed.nl/index.php/Dataset/103': 'kunstcollecties',
+             'https://kennis.cultureelerfgoed.nl/index.php/Dataset/102': 'groenaanleg'}
+             # cho
 
 # --- Make allowlist graph  ---
 def generate_allowlist() -> Graph:
     graph = Graph()
-    graph.add((URIRef('https://kennis.cultureelerfgoed.nl/index.php/Dataset/45'), RDF.type, SDO.DataDownload))
-    graph.add((URIRef('https://kennis.cultureelerfgoed.nl/index.php/Dataset/45'), SDO.contentUrl, Literal('https://api.linkeddata.cultureelerfgoed.nl/datasets/thesauri/cht/services/cht-jena/sparql')))
-    graph.add((URIRef('https://kennis.cultureelerfgoed.nl/index.php/Dataset/5'), RDF.type, SDO.DataDownload))
-    graph.add((URIRef('https://kennis.cultureelerfgoed.nl/index.php/Dataset/5'), SDO.contentUrl, Literal('https://api.linkeddata.cultureelerfgoed.nl/datasets/thesauri/archeologischbasisregister/services/archeologischbasisregister-jena/sparql')))
-    graph.add((URIRef('https://kennis.cultureelerfgoed.nl/index.php/Dataset/147'), RDF.type, SDO.DataDownload))
-    graph.add((URIRef('https://kennis.cultureelerfgoed.nl/index.php/Dataset/147'), SDO.contentUrl, Literal('https://api.linkeddata.cultureelerfgoed.nl/datasets/thesauri/referentienetwerk/sparql')))    
+    services = endpoint_info_service.get_services()
+    for key, value in ALLOWLIST.items():
+        graph.add((URIRef(key), RDF.type, SDO.DataDownload))
+        d_item = services.get(value)
+        graph.add((URIRef(key), SDO.identifier, Literal(value)))
+        if d_item:
+            if 'endpoint' in d_item:
+                graph.add((URIRef(key), SDO.contentUrl, URIRef(d_item['endpoint'])))        
+            if 'displayName' in d_item:
+                graph.add((URIRef(key), SDO.name, Literal(d_item['displayName'])))
+            if 'description' in d_item:
+                graph.add((URIRef(key), SDO.description, Literal(d_item['description'])))
+            if 'createdAt' in d_item:
+                graph.add((URIRef(key), SDO.dateCreated, Literal(d_item['createdAt'])))
+            if 'updatedAt' in d_item:
+                graph.add((URIRef(key), SDO.dateModified, Literal(d_item['updatedAt'])))
+            
     return graph
 
 def main():

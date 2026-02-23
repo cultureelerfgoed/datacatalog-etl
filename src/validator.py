@@ -30,7 +30,6 @@ def validate(url: str, graph: Graph) -> Graph:
 
     validationgraph = Graph()
     validationgraph.parse(data=response.text, format='application/ld+json')
-
     return validationgraph
 
 def get_logstring(targetgraph: Graph, validationgraph: Graph, subject_node: Node):

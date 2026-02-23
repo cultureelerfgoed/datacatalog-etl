@@ -14,7 +14,6 @@ ALLOWLIST_PATH = os.getenv('ALLOWLIST_PATH', 'allowlist.jsonld')
 
 KB_DC_QUERY = '[[Categorie:Datasets]]|limit=500|?Status|?Batch|?Naam|?Dataset type|?Omschrijving' \
 '|?Zichtbaar in Erfgoedatlas|?Dataset|?Bronurl|?Dataset creatie|?Dataset domein|?Dataset rubriek|?Dataset beperkingen'
-VALIDATION_API = 'https://datasetregister.netwerkdigitaalerfgoed.nl/api/datasets/validate'
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -75,7 +74,8 @@ def parse_json_to_graph(dc_json: dict, graph_id: str, allowlist: Graph) -> Graph
             dl_distribution_node = BNode()
             graph.add((dl_distribution_node, RDF.type, SDO.DataDownload))
             graph.add((dl_distribution_node, SDO.encodingFormat, Literal('application/sparql-results+xml')))
-            graph.add((dl_distribution_node, SDO.contentUrl, URIRef(str(allowlist.value(dataset_node, SDO.contentUrl)))))
+            graph.add((dl_distribution_node, SDO.contentUrl, URIRef(str(allowlist.value(dataset_node, SDO.contentUrl) or dataset_properties['Bronurl'][0]))))
+            graph.add((dl_distribution_node, SDO.description, graph.value(dataset_node, SDO.description)))
             graph.add((dataset_node, SDO.distribution, dl_distribution_node))
             
     return graph
@@ -88,6 +88,8 @@ def main():
             json.dump(datacatalog_json, file)
         allowlist = Graph()
         allowlist.parse(ALLOWLIST_PATH)
+        for s, p, o in allowlist.triples((None, SDO.contentUrl, None)):
+            logger.info('%s: %s', str(s), str(o))
         graph = parse_json_to_graph(datacatalog_json, GRAPH_ID, allowlist)
         graph.serialize(format=OUTPUT_FILE_FORMAT, destination=TARGET_FILEPATH, encoding=ENCODING, auto_compact=True)  
     except OSError as oe:
