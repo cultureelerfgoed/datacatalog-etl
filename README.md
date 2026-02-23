@@ -37,9 +37,7 @@ source .venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-
-
-# How to run
+# Uitvoeren
 
 ```
 python src/generate_allowlist.py
