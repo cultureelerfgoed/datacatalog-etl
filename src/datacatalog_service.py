@@ -8,7 +8,7 @@ from rdflib.namespace import RDF, SDO
 GRAPH_ID = os.getenv('GRAPH_ID', 'default')
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
 TARGET_FILEPATH = os.getenv('TARGET_FILEPATH', 'datacatalog.jsonld')
-BASE_URI = os.getenv('BASE_URI', 'https://kennis.cultureelerfgoed.nl/api.php')
+SRC_URI = os.getenv('SRC_URI', 'https://kennis.cultureelerfgoed.nl/api.php')
 ENCODING = os.getenv('ENCODING', 'utf-8')
 ALLOWLIST_PATH = os.getenv('ALLOWLIST_PATH', 'allowlist.jsonld')
 
@@ -83,7 +83,7 @@ def parse_json_to_graph(dc_json: dict, graph_id: str, allowlist: Graph) -> Graph
 def main():
     """ main runner for workflow """
     try:
-        datacatalog_json = get_mwquery_response_as_json(BASE_URI, KB_DC_QUERY)
+        datacatalog_json = get_mwquery_response_as_json(SRC_URI, KB_DC_QUERY)
         with open('kb_datacatalog.json', 'w', encoding=ENCODING) as file:
             json.dump(datacatalog_json, file)
         allowlist = Graph()

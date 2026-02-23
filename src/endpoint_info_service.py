@@ -2,16 +2,10 @@ import json
 import os
 import logging
 import requests
-from rdflib import Graph, Node
-from rdflib.namespace import RDF, SH
 from urllib.parse import urlsplit
 
-
-OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
-TARGET_FILEPATH = os.getenv('TARGET_FILEPATH', 'datacatalog.jsonld')
 ENCODING = os.getenv('ENCODING', 'utf-8')
-BASE_URI = 'https://linkeddata.cultureelerfgoed.nl/'
-QUERY_ENDPOINT = 'https://api.linkeddata.cultureelerfgoed.nl/queries/'
+BASE_URI = os.getenv('BASE_URI', 'https://linkeddata.cultureelerfgoed.nl/')
 ACCOUNTS = {'rce', 'thesauri'}
 
 logger = logging.getLogger(__name__)
@@ -28,15 +22,8 @@ def get_dataset_uri(accountname='', datasetname=''):
     else:
         return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/'
 
-
 def get_service_uri(datasetname: str, accountname:str):
     return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/{accountname}/{datasetname}/services/'
-
-def get_query_uri(accountname=None):
-    if accountname:
-        return f'https://api.{urlsplit(BASE_URI).hostname}/queries/{accountname}/'
-    else:
-        return f'https://api.{urlsplit(BASE_URI).hostname}/queries/'
 
 def get_data(q_url: str) -> dict:
     """ Validate against endpoint """
