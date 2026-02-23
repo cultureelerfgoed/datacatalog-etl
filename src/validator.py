@@ -7,7 +7,7 @@ from rdflib.namespace import RDF, SH
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
 TARGET_FILEPATH = os.getenv('TARGET_FILEPATH', 'datacatalog.jsonld')
 ENCODING = os.getenv('ENCODING', 'utf-8')
-VALIDATION_API = 'https://datasetregister.netwerkdigitaalerfgoed.nl/api/datasets/validate'
+VALIDATION_API = os.getenv('VALIDATION_API', 'https://datasetregister.netwerkdigitaalerfgoed.nl/api/datasets/validate')
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(

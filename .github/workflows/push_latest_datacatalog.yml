@@ -1,7 +1,8 @@
 name: 'RCE Datacatalog ETL' 
 
 env:
-  BASE_URI: 'https://kennis.cultureelerfgoed.nl/api.php'
+  BASE_URI: 'https://linkeddata.cultureelerfgoed.nl/'
+  SRC_URI: 'https://kennis.cultureelerfgoed.nl/api.php'
   ARTIFACT_PATH: 'artifact-data.jsonld'
   GRAPH_ID: 'datacatalog-latest-graph'
   DATASET_NAME: 'datacatalog-rce'
@@ -30,7 +31,7 @@ jobs:
       run: |
         python src/datacatalog_service.py
       env:
-        BASE_URI: ${{ env.BASE_URI }}
+        SRC_URI: ${{ env.SRC_URI }}
         TARGET_FILEPATH: ${{ env.ARTIFACT_PATH }}
         GRAPH_ID: ${{ env.GRAPH_ID }}   
     - name: Upload data artifact

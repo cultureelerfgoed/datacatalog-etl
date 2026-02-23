@@ -88,10 +88,10 @@ def main():
             json.dump(datacatalog_json, file)
         allowlist = Graph()
         allowlist.parse(ALLOWLIST_PATH)
-        for s, p, o in allowlist.triples((None, SDO.contentUrl, None)):
-            logger.info('%s: %s', str(s), str(o))
         graph = parse_json_to_graph(datacatalog_json, GRAPH_ID, allowlist)
+        logger.info("Writing  %s", f"{OUTPUT_FILE_FORMAT} file to {TARGET_FILEPATH}")
         graph.serialize(format=OUTPUT_FILE_FORMAT, destination=TARGET_FILEPATH, encoding=ENCODING, auto_compact=True)  
+        logger.info("Filesize:  %s", f"{os.path.getsize(TARGET_FILEPATH)} bytes")
     except OSError as oe:
         logger.warning('Failed to write datacatalog from Kennisbank to file: %s', oe)
 
