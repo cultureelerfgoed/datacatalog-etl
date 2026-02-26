@@ -5,7 +5,7 @@ Deze ETL voert de volgende stappen uit:
 2. Haalt de lijst van gepubliceerde endpoints op van de Linked Data Voorziening van de RCE.
 3. Transformeert de metadata over de datasets naar schema.org volgens de richtlijn van het NDE Datasetregister, en filtert de datasets die hier niet aan voldoen er uit.
 4. Valideert de transformatie via de validatie API van het Netwerk Digitaal Erfgoed.
-5. Publiceert de set van datasets op [linkedata.cultureelerfgoed.nl](https://linkeddata.cultureelerfgoed.nl/rce/datacatalog-rce/).
+5. Publiceert de set van datasets op [linkeddata.cultureelerfgoed.nl](https://linkeddata.cultureelerfgoed.nl/rce/datacatalog-rce/).
 6. De data wordt opgehaald en opgenomen in het NDE Datasetregister. 
 
 ## Sequentiediagram ETL
