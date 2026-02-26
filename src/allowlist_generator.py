@@ -8,9 +8,7 @@ ALLOWLIST_PATH = os.getenv('ALLOWLIST_PATH', 'allowlist.jsonld')
 ENCODING = os.getenv('ENCODING', 'utf-8')
 ALLOWLIST = {'https://kennis.cultureelerfgoed.nl/index.php/Dataset/45': 'cht',
              'https://kennis.cultureelerfgoed.nl/index.php/Dataset/5': 'archeologischbasisregister',
-             'https://kennis.cultureelerfgoed.nl/index.php/Dataset/147': 'referentienetwerk',
              'https://kennis.cultureelerfgoed.nl/index.php/Dataset/105': 'Rijksmonumenten-sdo',
-             'https://kennis.cultureelerfgoed.nl/index.php/Dataset/103': 'kunstcollecties',
              'https://kennis.cultureelerfgoed.nl/index.php/Dataset/102': 'groenaanleg'}
              # cho
 

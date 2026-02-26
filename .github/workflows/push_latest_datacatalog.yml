@@ -5,7 +5,7 @@ env:
   SRC_URI: 'https://kennis.cultureelerfgoed.nl/api.php'
   ARTIFACT_PATH: 'artifact-data.jsonld'
   GRAPH_ID: 'datacatalog-latest-graph'
-  DATASET_NAME: 'datacatalog-rce'
+  DATASET_NAME: 'datacatalog'
 
 on:
   workflow_dispatch:
