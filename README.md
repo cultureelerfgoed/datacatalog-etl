@@ -11,22 +11,26 @@ Deze ETL voert de volgende stappen uit:
 ## Sequentiediagram ETL
 ```mermaid
 sequenceDiagram;
+    actor beheerder
+    participant Proza 
     participant Kennisbank
     participant ETL
     participant Linked Data Voorziening
     participant Netwerk Digitaal Erfgoed
-
-    ETL->>Kennisbank:ophalen RCE datasetregister
+    
+    beheerder->>Proza:ophalen intern datasetregister
+    Proza->>beheerder:
+    beheerder->>Kennisbank:publicatie intern datasetregister
+    ETL->>Kennisbank:ophalen intern datasetregister
     Kennisbank->>ETL:
-    ETL->>Linked Data Voorziening:ophalen endpoints
+    ETL->>Linked Data Voorziening:ophalen beschikbare endpoints
     Linked Data Voorziening->>ETL:
     ETL->>ETL:transformatie naar linked data
     ETL->>Netwerk Digitaal Erfgoed:validatie
     Netwerk Digitaal Erfgoed->>ETL:
-    ETL->>Linked Data Voorziening:publicatie
-    Netwerk Digitaal Erfgoed->>Linked Data Voorziening:opname in datasetregister
+    ETL->>Linked Data Voorziening:publicatie van datasets waarvoor endpoints bestaan
+    Netwerk Digitaal Erfgoed->>Linked Data Voorziening:opname in NDE datasetregister
     Linked Data Voorziening->>Netwerk Digitaal Erfgoed:
-
 ```
 
 # Installatie
