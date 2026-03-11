@@ -11,7 +11,12 @@ on:
   workflow_dispatch:
     inputs:
       use-triplydb-cli:
-        description: 'If true uses the TriplyDB CLI, otherwise TriplyDB REST API is used.'
+        description: 'Use TriplyDB CLI to push?'
+        default: false
+        required: false
+        type: boolean
+      sync-on-push:
+        description: 'Sync after push?'
         default: false
         required: false
         type: boolean
@@ -71,7 +76,7 @@ jobs:
       env:
         TARGET_FILEPATH: ${{ env.ARTIFACT_PATH }}
 
-  push-to-triply-api:
+  push-to-triply-api-curl:
     runs-on: ubuntu-latest
     if: ${{ inputs.use-triplydb-cli == false }} 
     needs: [get-latest-datacatalog, validate-datacatalog]
@@ -82,9 +87,9 @@ jobs:
           name: data-artifact
     - name: Push changes to TriplyDB API via cURL
       run:  |
-        curl -H 'Authorization: Bearer ${{ secrets.LDV_API_TOKEN }}' -H 'Content-Type: application/json' -X POST 'https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/${{ env.DATASET_NAME }}/jobs'  -F file='${{ env.ARTIFACT_PATH }}' -d 'sync: true'
+        curl -H 'Authorization: Bearer ${{ secrets.LDV_API_TOKEN }}' -X POST 'https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/${{ env.DATASET_NAME }}/jobs'  -F file='${{ env.ARTIFACT_PATH }}'
 
-  push-to-triply-cli:
+  push-to-triply-api-cli:
     runs-on: ubuntu-latest
     if: ${{ inputs.use-triplydb-cli == true }}
     needs: [get-latest-datacatalog, validate-datacatalog]
@@ -101,3 +106,11 @@ jobs:
       run: |
         ./triplydb-linux import-from-file --dataset "${{ env.DATASET_NAME }}" --token "${{ secrets.LDV_API_TOKEN }}" --account "rce" --url "https://api.linkeddata.cultureelerfgoed.nl" --default-graph-name "https://linkeddata.cultureelerfgoed.nl/rce/${{ env.DATASET_NAME }}/graphs/${{ env.GRAPH_ID }}" --mode "overwrite" ${{ env.ARTIFACT_PATH }} 
 
+  sync-triply-api:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.sync-on-push == true }} 
+    needs: [get-latest-datacatalog, validate-datacatalog]
+    steps:
+    - name: Push changes to TriplyDB API via cURL
+      run:  |
+        curl -H 'Authorization: Bearer ${{ secrets.LDV_API_TOKEN }}' -H 'Content-Type: application/json' -X POST https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/${{ env.DATASET_NAME }}/services/datacatalog -d '{"sync": "true"}'
