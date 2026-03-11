@@ -9,10 +9,6 @@ BASE_URI = os.getenv('BASE_URI', 'https://linkeddata.cultureelerfgoed.nl/')
 ACCOUNTS = {'rce', 'thesauri'}
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(
-    format='%(asctime)s %(levelname)-8s %(message)s',
-    level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S')
 
 def get_dataset_uri(accountname='', datasetname=''):
     if datasetname != '' and accountname != '':
@@ -56,6 +52,11 @@ def get_services():
 
 def main():
     """ main runner for workflow """
+    logging.basicConfig(
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        level=logging.INFO,
+        datefmt='%Y-%m-%d %H:%M:%S')
+
     for key, service in get_services().items():
         logger.info('%s: %s', key, service['endpoint'])
     

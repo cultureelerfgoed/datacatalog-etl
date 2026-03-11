@@ -16,10 +16,6 @@ KB_DC_QUERY = '[[Categorie:Datasets]]|limit=500|?Status|?Batch|?Naam|?Dataset ty
 '|?Zichtbaar in Erfgoedatlas|?Dataset|?Bronurl|?Dataset creatie|?Dataset domein|?Dataset rubriek|?Dataset beperkingen'
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(
-    format='%(asctime)s %(levelname)-8s %(message)s',
-    level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S')
 
 def get_mwquery_response_as_json(from_url: str, query: str):
     """ Get query response from URI """
@@ -82,6 +78,11 @@ def parse_json_to_graph(dc_json: dict, graph_id: str, allowlist: Graph) -> Graph
 
 def main():
     """ main runner for workflow """
+    logging.basicConfig(
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        level=logging.INFO,
+        datefmt='%Y-%m-%d %H:%M:%S')
+
     try:
         datacatalog_json = get_mwquery_response_as_json(SRC_URI, KB_DC_QUERY)
         with open('kb_datacatalog.json', 'w', encoding=ENCODING) as file:

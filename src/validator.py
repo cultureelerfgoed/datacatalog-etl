@@ -10,10 +10,6 @@ ENCODING = os.getenv('ENCODING', 'utf-8')
 VALIDATION_API = os.getenv('VALIDATION_API', 'https://datasetregister.netwerkdigitaalerfgoed.nl/api/datasets/validate')
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(
-    format='%(asctime)s %(levelname)-8s %(message)s',
-    level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S')
 
 def validate(url: str, graph: Graph) -> Graph:
     """ Validate against endpoint """
@@ -40,6 +36,11 @@ def get_logstring(targetgraph: Graph, validationgraph: Graph, subject_node: Node
 
 def main():
     """ main runner for workflow """
+    logging.basicConfig(
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        level=logging.INFO,
+        datefmt='%Y-%m-%d %H:%M:%S')
+
     tgraph = Graph()
     tgraph.parse(source=TARGET_FILEPATH, format=OUTPUT_FILE_FORMAT)
     vgraph = validate(VALIDATION_API, tgraph)
