@@ -88,7 +88,7 @@ jobs:
     - name: Push changes to TriplyDB API via cURL
       if: ${{ inputs.use-triplydb-cli == false }}
       run:  |
-        curl -H 'Authorization: Bearer ${{ secrets.LDV_API_TOKEN }}' -X POST 'https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/${{ env.DATASET_NAME }}/jobs'  -F file='${{ env.ARTIFACT_PATH }}'
+        curl -H 'Authorization: Bearer ${{ secrets.LDV_API_TOKEN }}' -H 'Content-Type: application/ld+json' -X POST 'https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/${{ env.DATASET_NAME }}/jobs'  -F file='${{ env.ARTIFACT_PATH }}'
     - name: Install dependencies
       if: ${{ inputs.use-triplydb-cli == true }}
       run: |
