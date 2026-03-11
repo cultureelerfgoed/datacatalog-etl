@@ -6,6 +6,7 @@ env:
   ARTIFACT_PATH: 'artifact-data.jsonld'
   GRAPH_ID: 'datacatalog-latest-graph'
   DATASET_NAME: 'datacatalog'
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
   workflow_dispatch:
@@ -76,9 +77,8 @@ jobs:
       env:
         TARGET_FILEPATH: ${{ env.ARTIFACT_PATH }}
 
-  push-to-triply-api-curl:
+  push-to-triply:
     runs-on: ubuntu-latest
-    if: ${{ inputs.use-triplydb-cli == false }} 
     needs: [get-latest-datacatalog, validate-datacatalog]
     steps:
     - name: Download data artifact
@@ -86,30 +86,23 @@ jobs:
       with:
           name: data-artifact
     - name: Push changes to TriplyDB API via cURL
+      if: ${{ inputs.use-triplydb-cli == false }}
       run:  |
         curl -H 'Authorization: Bearer ${{ secrets.LDV_API_TOKEN }}' -X POST 'https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/${{ env.DATASET_NAME }}/jobs'  -F file='${{ env.ARTIFACT_PATH }}'
-
-  push-to-triply-api-cli:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.use-triplydb-cli == true }}
-    needs: [get-latest-datacatalog, validate-datacatalog]
-    steps:
-    - name: Download data artifact
-      uses: actions/download-artifact@v4
-      with:
-          name: data-artifact
     - name: Install dependencies
+      if: ${{ inputs.use-triplydb-cli == true }}
       run: |
         wget 'https://static.triply.cc/cli/triplydb-linux'
         chmod +x triplydb-linux
     - name: Push changes to TriplyDB API via CLI
+      if: ${{ inputs.use-triplydb-cli == true }}
       run: |
         ./triplydb-linux import-from-file --dataset "${{ env.DATASET_NAME }}" --token "${{ secrets.LDV_API_TOKEN }}" --account "rce" --url "https://api.linkeddata.cultureelerfgoed.nl" --default-graph-name "https://linkeddata.cultureelerfgoed.nl/rce/${{ env.DATASET_NAME }}/graphs/${{ env.GRAPH_ID }}" --mode "overwrite" ${{ env.ARTIFACT_PATH }} 
 
-  sync-triply-api:
+  sync-triply:
     runs-on: ubuntu-latest
     if: ${{ inputs.sync-on-push == true }} 
-    needs: [get-latest-datacatalog, validate-datacatalog]
+    needs: push-to-triply
     steps:
     - name: Push changes to TriplyDB API via cURL
       run:  |
