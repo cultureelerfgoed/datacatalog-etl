@@ -16,9 +16,12 @@ def get_dataset_uri(accountname='', datasetname=''):
     elif accountname != '':
         return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/{accountname}/'
     else:
-        return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/'
+        return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/?limit=200'
 
-def get_service_uri(datasetname: str, accountname:str):
+def get_speedy_uri(accountname:str, datasetname: str):
+    return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/{accountname}/{datasetname}/sparql'
+
+def get_service_uri(accountname:str, datasetname: str):
     return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/{accountname}/{datasetname}/services/'
 
 def get_data(q_url: str) -> dict:
@@ -31,22 +34,17 @@ def get_data(q_url: str) -> dict:
 
     for item in r_obj:
         # for each dataset call service description endpoint if the serviceCount is not 0
-        if item.get('serviceCount') != 0:
-            a_nm = item.get('owner')['accountName']
-            s_uri = get_service_uri(item.get('name'), a_nm)
-            s_response = requests.get(s_uri, headers=headers, timeout=100)
-            s_obj = json.loads(s_response.text)
-            
-            ds[item.get('name')] = {'endpoint': s_obj[0].get('endpoint'), 
-                                    'description': item.get('description'), 
-                                    'displayName': item.get('displayName'), 
-                                    'createdAt': item.get('createdAt')}
+        a_nm = item.get('owner')['accountName']
+        ds[item.get('name')] = {'endpoint': get_speedy_uri(a_nm, item.get('name')), 
+                                'description': item.get('description'), 
+                                'displayName': item.get('displayName'), 
+                                'createdAt': item.get('createdAt'),
+                                'updatedAt': item.get('updatedAt')}
     return ds
 
 def get_services():
+    """ Returns all speedy endpoints  """
     s_dict = get_data(get_dataset_uri())
-    for account in ACCOUNTS:
-        s_dict = s_dict | get_data(get_dataset_uri(account))
     logger.info('Retrieved %i sparql endpoints.', len(s_dict))
     return s_dict
 

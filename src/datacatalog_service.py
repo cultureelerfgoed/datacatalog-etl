@@ -4,6 +4,7 @@ import logging
 import requests
 from rdflib import BNode, Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO
+from urllib.parse import urlsplit
 
 GRAPH_ID = os.getenv('GRAPH_ID', 'default')
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
@@ -48,7 +49,9 @@ def parse_json_to_graph(dc_json: dict, graph_id: str, allowlist: Graph) -> Graph
 
     for result in dc_json['query']['results']:
         # dataset definition
-        dataset_node = URIRef(dc_json['query']['results'][result]['fullurl'])
+        furl = dc_json['query']['results'][result]['fullurl']
+        durl = f'https://linkeddata.cultureelerfgoed.nl/rce/datacatalog/{urlsplit(furl).path[11:]}'
+        dataset_node = URIRef(durl)
         dataset_properties = dc_json['query']['results'][result]['printouts']
 
         #if any(word in 'some one long two phrase three' for word in list_):
