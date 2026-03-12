@@ -11,13 +11,8 @@ env:
 on:
   workflow_dispatch:
     inputs:
-      use-triplydb-cli:
-        description: 'Use TriplyDB CLI to push?'
-        default: false
-        required: false
-        type: boolean
       sync-on-push:
-        description: 'Sync after push?'
+        description: 'Sync TriplyDB after push?'
         default: false
         required: false
         type: boolean
@@ -85,17 +80,11 @@ jobs:
       uses: actions/download-artifact@v4
       with:
           name: data-artifact
-    - name: Push changes to TriplyDB API via cURL
-      if: ${{ inputs.use-triplydb-cli == false }}
-      run:  |
-        curl -H 'Authorization: Bearer ${{ secrets.LDV_API_TOKEN }}' -H 'Content-Type: application/ld+json' -X POST 'https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/${{ env.DATASET_NAME }}/jobs'  -F file='${{ env.ARTIFACT_PATH }}'
     - name: Install dependencies
-      if: ${{ inputs.use-triplydb-cli == true }}
       run: |
         wget 'https://static.triply.cc/cli/triplydb-linux'
         chmod +x triplydb-linux
     - name: Push changes to TriplyDB API via CLI
-      if: ${{ inputs.use-triplydb-cli == true }}
       run: |
         ./triplydb-linux import-from-file --dataset "${{ env.DATASET_NAME }}" --token "${{ secrets.LDV_API_TOKEN }}" --account "rce" --url "https://api.linkeddata.cultureelerfgoed.nl" --default-graph-name "https://linkeddata.cultureelerfgoed.nl/rce/${{ env.DATASET_NAME }}/graphs/${{ env.GRAPH_ID }}" --mode "overwrite" ${{ env.ARTIFACT_PATH }} 
 
