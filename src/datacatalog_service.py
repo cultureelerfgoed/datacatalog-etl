@@ -11,10 +11,9 @@ OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
 TARGET_FILEPATH = os.getenv('TARGET_FILEPATH', 'datacatalog.jsonld')
 SRC_URI = os.getenv('SRC_URI', 'https://kennis.cultureelerfgoed.nl/api.php')
 ENCODING = os.getenv('ENCODING', 'utf-8')
-ALLOWLIST_PATH = os.getenv('ALLOWLIST_PATH', 'allowlist.jsonld')
 
 KB_DC_QUERY = '[[Categorie:Datasets]]|limit=500|?Status|?Batch|?Naam|?Dataset type|?Omschrijving' \
-'|?Zichtbaar in Erfgoedatlas|?Dataset|?Bronurl|?Dataset creatie|?Dataset domein|?Dataset rubriek|?Dataset beperkingen'
+'|?Zichtbaar in Erfgoedatlas|?Dataset|?Bronurl|?Dataset creatie|?Dataset domein|?Dataset rubriek|?Dataset beperkingen|?Sparql-endpoint'
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +28,7 @@ def get_mwquery_response_as_json(from_url: str, query: str):
     logger.info('Query response from %s received', from_url)
     return json.loads(response.text)
 
-def parse_json_to_graph(dc_json: dict, graph_id: str, allowlist: Graph) -> Graph:
+def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
     """ Return graph from query response as JSON dict """
 
     graph = Graph(identifier=graph_id)
@@ -48,34 +47,35 @@ def parse_json_to_graph(dc_json: dict, graph_id: str, allowlist: Graph) -> Graph
     graph.add((organization_node, SDO.alternateName, Literal('Cultural Heritage Agency of the Netherlands', lang='en')))
 
     for result in dc_json['query']['results']:
-        # dataset definition
-        furl = dc_json['query']['results'][result]['fullurl']
-        durl = f'https://linkeddata.cultureelerfgoed.nl/rce/datacatalog/{urlsplit(furl).path[11:]}'
-        dataset_node = URIRef(durl)
-        dataset_properties = dc_json['query']['results'][result]['printouts']
+        if dc_json['query']['results'][result]['printouts']['Sparql-endpoint']:
+            
+            # dataset definition
+            furl = dc_json['query']['results'][result]['fullurl']
+            durl = f'https://linkeddata.cultureelerfgoed.nl/rce/datacatalog/{urlsplit(furl).path[11:]}'
+            dataset_node = URIRef(durl)
+            dataset_properties = dc_json['query']['results'][result]['printouts']
+            endpoint = dataset_properties['Sparql-endpoint'][0]
 
-        #if any(word in 'some one long two phrase three' for word in list_):
-        if (dataset_node, RDF.type, SDO.DataDownload) in allowlist and any(word in dataset_properties['Dataset beperkingen'][0] for word in ['Nee', 'Geen']):
-            logger.info('Found dataset %s in allowlist.', str(dataset_node))
-            graph.add((dataset_node, RDF.type, SDO.Dataset))
-            graph.add((dataset_node, SDO.name, Literal(dataset_properties['Naam'][0], lang='nl')))
-            graph.add((dataset_node, SDO.publisher, organization_node))
-            graph.add((dataset_node, SDO.description, Literal(dataset_properties['Omschrijving'][0], lang='nl')))
-            graph.add((dataset_node, SDO.genre, Literal(dataset_properties['Dataset rubriek'][0], lang='nl')))
-            graph.add((dataset_node, SDO.license, URIRef('https://creativecommons.org/licenses/by/4.0/')))
+            if any(word in dataset_properties['Dataset beperkingen'][0] for word in ['Nee', 'Geen']):
+                logger.info('Found dataset: %s with endpoint: %s', str(dataset_node), endpoint)
+                graph.add((dataset_node, RDF.type, SDO.Dataset))
+                graph.add((dataset_node, SDO.name, Literal(dataset_properties['Naam'][0], lang='nl')))
+                graph.add((dataset_node, SDO.publisher, organization_node))
+                graph.add((dataset_node, SDO.description, Literal(dataset_properties['Omschrijving'][0], lang='nl')))
+                graph.add((dataset_node, SDO.genre, Literal(dataset_properties['Dataset rubriek'][0], lang='nl')))
+                graph.add((dataset_node, SDO.license, URIRef('https://creativecommons.org/licenses/by/4.0/')))
 
-            if 'Alle' not in dataset_properties['Dataset domein'][0]:
-                graph.add((dataset_node, SDO.keywords, Literal(dataset_properties['Dataset domein'][0], lang='nl')))
-            else:
-                graph.add((dataset_node, SDO.keywords, Literal('Monumenten; Landschap; Kunstcollecties; Archeologie; Gebouwd; Roerend', lang='nl')))
+                if 'Alle' not in dataset_properties['Dataset domein'][0]:
+                    graph.add((dataset_node, SDO.keywords, Literal(dataset_properties['Dataset domein'][0], lang='nl')))
+                else:
+                    graph.add((dataset_node, SDO.keywords, Literal('Monumenten; Landschap; Kunstcollecties; Archeologie; Gebouwd; Roerend', lang='nl')))
 
-            graph.remove((dataset_node, None, Literal('')))
-            dl_distribution_node = BNode()
-            graph.add((dl_distribution_node, RDF.type, SDO.DataDownload))
-            graph.add((dl_distribution_node, SDO.encodingFormat, Literal('application/sparql-results+xml')))
-            graph.add((dl_distribution_node, SDO.contentUrl, URIRef(str(allowlist.value(dataset_node, SDO.contentUrl) or dataset_properties['Bronurl'][0]))))
-            graph.add((dl_distribution_node, SDO.description, graph.value(dataset_node, SDO.description)))
-            graph.add((dataset_node, SDO.distribution, dl_distribution_node))
+                graph.remove((dataset_node, None, Literal('')))
+                dl_distribution_node = BNode()
+                graph.add((dl_distribution_node, RDF.type, SDO.DataDownload))
+                graph.add((dl_distribution_node, SDO.encodingFormat, Literal('application/sparql-results+xml')))
+                graph.add((dl_distribution_node, SDO.contentUrl, URIRef(dc_json['query']['results'][result]['printouts']['Sparql-endpoint'][0])))
+                graph.add((dataset_node, SDO.distribution, dl_distribution_node))
             
     return graph
 
@@ -90,9 +90,7 @@ def main():
         datacatalog_json = get_mwquery_response_as_json(SRC_URI, KB_DC_QUERY)
         with open('kb_datacatalog.json', 'w', encoding=ENCODING) as file:
             json.dump(datacatalog_json, file)
-        allowlist = Graph()
-        allowlist.parse(ALLOWLIST_PATH)
-        graph = parse_json_to_graph(datacatalog_json, GRAPH_ID, allowlist)
+        graph = parse_json_to_graph(datacatalog_json, GRAPH_ID)
         logger.info("Writing  %s", f"{OUTPUT_FILE_FORMAT} file to {TARGET_FILEPATH}")
         graph.serialize(format=OUTPUT_FILE_FORMAT, destination=TARGET_FILEPATH, encoding=ENCODING, auto_compact=True)  
         logger.info("Filesize:  %s", f"{os.path.getsize(TARGET_FILEPATH)} bytes")
