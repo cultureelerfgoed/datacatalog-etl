@@ -32,8 +32,8 @@ sequenceDiagram;
         ETL->>Linked Data Voorziening:publicatie van datasets waarvoor endpoints bestaan
         ETL->>Linked Data Voorziening:sync
         ETL->>Netwerk Digitaal Erfgoed:validatie op endpoint
-        Netwerk Digitaal Erfgoed-->>LDV:
-        LDV-->>Netwerk Digitaal Erfgoed:
+        Netwerk Digitaal Erfgoed-->>Linked Data Voorziening:
+        Linked Data Voorziening-->>Netwerk Digitaal Erfgoed:
         Netwerk Digitaal Erfgoed-->>ETL:
     end
     Netwerk Digitaal Erfgoed->>Linked Data Voorziening:opname in NDE datasetregister
