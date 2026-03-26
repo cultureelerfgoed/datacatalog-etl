@@ -10,12 +10,6 @@ env:
 
 on:
   workflow_dispatch:
-    inputs:
-      sync-on-push:
-        description: 'Sync TriplyDB after push?'
-        default: false
-        required: false
-        type: boolean
 
 jobs:
   get-latest-datacatalog:
