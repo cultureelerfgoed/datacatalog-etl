@@ -45,7 +45,7 @@ jobs:
         path: ${{ env.ARTIFACT_PATH }}
         overwrite: true
   
-  validate-datacatalog-body:
+  validate-datacatalog-by-body:
     runs-on: ubuntu-latest
     needs: get-latest-datacatalog 
     steps:
@@ -69,7 +69,7 @@ jobs:
 
   push-to-triply:
     runs-on: ubuntu-latest
-    needs: [get-latest-datacatalog, validate-datacatalog-body]
+    needs: [get-latest-datacatalog, validate-datacatalog-by-body]
     steps:
     - name: Download data artifact
       uses: actions/download-artifact@v4
@@ -85,15 +85,15 @@ jobs:
 
   sync-triply:
     runs-on: ubuntu-latest
-    if: ${{ inputs.sync-on-push == true }} 
     needs: push-to-triply
     steps:
     - name: Push changes to TriplyDB API via cURL
       run:  |
         curl -H 'Authorization: Bearer ${{ secrets.LDV_API_TOKEN }}' -H 'Content-Type: application/json' -X POST https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/${{ env.DATASET_NAME }}/services/datacatalog -d '{"sync": "true"}'
 
-  validate-datacatalog-url:
-    runs-on: ubuntu-latest 
+  validate-datacatalog-by-url:
+    runs-on: ubuntu-latest
+    needs: sync-triply 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v6
