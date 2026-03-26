@@ -27,9 +27,11 @@ sequenceDiagram;
         ETL->>Kennisbank:ophalen intern datasetregister
         Kennisbank-->>ETL:
         ETL->>ETL:transformatie naar linked data
-        ETL->>Netwerk Digitaal Erfgoed:validatie
+        ETL->>Netwerk Digitaal Erfgoed:validatie op body
         Netwerk Digitaal Erfgoed-->>ETL:
         ETL->>Linked Data Voorziening:publicatie van datasets waarvoor endpoints bestaan
+        ETL->>Linked Data Voorziening:sync
+        ETL->>Netwerk Digitaal Erfgoed:validatie op endpoint
     end
     Netwerk Digitaal Erfgoed->>Linked Data Voorziening:opname in NDE datasetregister
     Linked Data Voorziening-->>Netwerk Digitaal Erfgoed:
