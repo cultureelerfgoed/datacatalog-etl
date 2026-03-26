@@ -75,6 +75,7 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
                 graph.add((dl_distribution_node, RDF.type, SDO.DataDownload))
                 graph.add((dl_distribution_node, SDO.encodingFormat, Literal('application/sparql-results+xml')))
                 graph.add((dl_distribution_node, SDO.contentUrl, URIRef(dc_json['query']['results'][result]['printouts']['Sparql-endpoint'][0])))
+                graph.add((dl_distribution_node, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties['Naam'][0]} op de Linked-Data Voorziening van de RCE.')))
                 graph.add((dataset_node, SDO.distribution, dl_distribution_node))
             
     return graph
