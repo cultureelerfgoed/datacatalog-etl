@@ -24,7 +24,6 @@ sequenceDiagram;
     loop RCE Datacatalog ETL
         ETL->>Linked Data Voorziening:ophalen beschikbare endpoints
         Linked Data Voorziening-->>ETL:
-        ETL->>ETL:genereer allowlist
         ETL->>Kennisbank:ophalen intern datasetregister
         Kennisbank-->>ETL:
         ETL->>ETL:transformatie naar linked data
