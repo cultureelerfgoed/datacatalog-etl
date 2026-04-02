@@ -41,7 +41,7 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
     cp_node = BNode()
     graph.add((cp_node, RDF.type, SDO.ContactPoint))
     graph.add((cp_node, SDO.name, Literal('Infodesk van de RCE', lang='nl')))
-    graph.add((cp_node, SDO.email, Literal('info@cultureelerfgoed.nl')))
+    graph.add((cp_node, SDO.email, Literal('thesauri@cultureelerfgoed.nl')))
     graph.add((organization_node, SDO.contactPoint, cp_node))
     graph.add((organization_node, SDO.identifier, Literal('NL-AmfRCE')))
     graph.add((organization_node, SDO.alternateName, Literal('Cultural Heritage Agency of the Netherlands', lang='en')))
