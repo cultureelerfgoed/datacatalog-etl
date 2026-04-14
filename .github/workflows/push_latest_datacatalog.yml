@@ -59,7 +59,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
           name: data-artifact   
-    - name: Run test 
+    - name: Validate 
       run: |
         python src/validator.py --path '${{ env.ARTIFACT_PATH }}' --method 'GET' --status 200
 
@@ -101,6 +101,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run test 
+    - name: Validate 
       run: |
         python src/validator.py --url 'https://api.linkeddata.cultureelerfgoed.nl/queries/rce/get-datacatalog/5/run?page=1&pageSize=1000' --method 'PUT' --status 200
