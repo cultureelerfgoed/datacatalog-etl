@@ -30,8 +30,10 @@ def get_dataset_metadata(q_url: str, dataset_node: Node, distribution_node: Node
     timeformat_src = '%Y-%m-%dT%H:%M:%S.%fZ'
     created = datetime.strptime(item.get('createdAt'), timeformat_src)
     modified = datetime.strptime(item.get('updatedAt'), timeformat_src)
+    published = datetime.strptime(item.get('lastGraphsUpdateTime'), timeformat_src)
     graph.add((dataset_node, SDO.dateCreated, Literal(created.date().isoformat())))
     graph.add((dataset_node, SDO.dateModified, Literal(modified.date().isoformat())))
+    graph.add((dataset_node, SDO.datePublished, Literal(published.date().isoformat())))
     graph.add((distribution_node, SDO.dateCreated, Literal(created.date().isoformat())))
     graph.add((distribution_node, SDO.dateModified, Literal(modified.date().isoformat())))
     graph.add((distribution_node, SDO.inLanguage, Literal('nl')))
