@@ -1,6 +1,7 @@
 import json
 import os
 import logging
+from datetime import datetime
 from urllib.parse import urlsplit
 import requests
 from rdflib import Graph, Node, Literal, BNode
@@ -25,16 +26,15 @@ def get_dataset_metadata(q_url: str, dataset_node: Node, distribution_node: Node
     headers = {'accept': 'text/plain'}
     response = requests.get(get_dataset_uri_by_endpoint(q_url), headers=headers, timeout=100)
     item = json.loads(response.content)
-    logger.info('Got %i items from %s.', len(item), q_url)
     graph = Graph()
-    logger.info(item)
-    
-    a_nm = item.get('owner')['name']
-    graph.add((dataset_node, SDO.dateCreated, Literal(item.get('createdAt'))))
-    graph.add((dataset_node, SDO.dateModified, Literal(item.get('updatedAt'))))
-    graph.add((dataset_node, SDO.creator, Literal(a_nm)))
-    graph.add((distribution_node, SDO.dateCreated, Literal(item.get('createdAt'))))
-    graph.add((distribution_node, SDO.dateModified, Literal(item.get('updatedAt'))))
+    timeformat_src = '%Y-%m-%dT%H:%M:%S.%fZ'
+    timeformat_tgt = '%Y-%m-%dT%H:%M:%S'
+    created = datetime.strptime(item.get('createdAt'), timeformat_src)
+    modified = datetime.strptime(item.get('updatedAt'), timeformat_src)
+    graph.add((dataset_node, SDO.dateCreated, Literal(datetime.strftime(created, timeformat_tgt))))
+    graph.add((dataset_node, SDO.dateModified, Literal(datetime.strftime(modified, timeformat_tgt))))
+    graph.add((distribution_node, SDO.dateCreated, Literal(created)))
+    graph.add((distribution_node, SDO.dateModified, Literal(modified)))
     graph.add((distribution_node, SDO.inLanguage, Literal('nl')))
     graph.add((distribution_node, SDO.inLanguage, Literal('en')))
     return graph

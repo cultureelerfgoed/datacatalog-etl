@@ -1,6 +1,7 @@
 import os
 import logging
 import argparse
+from typing import Tuple
 import requests
 from rdflib import Graph, Node
 from rdflib.namespace import RDF, SH
@@ -19,14 +20,14 @@ def validate_url(url: str, expected_status: int):
     response = requests.put(VALIDATION_API, headers={'accept': 'application/ld+json', 'Content-Type': 'application/ld+json'}, data=datastr, timeout=200)
     assert response.status_code == int(expected_status), f'Received status code {response.status_code}, expected {expected_status}, from {VALIDATION_API}: {response.content}'
 
-def validate_body(graph: Graph, expected_status: int) -> Graph:
+def validate_body(graph: Graph) -> Tuple[Graph, int]:
     """ Validate body against endpoint """
     strgraph = graph.serialize(format=OUTPUT_FILE_FORMAT)
     response = requests.post(VALIDATION_API, headers={'accept': 'application/ld+json', 'Content-Type': 'application/ld+json'}, data=strgraph, timeout=200)
-    assert response.status_code == int(expected_status), f'Received status code {response.status_code}, expected {expected_status}, from {VALIDATION_API}..'
+    #assert response.status_code == int(expected_status), f'Received status code {response.status_code}, expected {expected_status}, from {VALIDATION_API}..'
     validationgraph = Graph()
     validationgraph.parse(data=response.text, format='application/ld+json')
-    return validationgraph
+    return validationgraph, response.status_code
 
 def get_logstring(targetgraph: Graph, validationgraph: Graph, subject_node: Node):
     """ Format Shacl validation as nice string """
@@ -41,7 +42,7 @@ def main():
         format='%(asctime)s %(levelname)-8s %(message)s',
         level=logging.INFO,
         datefmt='%Y-%m-%d %H:%M:%S')
-    parser = argparse.ArgumentParser(description='PoolParty tests')
+    parser = argparse.ArgumentParser(description='Datacatalog validation')
     parser.add_argument('-u','--url', help='Target URL', required=False)
     parser.add_argument('-p','--path', help='Target path', required=False)
     parser.add_argument('-m','--method', help='Request method', required=True)
@@ -50,7 +51,8 @@ def main():
     if str.upper(args['method']) == 'GET':
         tgraph = Graph()
         tgraph.parse(args['path'], format=OUTPUT_FILE_FORMAT)
-        vgraph = validate_body(tgraph, args['status'])
+        expected_status = int(args['status'])
+        vgraph, rstatus = validate_body(tgraph)
         
         for subj, pred, obj in vgraph.triples((None, RDF.type, SH.ValidationResult)):
             if vgraph.value(subj, SH.resultSeverity) == SH.Info:
@@ -61,6 +63,8 @@ def main():
                 logger.error('Invalid datacatalog, Shacl violations found.')
                 logger.error(get_logstring(tgraph, vgraph, subj))
                 raise ValueError(f'Failed Shacl validation: {str(vgraph.value(subj, SH.focusNode))}')
+            
+        assert rstatus == expected_status, f'Received status code {rstatus}, expected {expected_status}, from {VALIDATION_API}..'
     elif str.upper(args['method']) == 'PUT':
         validate_url(args['url'], args['status'])
 

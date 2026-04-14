@@ -87,6 +87,7 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
                 graph.add((dl_distribution_node, SDO.contentUrl, endpoint))
                 graph.add((dl_distribution_node, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties['Naam'][0]} op de Linked-Data Voorziening van de RCE.')))
                 graph.add((dataset_node, SDO.distribution, dl_distribution_node))
+                graph.add((dataset_node, SDO.creator, organization_node))
                 meta_graph = endpoint_info_service.get_dataset_metadata(str(endpoint), dataset_node, dl_distribution_node)
                 graph = graph + meta_graph
             
