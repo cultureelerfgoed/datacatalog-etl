@@ -1,8 +1,10 @@
 import json
 import os
 import logging
-import requests
 from urllib.parse import urlsplit
+import requests
+from rdflib import Graph, Node, Literal, BNode
+from rdflib.namespace import SDO
 
 ENCODING = os.getenv('ENCODING', 'utf-8')
 BASE_URI = os.getenv('BASE_URI', 'https://linkeddata.cultureelerfgoed.nl/')
@@ -10,43 +12,32 @@ ACCOUNTS = {'rce', 'thesauri'}
 
 logger = logging.getLogger(__name__)
 
-def get_dataset_uri(accountname='', datasetname=''):
-    if datasetname != '' and accountname != '':
-        return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/{accountname}/{datasetname}/'
-    elif accountname != '':
-        return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/{accountname}/'
-    else:
-        return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/?limit=200'
+def get_dataset_uri(accountname: str, datasetname: str):
+    """ return uri of dataset based on base uri, accountname, and datasetname """    
+    return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/{accountname}/{datasetname}/'
 
-def get_speedy_uri(accountname:str, datasetname: str):
-    return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/{accountname}/{datasetname}/sparql'
+def get_dataset_uri_by_endpoint(endpoint: str):
+    """ Return uri of dataset based on uri of endpoint  """
+    return endpoint.removesuffix('sparql')
 
-def get_service_uri(accountname:str, datasetname: str):
-    return f'https://api.{urlsplit(BASE_URI).hostname}/datasets/{accountname}/{datasetname}/services/'
-
-def get_data(q_url: str) -> dict:
+def get_dataset_metadata(q_url: str, dataset_node: Node, distribution_node: Node) -> Graph:
     """ Validate against endpoint """
     headers = {'accept': 'text/plain'}
-    response = requests.get(q_url, headers=headers, timeout=100)
-    r_obj = json.loads(response.content)
-    logger.info('Got %i items from %s.', len(r_obj), q_url)
-    ds = dict()
-
-    for item in r_obj:
-        # for each dataset call service description endpoint if the serviceCount is not 0
-        a_nm = item.get('owner')['accountName']
-        ds[item.get('name')] = {'endpoint': get_speedy_uri(a_nm, item.get('name')), 
-                                'description': item.get('description'), 
-                                'displayName': item.get('displayName'), 
-                                'createdAt': item.get('createdAt'),
-                                'updatedAt': item.get('updatedAt')}
-    return ds
-
-def get_services():
-    """ Returns all speedy endpoints  """
-    s_dict = get_data(get_dataset_uri())
-    logger.info('Retrieved %i sparql endpoints.', len(s_dict))
-    return s_dict
+    response = requests.get(get_dataset_uri_by_endpoint(q_url), headers=headers, timeout=100)
+    item = json.loads(response.content)
+    logger.info('Got %i items from %s.', len(item), q_url)
+    graph = Graph()
+    logger.info(item)
+    
+    a_nm = item.get('owner')['name']
+    graph.add((dataset_node, SDO.dateCreated, Literal(item.get('createdAt'))))
+    graph.add((dataset_node, SDO.dateModified, Literal(item.get('updatedAt'))))
+    graph.add((dataset_node, SDO.creator, Literal(a_nm)))
+    graph.add((distribution_node, SDO.dateCreated, Literal(item.get('createdAt'))))
+    graph.add((distribution_node, SDO.dateModified, Literal(item.get('updatedAt'))))
+    graph.add((distribution_node, SDO.inLanguage, Literal('nl')))
+    graph.add((distribution_node, SDO.inLanguage, Literal('en')))
+    return graph
 
 def main():
     """ main runner for workflow """
@@ -55,8 +46,8 @@ def main():
         level=logging.INFO,
         datefmt='%Y-%m-%d %H:%M:%S')
 
-    for key, service in get_services().items():
-        logger.info('%s: %s', key, service['endpoint'])
+    g = get_dataset_metadata('https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/datacatalog/sparql', BNode(), BNode())
+    g.print()
     
 if __name__ == '__main__':
     main()

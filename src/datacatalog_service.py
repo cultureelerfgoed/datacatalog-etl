@@ -1,10 +1,12 @@
 import json
 import os
 import logging
+from typing import Iterable
+from urllib.parse import urlsplit
 import requests
 from rdflib import BNode, Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO
-from urllib.parse import urlsplit
+import endpoint_info_service
 
 GRAPH_ID = os.getenv('GRAPH_ID', 'default')
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
@@ -66,19 +68,36 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
                 graph.add((dataset_node, SDO.license, URIRef('https://creativecommons.org/licenses/by/4.0/')))
 
                 if 'Alle' not in dataset_properties['Dataset domein'][0]:
-                    graph.add((dataset_node, SDO.keywords, Literal(dataset_properties['Dataset domein'][0], lang='nl')))
+                    spl_tags = try_safe_split_by_str(dataset_properties['Dataset domein'][0], ';')
+                    for keyword in spl_tags:
+                        graph.add((dataset_node, SDO.keywords, Literal(keyword, lang='nl')))
                 else:
-                    graph.add((dataset_node, SDO.keywords, Literal('Monumenten; Landschap; Kunstcollecties; Archeologie; Gebouwd; Roerend', lang='nl')))
+                    graph.add((dataset_node, SDO.keywords, Literal('Monumenten', lang='nl')))
+                    graph.add((dataset_node, SDO.keywords, Literal('Landschap', lang='nl')))
+                    graph.add((dataset_node, SDO.keywords, Literal('Kunstcollecties', lang='nl')))
+                    graph.add((dataset_node, SDO.keywords, Literal('Archeologie', lang='nl')))
+                    graph.add((dataset_node, SDO.keywords, Literal('Gebouwd', lang='nl')))
+                    graph.add((dataset_node, SDO.keywords, Literal('Roerend', lang='nl')))
 
                 graph.remove((dataset_node, None, Literal('')))
                 dl_distribution_node = BNode()
                 graph.add((dl_distribution_node, RDF.type, SDO.DataDownload))
                 graph.add((dl_distribution_node, SDO.encodingFormat, Literal('application/sparql-results+xml')))
-                graph.add((dl_distribution_node, SDO.contentUrl, URIRef(dc_json['query']['results'][result]['printouts']['Sparql-endpoint'][0])))
+                endpoint = URIRef(dc_json['query']['results'][result]['printouts']['Sparql-endpoint'][0])
+                graph.add((dl_distribution_node, SDO.contentUrl, endpoint))
                 graph.add((dl_distribution_node, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties['Naam'][0]} op de Linked-Data Voorziening van de RCE.')))
                 graph.add((dataset_node, SDO.distribution, dl_distribution_node))
+                meta_graph = endpoint_info_service.get_dataset_metadata(str(endpoint), dataset_node, dl_distribution_node)
+                graph = graph + meta_graph
             
     return graph
+
+def try_safe_split_by_str(val: str, delimiter: str) -> Iterable[str]:
+    """ Method to delimit strings without raising an error """ 
+    try:
+        return filter(lambda c: c.isalnum(), val.split(delimiter))
+    except BaseException:
+        return {val}
 
 def main():
     """ main runner for workflow """

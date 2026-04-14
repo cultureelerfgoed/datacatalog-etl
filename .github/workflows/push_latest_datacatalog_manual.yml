@@ -1,4 +1,4 @@
-name: 'Datacatalog ETL daily' 
+name: 'Datacatalog ETL manual run' 
 
 env:
   BASE_URI: 'https://linkeddata.cultureelerfgoed.nl/'
@@ -9,9 +9,7 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
-  schedule:
-  - cron: '0 15 * * *'
-    timezone: 'Europe/Amsterdam' 
+  workflow_dispatch:
 
 jobs:
   get-latest-datacatalog:
