@@ -4,12 +4,14 @@ import logging
 from datetime import datetime
 from urllib.parse import urlsplit
 import requests
-from rdflib import Graph, Node, Literal, BNode
+from rdflib import Graph, Node, Literal, BNode, URIRef
 from rdflib.namespace import SDO
 
 ENCODING = os.getenv('ENCODING', 'utf-8')
 BASE_URI = os.getenv('BASE_URI', 'https://linkeddata.cultureelerfgoed.nl/')
-ACCOUNTS = {'rce', 'thesauri'}
+LICENSES = {'CC BY-SA v4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
+            'CC BY': 'https://creativecommons.org/licenses/by/4.0/',
+            'CC0 1.0': 'https://creativecommons.org/publicdomain/zero/1.0/'}
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +33,7 @@ def get_dataset_metadata(q_url: str, dataset_node: Node, distribution_node: Node
     created = datetime.strptime(item.get('createdAt'), timeformat_src)
     modified = datetime.strptime(item.get('updatedAt'), timeformat_src)
     published = datetime.strptime(item.get('lastGraphsUpdateTime'), timeformat_src)
+    graph.add((dataset_node, SDO.license, URIRef(LICENSES[item.get('license', LICENSES['CC BY'])])))
     graph.add((dataset_node, SDO.dateCreated, Literal(created.date().isoformat())))
     graph.add((dataset_node, SDO.dateModified, Literal(modified.date().isoformat())))
     graph.add((dataset_node, SDO.datePublished, Literal(published.date().isoformat())))

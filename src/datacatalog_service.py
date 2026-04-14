@@ -65,7 +65,6 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
                 graph.add((dataset_node, SDO.publisher, organization_node))
                 graph.add((dataset_node, SDO.description, Literal(dataset_properties['Omschrijving'][0], lang='nl')))
                 graph.add((dataset_node, SDO.genre, Literal(dataset_properties['Dataset rubriek'][0], lang='nl')))
-                graph.add((dataset_node, SDO.license, URIRef('https://creativecommons.org/licenses/by/4.0/')))
 
                 if 'Alle' not in dataset_properties['Dataset domein'][0]:
                     spl_tags = try_safe_split_by_str(dataset_properties['Dataset domein'][0], ';')
