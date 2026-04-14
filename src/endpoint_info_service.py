@@ -28,13 +28,13 @@ def get_dataset_metadata(q_url: str, dataset_node: Node, distribution_node: Node
     item = json.loads(response.content)
     graph = Graph()
     timeformat_src = '%Y-%m-%dT%H:%M:%S.%fZ'
-    timeformat_tgt = '%Y-%m-%dT%H:%M:%S'
+    timeformat_tgt = '%Y-%m-%d'
     created = datetime.strptime(item.get('createdAt'), timeformat_src)
     modified = datetime.strptime(item.get('updatedAt'), timeformat_src)
     graph.add((dataset_node, SDO.dateCreated, Literal(datetime.strftime(created, timeformat_tgt))))
     graph.add((dataset_node, SDO.dateModified, Literal(datetime.strftime(modified, timeformat_tgt))))
-    graph.add((distribution_node, SDO.dateCreated, Literal(created)))
-    graph.add((distribution_node, SDO.dateModified, Literal(modified)))
+    graph.add((distribution_node, SDO.dateCreated, Literal(datetime.strftime(created, timeformat_tgt))))
+    graph.add((distribution_node, SDO.dateModified, Literal(datetime.strftime(modified, timeformat_tgt))))
     graph.add((distribution_node, SDO.inLanguage, Literal('nl')))
     graph.add((distribution_node, SDO.inLanguage, Literal('en')))
     return graph
