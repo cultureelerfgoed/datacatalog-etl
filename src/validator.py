@@ -26,7 +26,6 @@ def validate_body(graph: Graph) -> Tuple[Graph, int]:
     """ Validate body against endpoint """
     strgraph = graph.serialize(format=OUTPUT_FILE_FORMAT, encoding=ENCODING)
     response = requests.post(config['VALIDATION_API'], headers={'accept': 'application/ld+json', 'Content-Type': 'application/ld+json'}, data=strgraph, timeout=200)
-    #assert response.status_code == int(expected_status), f'Received status code {response.status_code}, expected {expected_status}, from {VALIDATION_API}..'
     validationgraph = Graph()
     validationgraph.parse(data=response.text, format='application/ld+json')
     return validationgraph, response.status_code
