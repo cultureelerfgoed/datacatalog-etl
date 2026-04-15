@@ -12,7 +12,6 @@ import endpoint_info_service
 CONFIG_PATH = os.getenv('CONFIG_PATH', 'config/config.yml')
 ENCODING = os.getenv('ENCODING', 'utf-8')
 GRAPH_ID = os.getenv('GRAPH_ID', 'default')
-DATASET_NAME = os.getenv('DATASET_NAME', 'datacatalog')
 ARTIFACT_PATH = os.getenv('ARTIFACT_PATH', 'datacatalog.json-ld')
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
 
