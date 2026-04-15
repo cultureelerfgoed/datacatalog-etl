@@ -7,8 +7,6 @@ from rdflib import Graph, Node
 from rdflib.namespace import RDF, SH
 import yaml
 
-from datacatalog_service import ARTIFACT_PATH
-
 CONFIG_PATH = os.getenv('CONFIG_PATH', 'config/config.yml')
 ENCODING = os.getenv('ENCODING', 'utf-8')
 ARTIFACT_PATH = os.getenv('ARTIFACT_PATH', 'datacatalog.json-ld')

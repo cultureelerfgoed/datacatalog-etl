@@ -33,10 +33,8 @@ jobs:
     - name: Get latest datacatalog 
       run: |
         python src/datacatalog_service.py
-      env:
-        TARGET_FILEPATH: ${{ env.ARTIFACT_PATH }}
     - name: Upload data artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: data-artifact
         path: ${{ env.ARTIFACT_PATH }}
@@ -62,7 +60,7 @@ jobs:
           name: data-artifact   
     - name: Validate 
       run: |
-        python src/validator.py --path '${{ env.ARTIFACT_PATH }}' --method 'GET' --status 200
+        python src/validator.py --method 'GET' --status 200
 
   push-to-triply:
     runs-on: ubuntu-latest
