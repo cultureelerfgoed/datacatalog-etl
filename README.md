@@ -53,12 +53,8 @@ pip install -r requirements.txt
 ```
 python src/generate_allowlist.py
 python src/datacatalog_service.py
-python src/validator.py
+python src/validator.py --path 'artifact-data.jsonld' --method 'GET' --status 200
 ```
+# Configureren
 
-<!--
-#### Endpoint voor validatie van NDE
-```https://datasetregister.netwerkdigitaalerfgoed.nl/api/#/default/validate-body```
-#### Endpoint Kennisbank RDF export
-```https://kennis.cultureelerfgoed.nl/index.php/Speciaal:Vragen/format%3Drdf/limit%3D20/link%3Dall/headers%3Dshow/searchlabel%3DRDF/class%3Dsortable-20wikitable-20smwtable/prefix%3Dnone/sort%3D/order%3Dasc/offset%3D0/-5B-5BCategorie:Datasets-5D-5D/mainlabel%3D/prettyprint%3Dtrue/unescape%3Dtrue```
--->
+De configuratiewaardes van de workflow kunnen aangepast worden in het bestand config/config.yml. Zie config/config.yml voor uitgebreidere documentatie over de mogelijkheden. Verdere configuratie staat in de workflow bestanden in .github/workflows/.

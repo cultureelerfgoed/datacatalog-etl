@@ -1,0 +1,29 @@
+# Linked Data 
+BASE_URI: 'https://linkeddata.cultureelerfgoed.nl/'
+
+# Validatie API
+VALIDATION_API: 'https://datasetregister.netwerkdigitaalerfgoed.nl/api/datasets/validate'
+
+# Kennisbank API 
+SRC_URI: 'https://kennis.cultureelerfgoed.nl/api.php'
+
+# Query om datasets op te halen van de Kennisbank
+KB_DC_QUERY: '[[Categorie:Datasets]]|limit=500|?Status|?Batch|?Naam|?Dataset type|?Omschrijving|?Zichtbaar in Erfgoedatlas|?Dataset|?Bronurl|?Dataset creatie|?Dataset domein|?Dataset rubriek|?Dataset beperkingen|?Sparql-endpoint'
+
+# Velden op de kennisbank
+KENNISBANK_ENDPOINT: 'Sparql-endpoint'
+KENNISBANK_BEPERKINGEN: 'Dataset beperkingen'
+KENNISBANK_NAAM: 'Naam'
+KENNISBANK_OMSCHRIJVING: 'Omschrijving'
+KENNISBANK_RUBRIEK: 'Dataset rubriek'
+KENNISBANK_DOMEIN: 'Dataset domein'
+
+# Organisatie
+ORG_URI: 'https://www.cultureelerfgoed.nl'
+ORG_NAME: 'Rijksdienst voor het Cultureel Erfgoed'
+ORG_SAME_AS: 'https://standaarden.overheid.nl/owms/terms/Rijksdienst_voor_het_Cultureel_Erfgoed'
+ORG_CONTACT_NAME: 'Infodesk van de RCE'
+ORG_CONTACT_EMAIL: 'thesauri@cultureelerfgoed.nl'
+ORG_ISIL: 'NL-AmfRCE'
+ORG_ALTNAME: 'Cultural Heritage Agency of the Netherlands'
+

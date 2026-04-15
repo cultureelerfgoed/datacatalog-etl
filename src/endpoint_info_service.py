@@ -1,18 +1,13 @@
 import json
-import os
-import logging
 from datetime import datetime
-from urllib.parse import urlsplit
 import requests
-from rdflib import Graph, Node, Literal, BNode, URIRef, xsd_datetime
+from rdflib import Graph, Node, Literal, URIRef
 from rdflib.namespace import SDO, XSD
-import config
 
-logger = logging.getLogger(__name__)
-
-def get_dataset_uri(accountname: str, datasetname: str):
-    """ return uri of dataset based on base uri, accountname, and datasetname """    
-    return f'https://api.{urlsplit(config.BASE_URI).hostname}/datasets/{accountname}/{datasetname}/'
+LICENSES = {'CC BY-SA v4.0':    'https://creativecommons.org/licenses/by-sa/4.0/',
+            'CC BY':            'https://creativecommons.org/licenses/by/4.0/',
+            'CC0 1.0':          'https://creativecommons.org/publicdomain/zero/1.0/',
+            'default':          'https://creativecommons.org/licenses/by/4.0/'}
 
 def get_dataset_uri_by_endpoint(endpoint: str):
     """ Return uri of dataset based on uri of endpoint  """
@@ -28,7 +23,7 @@ def get_dataset_metadata(q_url: str, dataset_node: Node, distribution_node: Node
     created = datetime.strptime(item.get('createdAt'), timeformat_src)
     modified = datetime.strptime(item.get('updatedAt'), timeformat_src)
     published = datetime.strptime(item.get('lastGraphsUpdateTime'), timeformat_src)
-    graph.add((dataset_node, SDO.license, URIRef(config.LICENSES[item.get('license', config.LICENSES['default'])])))
+    graph.add((dataset_node, SDO.license, URIRef(LICENSES[item.get('license', 'default')])))
     graph.add((dataset_node, SDO.dateCreated, Literal(created.date().isoformat(), datatype=XSD.date)))
     graph.add((dataset_node, SDO.dateModified, Literal(modified.date().isoformat(), datatype=XSD.date)))
     graph.add((dataset_node, SDO.datePublished, Literal(published.date().isoformat(), datatype=XSD.date)))
