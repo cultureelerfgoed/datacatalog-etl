@@ -46,6 +46,7 @@ def main():
     parser = argparse.ArgumentParser(description='Datacatalog validation')
     parser.add_argument('-m','--method', help='Request method', required=True)
     parser.add_argument('-s','--status', help='Expected status code', required=True)
+    parser.add_argument('-u','--url', help='URL to validate', required=False)
     args = vars(parser.parse_args())
     if str.upper(args['method']) == 'GET':
         tgraph = Graph()
