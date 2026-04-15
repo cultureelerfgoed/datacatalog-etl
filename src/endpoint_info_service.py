@@ -4,8 +4,8 @@ import logging
 from datetime import datetime
 from urllib.parse import urlsplit
 import requests
-from rdflib import Graph, Node, Literal, BNode, URIRef
-from rdflib.namespace import SDO
+from rdflib import Graph, Node, Literal, BNode, URIRef, xsd_datetime
+from rdflib.namespace import SDO, XSD
 import config
 
 logger = logging.getLogger(__name__)
@@ -29,11 +29,11 @@ def get_dataset_metadata(q_url: str, dataset_node: Node, distribution_node: Node
     modified = datetime.strptime(item.get('updatedAt'), timeformat_src)
     published = datetime.strptime(item.get('lastGraphsUpdateTime'), timeformat_src)
     graph.add((dataset_node, SDO.license, URIRef(config.LICENSES[item.get('license', config.LICENSES['default'])])))
-    graph.add((dataset_node, SDO.dateCreated, Literal(created.date().isoformat())))
-    graph.add((dataset_node, SDO.dateModified, Literal(modified.date().isoformat())))
-    graph.add((dataset_node, SDO.datePublished, Literal(published.date().isoformat())))
-    graph.add((distribution_node, SDO.dateCreated, Literal(created.date().isoformat())))
-    graph.add((distribution_node, SDO.dateModified, Literal(modified.date().isoformat())))
+    graph.add((dataset_node, SDO.dateCreated, Literal(created.date().isoformat(), datatype=XSD.date)))
+    graph.add((dataset_node, SDO.dateModified, Literal(modified.date().isoformat(), datatype=XSD.date)))
+    graph.add((dataset_node, SDO.datePublished, Literal(published.date().isoformat(), datatype=XSD.date)))
+    graph.add((distribution_node, SDO.dateCreated, Literal(created.date().isoformat(), datatype=XSD.date)))
+    graph.add((distribution_node, SDO.dateModified, Literal(modified.date().isoformat(), datatype=XSD.date)))
     graph.add((distribution_node, SDO.inLanguage, Literal('nl')))
     graph.add((distribution_node, SDO.inLanguage, Literal('en')))
     return graph

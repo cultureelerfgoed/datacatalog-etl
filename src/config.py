@@ -7,6 +7,7 @@ OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
 TARGET_FILEPATH = os.getenv('TARGET_FILEPATH', 'datacatalog.jsonld')
 SRC_URI = os.getenv('SRC_URI', 'https://kennis.cultureelerfgoed.nl/api.php')
 ENCODING = os.getenv('ENCODING', 'utf-8')
+BASE_URI = os.getenv('BASE_URI', 'https://linkeddata.cultureelerfgoed.nl')
 VALIDATION_API = os.getenv('VALIDATION_API', 'https://datasetregister.netwerkdigitaalerfgoed.nl/api/datasets/validate')
 
 KENNISBANK_ENDPOINT = 'Sparql-endpoint'

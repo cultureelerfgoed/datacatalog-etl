@@ -10,12 +10,6 @@ import endpoint_info_service
 import config
 from config import KENNISBANK_MAPPING as MAPPING
 
-GRAPH_ID = os.getenv('GRAPH_ID', 'default')
-OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
-TARGET_FILEPATH = os.getenv('TARGET_FILEPATH', 'datacatalog.jsonld')
-SRC_URI = os.getenv('SRC_URI', 'https://kennis.cultureelerfgoed.nl/api.php')
-ENCODING = os.getenv('ENCODING', 'utf-8')
-
 logger = logging.getLogger(__name__)
 
 def get_mwquery_response_as_json(from_url: str, query: str):
@@ -29,11 +23,8 @@ def get_mwquery_response_as_json(from_url: str, query: str):
     logger.info('Query response from %s received', from_url)
     return json.loads(response.text)
 
-def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
-    """ Return graph from query response as JSON dict """
-
-    graph = Graph(identifier=graph_id)
-
+def get_organization() -> Graph:
+    graph = Graph(identifier=config.GRAPH_ID)
     # organization information
     organization_node = URIRef(config.ORG_URI)
     graph.add((organization_node, RDF.type, SDO.Organization))
@@ -46,6 +37,12 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
     graph.add((organization_node, SDO.contactPoint, cp_node))
     graph.add((organization_node, SDO.identifier, Literal(config.ORG_ISIL)))
     graph.add((organization_node, SDO.alternateName, Literal(config.ORG_ALTNAME, lang='en')))
+    return graph
+
+def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
+    """ Return graph from query response as JSON dict """
+
+    graph = get_organization()
 
     for result in dc_json['query']['results']:
         if dc_json['query']['results'][result]['printouts'][config.KENNISBANK_ENDPOINT]:
@@ -60,7 +57,8 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
             if any(word in dataset_properties[config.KENNISBANK_BEPERKINGEN][0] for word in ['Nee', 'Geen']):
                 logger.info('Found dataset: %s with endpoint: %s', str(dataset_node), endpoint)
                 graph.add((dataset_node, RDF.type, SDO.Dataset))
-                graph.add((dataset_node, SDO.publisher, organization_node))
+                graph.add((dataset_node, SDO.publisher, URIRef(config.ORG_URI)))
+                
                 graph.add((dataset_node, MAPPING[config.KENNISBANK_NAAM], get_literal_from_mw_response(dataset_properties, config.KENNISBANK_NAAM)))
                 graph.add((dataset_node, MAPPING[config.KENNISBANK_OMSCHRIJVING], get_literal_from_mw_response(dataset_properties, config.KENNISBANK_OMSCHRIJVING)))
                 graph.add((dataset_node, MAPPING[config.KENNISBANK_RUBRIEK], get_literal_from_mw_response(dataset_properties, config.KENNISBANK_RUBRIEK)))
@@ -85,7 +83,7 @@ def parse_json_to_graph(dc_json: dict, graph_id: str) -> Graph:
                 graph.add((dl_distribution_node, SDO.contentUrl, endpoint))
                 graph.add((dl_distribution_node, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties[config.KENNISBANK_NAAM][0]} op de Linked-Data Voorziening van de RCE.')))
                 graph.add((dataset_node, SDO.distribution, dl_distribution_node))
-                graph.add((dataset_node, SDO.creator, organization_node))
+                graph.add((dataset_node, SDO.creator, URIRef(config.ORG_URI)))
                 meta_graph = endpoint_info_service.get_dataset_metadata(str(endpoint), dataset_node, dl_distribution_node)
                 graph = graph + meta_graph
             
