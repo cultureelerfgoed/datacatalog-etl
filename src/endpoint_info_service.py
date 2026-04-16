@@ -35,5 +35,5 @@ def get_dataset_metadata(q_url: str, dataset_node: Node, distribution_node: Node
     graph.add((distribution_node, SDO.dateModified, Literal(modified.date().isoformat(), datatype=XSD.date)))
     #graph.add((distribution_node, SDO.inLanguage, Literal('nl-NL', datatype=XSD.language)))
     #graph.add((distribution_node, SDO.inLanguage, Literal('en-US', datatype=XSD.language)))
-    graph.add((distribution_node, SDO.inLanguage, Literal('nl', datatype=XSD.language)))
+    graph.add((dataset_node, SDO.inLanguage, Literal('nl-NL', datatype=XSD.language)))
     return graph

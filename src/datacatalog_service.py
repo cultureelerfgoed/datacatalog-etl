@@ -5,7 +5,7 @@ from typing import Iterable
 from urllib.parse import urlsplit
 import requests
 from rdflib import BNode, Graph, Literal, URIRef
-from rdflib.namespace import RDF, SDO
+from rdflib.namespace import RDF, SDO, XSD
 import yaml
 import endpoint_info_service
 
@@ -86,6 +86,7 @@ def parse_json_to_graph(dc_json: dict) -> Graph:
                 dl_distribution_node = BNode()
                 graph.add((dl_distribution_node, RDF.type, SDO.DataDownload))
                 graph.add((dl_distribution_node, SDO.encodingFormat, Literal('application/sparql-results+xml')))
+                #endpoint = Literal(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0], datatype=XSD.anyURI)
                 endpoint = URIRef(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0])
                 graph.add((dl_distribution_node, SDO.contentUrl, endpoint))
                 graph.add((dl_distribution_node, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties[config['KENNISBANK_ENDPOINT']][0]} op de Linked-Data Voorziening van de RCE.')))
