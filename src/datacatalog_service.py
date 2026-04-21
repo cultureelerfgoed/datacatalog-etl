@@ -8,6 +8,7 @@ from rdflib import BNode, Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO, XSD
 import yaml
 import endpoint_info_service
+import cht_term_resolver_service as cht_service
 
 CONFIG_PATH = os.getenv('CONFIG_PATH', 'config/config.yml')
 ENCODING = os.getenv('ENCODING', 'utf-8')
@@ -68,7 +69,10 @@ def parse_json_to_graph(dc_json: dict) -> Graph:
                 
                 graph.add((dataset_node, SDO.name, get_literal_from_mw_response(dataset_properties, config['KENNISBANK_NAAM'])))
                 graph.add((dataset_node, SDO.description, get_literal_from_mw_response(dataset_properties, config['KENNISBANK_OMSCHRIJVING'])))
-                graph.add((dataset_node, SDO.genre, get_literal_from_mw_response(dataset_properties, config['KENNISBANK_RUBRIEK'])))
+
+                term = cht_service.get_term_uri_from_cht(dataset_properties[config['KENNISBANK_RUBRIEK']][0])
+                if term:
+                    graph.add((dataset_node, SDO.about, URIRef(term)))
 
                 if 'Alle' not in dataset_properties[config['KENNISBANK_DOMEIN']][0]:
                     spl_tags = try_safe_split_by_str(dataset_properties[config['KENNISBANK_DOMEIN']][0], ';')
@@ -83,16 +87,17 @@ def parse_json_to_graph(dc_json: dict) -> Graph:
                     graph.add((dataset_node, SDO.keywords, Literal('Roerend', lang='nl')))
 
                 graph.remove((dataset_node, None, Literal('')))
-                dl_distribution_node = BNode()
-                graph.add((dl_distribution_node, RDF.type, SDO.DataDownload))
-                graph.add((dl_distribution_node, SDO.encodingFormat, Literal('application/sparql-results+xml')))
+                data_dl = BNode()
+                graph.add((data_dl, RDF.type, SDO.DataDownload))
+                graph.add((data_dl, SDO.usageInfo, URIRef('https://www.w3.org/TR/sparql11-protocol/')))
+                # https://api.linkeddata.cultureelerfgoed.nl/queries/thesauri/Query-2/5/run?zoektermlabel=Gebouwd+Erfgoed
                 #endpoint = Literal(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0], datatype=XSD.anyURI)
                 endpoint = URIRef(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0])
-                graph.add((dl_distribution_node, SDO.contentUrl, endpoint))
-                graph.add((dl_distribution_node, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties[config['KENNISBANK_ENDPOINT']][0]} op de Linked-Data Voorziening van de RCE.')))
-                graph.add((dataset_node, SDO.distribution, dl_distribution_node))
+                graph.add((data_dl, SDO.contentUrl, endpoint))
+                graph.add((data_dl, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties[config['KENNISBANK_ENDPOINT']][0]} op de Linked-Data Voorziening van de RCE.')))
+                graph.add((dataset_node, SDO.distribution, data_dl))
                 graph.add((dataset_node, SDO.creator, URIRef(config['ORG_URI'])))
-                meta_graph = endpoint_info_service.get_dataset_metadata(str(endpoint), dataset_node, dl_distribution_node)
+                meta_graph = endpoint_info_service.get_dataset_metadata(str(endpoint), dataset_node, data_dl)
                 graph = graph + meta_graph
             
     return graph
