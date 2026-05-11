@@ -2,13 +2,13 @@ import json
 import os
 import logging
 from typing import Iterable
-from urllib.parse import urlsplit
 import requests
 from rdflib import BNode, Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO, XSD
 import yaml
 import endpoint_info_service
 import cht_term_resolver_service as cht_service
+import uritools
 
 CONFIG_PATH = os.getenv('CONFIG_PATH', 'config/config.yml')
 ENCODING = os.getenv('ENCODING', 'utf-8')
@@ -57,8 +57,7 @@ def parse_json_to_graph(dc_json: dict) -> Graph:
             
             # dataset definition
             furl = dc_json['query']['results'][result]['fullurl']
-            durl = f'https://linkeddata.cultureelerfgoed.nl/rce/datacatalog/{urlsplit(furl).path[11:]}'
-            dataset_node = URIRef(durl)
+            dataset_node = uritools.get_object_uri(config['BASE_URI'], config['COLLECTION_ID'], furl, SDO.dataset)
             dataset_properties = dc_json['query']['results'][result]['printouts']
             endpoint = dataset_properties[config['KENNISBANK_ENDPOINT']][0]
 
@@ -91,8 +90,8 @@ def parse_json_to_graph(dc_json: dict) -> Graph:
                 graph.add((data_dl, RDF.type, SDO.DataDownload))
                 graph.add((data_dl, SDO.usageInfo, URIRef('https://www.w3.org/TR/sparql11-protocol/')))
                 # https://api.linkeddata.cultureelerfgoed.nl/queries/thesauri/Query-2/5/run?zoektermlabel=Gebouwd+Erfgoed
-                #endpoint = Literal(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0], datatype=XSD.anyURI)
-                endpoint = URIRef(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0])
+                endpoint = Literal(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0], datatype=XSD.anyURI)
+                #endpoint = URIRef(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0])
                 graph.add((data_dl, SDO.contentUrl, endpoint))
                 graph.add((data_dl, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties[config['KENNISBANK_ENDPOINT']][0]} op de Linked-Data Voorziening van de RCE.')))
                 graph.add((dataset_node, SDO.distribution, data_dl))

@@ -25,7 +25,7 @@ def get_dataset_metadata(q_url: str, dataset_node: Node, distribution_node: Node
     published = datetime.strptime(item.get('lastGraphsUpdateTime'), timeformat_src)
     
     for tag in item.get('tags'):
-        graph.add((dataset_node, SDO.keyword, Literal(tag)))
+        graph.add((dataset_node, SDO.keywords, Literal(tag)))
 
     graph.add((dataset_node, SDO.license, URIRef(LICENSES[item.get('license', 'default')])))
     graph.add((dataset_node, SDO.dateCreated, Literal(created.date().isoformat(), datatype=XSD.date)))

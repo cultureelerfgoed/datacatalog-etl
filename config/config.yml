@@ -1,5 +1,6 @@
 # Linked Data 
 BASE_URI: 'https://linkeddata.cultureelerfgoed.nl/'
+COLLECTION_ID: 'datacatalog'
 
 # Validatie API
 VALIDATION_API: 'https://datasetregister.netwerkdigitaalerfgoed.nl/api/datasets/validate'
@@ -26,4 +27,3 @@ ORG_CONTACT_NAME: 'Infodesk van de RCE'
 ORG_CONTACT_EMAIL: 'thesauri@cultureelerfgoed.nl'
 ORG_ISIL: 'NL-AmfRCE'
 ORG_ALTNAME: 'Cultural Heritage Agency of the Netherlands'
-

@@ -1,5 +1,4 @@
 from typing import Optional
-
 import requests
 import json
 import logging
