@@ -1,6 +1,6 @@
 # Linked Data 
 BASE_URI: 'https://linkeddata.cultureelerfgoed.nl/'
-COLLECTION_ID: 'datacatalog'
+COLLECTION_ID: 'rce/datacatalog'
 
 # Validatie API
 VALIDATION_API: 'https://datasetregister.netwerkdigitaalerfgoed.nl/api/datasets/validate'
