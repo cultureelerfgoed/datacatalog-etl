@@ -93,7 +93,7 @@ def parse_json_to_graph(dc_json: dict) -> Graph:
                 endpoint = Literal(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0], datatype=XSD.anyURI)
                 #endpoint = URIRef(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0])
                 graph.add((data_dl, SDO.contentUrl, endpoint))
-                graph.add((data_dl, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties[config['KENNISBANK_ENDPOINT']][0]} op de Linked-Data Voorziening van de RCE.')))
+                graph.add((data_dl, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties[config['KENNISBANK_NAAM']][0]} op de Linked-Data Voorziening van de RCE.')))
                 graph.add((dataset_node, SDO.distribution, data_dl))
                 graph.add((dataset_node, SDO.creator, URIRef(config['ORG_URI'])))
                 meta_graph = endpoint_info_service.get_dataset_metadata(str(endpoint), dataset_node, data_dl)
