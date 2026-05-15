@@ -1,4 +1,4 @@
-pyrcelib>=2026.0.5
+pyrcelib>=2026.0.7
 PyYAML>=6.0.3
 rdflib>=7.5.0
 requests>=2.32.5

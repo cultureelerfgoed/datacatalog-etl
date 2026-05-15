@@ -3,7 +3,7 @@ import os
 import logging
 from typing import Iterable
 import requests
-from rdflib import BNode, Graph, Literal, URIRef
+from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO, XSD
 import yaml
 import endpoint_info_service
@@ -30,27 +30,11 @@ def get_mwquery_response_as_json(from_url: str, query: str):
     logger.info('Query response from %s received', from_url)
     return json.loads(response.text)
 
-def get_organization() -> Graph:
-    """ get graph with organization node """
-    graph = Graph(identifier=GRAPH_ID)
-    # organization information
-    organization_node = URIRef(config['ORG_URI'])
-    graph.add((organization_node, RDF.type, SDO.Organization))
-    graph.add((organization_node, SDO.name, Literal(config['ORG_NAME'], lang='nl')))
-    graph.add((organization_node, SDO.sameAs, URIRef(config['ORG_SAME_AS'])))
-    cp_node = BNode()
-    graph.add((cp_node, RDF.type, SDO.ContactPoint))
-    graph.add((cp_node, SDO.name, Literal(config['ORG_CONTACT_NAME'], lang='nl')))
-    graph.add((cp_node, SDO.email, Literal(config['ORG_CONTACT_EMAIL'])))
-    graph.add((organization_node, SDO.contactPoint, cp_node))
-    graph.add((organization_node, SDO.identifier, Literal(config['ORG_ISIL'])))
-    graph.add((organization_node, SDO.alternateName, Literal(config['ORG_ALTNAME'], lang='en')))
-    return graph
 
 def parse_json_to_graph(dc_json: dict) -> Graph:
     """ Return graph from query response as JSON dict """
 
-    graph = get_organization()
+    graph = uritools.get_organization()
 
     for result in dc_json['query']['results']:
         if dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']]:
@@ -86,7 +70,7 @@ def parse_json_to_graph(dc_json: dict) -> Graph:
                     graph.add((dataset_node, SDO.keywords, Literal('Roerend', lang='nl')))
 
                 graph.remove((dataset_node, None, Literal('')))
-                data_dl = BNode()
+                data_dl = uritools.get_object_uri(config['BASE_URI'], config['COLLECTION_ID'], furl, SDO.DataDownload)
                 graph.add((data_dl, RDF.type, SDO.DataDownload))
                 graph.add((data_dl, SDO.usageInfo, URIRef('https://www.w3.org/TR/sparql11-protocol/')))
                 # https://api.linkeddata.cultureelerfgoed.nl/queries/thesauri/Query-2/5/run?zoektermlabel=Gebouwd+Erfgoed
