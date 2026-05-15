@@ -34,7 +34,13 @@ def get_mwquery_response_as_json(from_url: str, query: str):
 def parse_json_to_graph(dc_json: dict) -> Graph:
     """ Return graph from query response as JSON dict """
 
-    graph = uritools.get_organization()
+    graph = uritools.get_organization(config['ORG_URI'], 
+                                        config['ORG_NAME'], 
+                                        config['ORG_SAME_AS'],
+                                        config['ORG_CONTACT_NAME'],
+                                        config['ORG_CONTACT_EMAIL'],
+                                        config['ORG_ISIL'],
+                                        config['ORG_ALTNAME'])
 
     for result in dc_json['query']['results']:
         if dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']]:
