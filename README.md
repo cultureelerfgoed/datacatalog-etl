@@ -1,5 +1,10 @@
 # ETL voor het publiceren van RCE datasets op het NDE Datasetregister
 
+```mermaid
+flowchart LR;
+    Proza(Proza) --> KB(Kennisbank) --> ETL(ETL) --> LDV(Linked Data Voorziening) --> NDE(NDE Datasetregister)
+```
+
 Deze ETL voert de volgende stappen uit:
 1. Haalt de lijst van datasets op die gepubliceerd zijn op de Kennisbank van de Rijksdienst voor Cultureel Erfgoed.
 2. Haalt de lijst van gepubliceerde endpoints op van de Linked Data Voorziening van de RCE.
