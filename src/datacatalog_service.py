@@ -28,7 +28,13 @@ def get_mwquery_response_as_json(from_url: str, query: str):
     }
     response = requests.get(from_url, params=get_params, timeout=100)
     logger.info('Query response from %s received', from_url)
-    return json.loads(response.text)
+    try:
+        r_json = json.loads(response.text)
+        return r_json
+    except json.JSONDecodeError as je:
+        logger.warning('Invalid response: %s \n %s \n %s', response.text, response, str(je))
+        
+        
 
 
 def parse_json_to_graph(dc_json: dict) -> Graph:
@@ -111,10 +117,11 @@ def main():
         datacatalog_json = get_mwquery_response_as_json(config['SRC_URI'], config['KB_DC_QUERY'])
         with open('kb_datacatalog.json', 'w', encoding=ENCODING) as file:
             json.dump(datacatalog_json, file)
-        graph = parse_json_to_graph(datacatalog_json)
-        logger.info("Writing  %s", f"{OUTPUT_FILE_FORMAT} file to {ARTIFACT_PATH}")
-        graph.serialize(format=OUTPUT_FILE_FORMAT, destination=ARTIFACT_PATH, encoding=ENCODING, auto_compact=True) 
-        logger.info("Filesize:  %s", f"{os.path.getsize(ARTIFACT_PATH)} bytes")
+        if datacatalog_json:
+            graph = parse_json_to_graph(datacatalog_json)
+            logger.info("Writing  %s", f"{OUTPUT_FILE_FORMAT} file to {ARTIFACT_PATH}")
+            graph.serialize(format=OUTPUT_FILE_FORMAT, destination=ARTIFACT_PATH, encoding=ENCODING, auto_compact=True) 
+            logger.info("Filesize:  %s", f"{os.path.getsize(ARTIFACT_PATH)} bytes")
     except OSError as oe:
         logger.warning('Failed to write datacatalog from Kennisbank to file: %s', oe)
 
