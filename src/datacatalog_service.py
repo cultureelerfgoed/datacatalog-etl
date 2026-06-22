@@ -29,10 +29,10 @@ def get_mwquery_response_as_json(from_url: str, query: str):
     response = requests.get(from_url, params=get_params, timeout=100)
     logger.info('Query response from %s received', from_url)
     try:
-        r_json = json.loads(response.text)
-        return r_json
+        return json.loads(response.text)
     except json.JSONDecodeError as je:
         logger.warning('Invalid response: %s \n %s \n %s', response.text, response, str(je))
+        raise je
         
         
 
@@ -115,9 +115,10 @@ def main():
 
     try:
         datacatalog_json = get_mwquery_response_as_json(config['SRC_URI'], config['KB_DC_QUERY'])
-        with open('kb_datacatalog.json', 'w', encoding=ENCODING) as file:
-            json.dump(datacatalog_json, file)
+       
         if datacatalog_json:
+             with open('kb_datacatalog.json', 'w', encoding=ENCODING) as file:
+                        json.dump(datacatalog_json, file)
             graph = parse_json_to_graph(datacatalog_json)
             logger.info("Writing  %s", f"{OUTPUT_FILE_FORMAT} file to {ARTIFACT_PATH}")
             graph.serialize(format=OUTPUT_FILE_FORMAT, destination=ARTIFACT_PATH, encoding=ENCODING, auto_compact=True) 
