@@ -117,8 +117,8 @@ def main():
         datacatalog_json = get_mwquery_response_as_json(config['SRC_URI'], config['KB_DC_QUERY'])
        
         if datacatalog_json:
-             with open('kb_datacatalog.json', 'w', encoding=ENCODING) as file:
-                        json.dump(datacatalog_json, file)
+            with open('kb_datacatalog.json', 'w', encoding=ENCODING) as file:
+                json.dump(datacatalog_json, file)
             graph = parse_json_to_graph(datacatalog_json)
             logger.info("Writing  %s", f"{OUTPUT_FILE_FORMAT} file to {ARTIFACT_PATH}")
             graph.serialize(format=OUTPUT_FILE_FORMAT, destination=ARTIFACT_PATH, encoding=ENCODING, auto_compact=True) 
