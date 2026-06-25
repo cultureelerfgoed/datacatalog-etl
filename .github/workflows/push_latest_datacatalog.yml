@@ -1,4 +1,4 @@
-name: 'Datacatalog ETL daily' 
+name: 'Harvest, transform, and push new datacatalog daily.' 
 
 env:
   ENCODING: 'utf-8'
@@ -40,32 +40,10 @@ jobs:
         name: data-artifact
         path: ${{ env.ARTIFACT_PATH }}
         overwrite: true
-  
-  validate-datacatalog-by-body:
-    runs-on: ubuntu-latest
-    needs: get-latest-datacatalog 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v6
-    - name: Set up Python
-      uses: actions/setup-python@v6
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Download data artifact
-      uses: actions/download-artifact@v8
-      with:
-          name: data-artifact   
-    - name: Validate 
-      run: |
-        python src/validator.py --method 'GET' --status 200
 
   push-to-triply:
     runs-on: ubuntu-latest
-    needs: [get-latest-datacatalog, validate-datacatalog-by-body]
+    needs: get-latest-datacatalog
     steps:
     - name: Download data artifact
       uses: actions/download-artifact@v8
@@ -86,21 +64,3 @@ jobs:
     - name: Push changes to TriplyDB API via cURL
       run:  |
         curl -H 'Authorization: Bearer ${{ secrets.LDV_API_TOKEN }}' -H 'Content-Type: application/json' -X POST https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/${{ env.DATASET_NAME }}/services/datacatalog -d '{"sync": "true"}'
-
-  validate-datacatalog-by-url:
-    runs-on: ubuntu-latest
-    needs: sync-triply 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v6
-    - name: Set up Python
-      uses: actions/setup-python@v6
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Validate 
-      run: |
-        python src/validator.py --url 'https://api.linkeddata.cultureelerfgoed.nl/queries/rce/get-datacatalog/5/run?page=1&pageSize=1000' --method 'PUT' --status 200

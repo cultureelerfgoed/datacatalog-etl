@@ -1,0 +1,33 @@
+name: 'Validate datacatalog endpoint using NDE validation service' 
+
+env:
+  ENCODING: 'utf-8'
+  CONFIG_PATH: 'config/config.yml'
+  ARTIFACT_PATH: 'artifact-data.jsonld'
+  # Format van de linked data serialisatie, opties: ttl, xml, pretty-xml, json-ld, ntriples, n3, trig, trix, nquads
+  OUTPUT_FILE_FORMAT: 'json-ld'  
+  # Naam van de dataset op de Linked Data Omgeving
+  DATASET_NAME: 'datacatalog'
+  # Naam van de graph op de Linked Data Omgeving
+  GRAPH_ID: 'datacatalog-latest-graph'
+
+on:
+  workflow_dispatch: {}   
+
+jobs:  
+  validate-datacatalog-by-url:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Validate 
+      run: |
+        python src/validator.py --url 'https://api.linkeddata.cultureelerfgoed.nl/queries/rce/get-datacatalog/5/run?page=1&pageSize=1000' --method 'PUT' --status 200

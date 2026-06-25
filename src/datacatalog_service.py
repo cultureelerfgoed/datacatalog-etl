@@ -7,7 +7,6 @@ from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO, XSD
 import yaml
 import endpoint_info_service
-import cht_term_resolver_service as cht_service
 import uritools
 
 CONFIG_PATH = os.getenv('CONFIG_PATH', 'config/config.yml')
@@ -33,9 +32,6 @@ def get_mwquery_response_as_json(from_url: str, query: str):
     except json.JSONDecodeError as je:
         logger.warning('Invalid response: %s \n %s \n %s', response.text, response, str(je))
         raise je
-        
-        
-
 
 def parse_json_to_graph(dc_json: dict) -> Graph:
     """ Return graph from query response as JSON dict """
@@ -65,7 +61,7 @@ def parse_json_to_graph(dc_json: dict) -> Graph:
                 graph.add((dataset_node, SDO.name, get_literal_from_mw_response(dataset_properties, config['KENNISBANK_NAAM'])))
                 graph.add((dataset_node, SDO.description, get_literal_from_mw_response(dataset_properties, config['KENNISBANK_OMSCHRIJVING'])))
 
-                term = cht_service.get_term_uri_from_cht(dataset_properties[config['KENNISBANK_RUBRIEK']][0])
+                term = uritools.get_term_uri_from_cht(dataset_properties[config['KENNISBANK_RUBRIEK']][0])
                 if term:
                     graph.add((dataset_node, SDO.about, URIRef(term)))
 
