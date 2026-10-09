@@ -1,0 +1,25 @@
+#!/bin/sh
+
+current_branch=$(git symbolic-ref --short head)
+
+echo "you are on $current_branch, running tests.."
+
+# Activate venv
+if [[ "$OSTYPE" == "win32" ]]; then
+    source .venv/Scripts/activate
+else
+    source .venv/bin/activate
+fi 
+
+# Run tests
+python -m pytest tests/
+
+# Retrieve exit code
+is_test_passed=$?
+
+if [[ $current_branch = "main" ]] && [ $is_test_passed -ne 0 ]; then
+    echo -e "Aborting push: Test failed."
+    exit $is_test_passed
+else
+    exit 0
+fi
