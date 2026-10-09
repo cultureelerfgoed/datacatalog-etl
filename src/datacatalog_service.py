@@ -5,7 +5,7 @@ from typing import Iterable
 import requests
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO, XSD
-from requests.exceptions import InvalidURL
+from requests.exceptions import InvalidURL, ConnectTimeout
 import yaml
 import endpoint_info_service
 import uritools
@@ -14,7 +14,7 @@ import jsonpath
 CONFIG_PATH = os.getenv('CONFIG_PATH', 'config/config.yml')
 ENCODING = os.getenv('ENCODING', 'utf-8')
 GRAPH_ID = os.getenv('GRAPH_ID', 'default')
-ARTIFACT_PATH = os.getenv('ARTIFACT_PATH', 'datacatalog.json-ld')
+ARTIFACT_PATH = os.getenv('ARTIFACT_PATH', 'datacatalog.jsonld')
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
 
 config = yaml.safe_load(open(CONFIG_PATH, encoding=ENCODING))
@@ -36,7 +36,6 @@ def get_mwquery_response_as_json(from_url: str, query: str):
         raise je
 
 def parse_json_to_graph(dc_json: dict[str, str]) -> Graph:
-    print(type(dc_json))
     graph = uritools.get_organization(config['ORG_URI'], 
                                             config['ORG_NAME'], 
                                             config['ORG_SAME_AS'],
@@ -46,19 +45,17 @@ def parse_json_to_graph(dc_json: dict[str, str]) -> Graph:
                                             config['ORG_ALTNAME'])
     
     for result in dc_json['query']['results']:
-        print(type(result))
-
         endpoint_obj = jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_ENDPOINT']}"][0]', dc_json)
         if endpoint_obj:
-            endpoint = str(endpoint_obj)[0]
+            endpoint = str(endpoint_obj[0])
             naam = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_NAAM']}"][0]', dc_json)[0])
             beperkingen = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_BEPERKINGEN']}"][0]', dc_json)[0])
             omschrijving = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_OMSCHRIJVING']}"][0]', dc_json)[0])
             rubriek = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_RUBRIEK']}"][0]', dc_json)[0])
             domein = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_DOMEIN']}"][0]', dc_json)[0])
             full_url = str(jsonpath.findall(f'$..["{result}"]["fullurl"]', dc_json)[0])
+
             graph = graph + make_dataset_description(full_url, beperkingen, endpoint, domein, naam, rubriek, omschrijving)
-            print(naam, endpoint, beperkingen, omschrijving, rubriek, domein, full_url)
     return graph
 
 def make_dataset_description(full_url: str,
@@ -105,7 +102,7 @@ def make_dataset_description(full_url: str,
         try:
             meta_graph = endpoint_info_service.get_dataset_metadata(endpoint, dataset_node, data_dl)
             graph = graph + meta_graph
-        except InvalidURL as iu:
+        except (InvalidURL, ConnectTimeout) as iu:
             logger.error('Unable to get endpoint info for %s, msg: %s', endpoint, iu)
     return graph
 

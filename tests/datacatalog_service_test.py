@@ -40,7 +40,7 @@ def test_parse_json_to_graph_valid():
     '                 "Dataset beperkingen": [' \
     '                     "Nee"' \
     '                 ],' \
-    '                 "Sparql-endpoint": [ "https://test.cultureelerfgoed.nl/Dataset/115/sparql" ]' \
+    '                 "Sparql-endpoint": [ "https://api.linkeddata.cultureelerfgoed.nl/datasets/thesauri/archeologischbasisregister/sparql" ]' \
     '             },' \
     '             "fulltext": "Dataset/115",' \
     '             "fullurl": "https://kennis.cultureelerfgoed.nl/index.php/Dataset/115",' \
@@ -53,7 +53,6 @@ def test_parse_json_to_graph_valid():
     '}'
 
     graph = datacatalog_service.parse_json_to_graph(json.loads(desc))
-    graph.print()
     assert len(list(graph.subjects(RDF.type, SDO.Dataset))) == 1
     assert len(list(graph.subjects(RDF.type, SDO.Organization))) == 1
     assert len(list(graph.subjects(RDF.type, SDO.DataDownload))) == 1
@@ -107,7 +106,6 @@ def test_parse_json_to_graph_no_endpoint():
     '}'
 
     graph = datacatalog_service.parse_json_to_graph(json.loads(desc))
-    graph.print()
     assert len(list(graph.subjects(RDF.type, SDO.Dataset))) == 0
     assert len(list(graph.subjects(RDF.type, SDO.Organization))) == 1
     assert len(list(graph.subjects(RDF.type, SDO.DataDownload))) == 0
@@ -148,7 +146,7 @@ def test_parse_json_to_graph_beperkingen():
     '                 "Dataset beperkingen": [' \
     '                     "Ja"' \
     '                 ],' \
-    '                 "Sparql-endpoint": [ "https://test.cultureelerfgoed.nl/Dataset/115/sparql" ]' \
+    '                 "Sparql-endpoint": [ "https://api.linkeddata.cultureelerfgoed.nl/datasets/thesauri/archeologischbasisregister/sparql" ]' \
     '             },' \
     '             "fulltext": "Dataset/115",' \
     '             "fullurl": "https://kennis.cultureelerfgoed.nl/index.php/Dataset/115",' \
@@ -161,7 +159,6 @@ def test_parse_json_to_graph_beperkingen():
     '}'
 
     graph = datacatalog_service.parse_json_to_graph(json.loads(desc))
-    graph.print()
     assert len(list(graph.subjects(RDF.type, SDO.Dataset))) == 0
     assert len(list(graph.subjects(RDF.type, SDO.Organization))) == 1
     assert len(list(graph.subjects(RDF.type, SDO.DataDownload))) == 0
