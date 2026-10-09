@@ -43,19 +43,22 @@ def parse_json_to_graph(dc_json: dict[str, str]) -> Graph:
                                             config['ORG_CONTACT_EMAIL'],
                                             config['ORG_ISIL'],
                                             config['ORG_ALTNAME'])
-    
-    for result in dc_json['query']['results']:
-        endpoint_obj = jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_ENDPOINT']}"][0]', dc_json)
-        if endpoint_obj:
-            endpoint = str(endpoint_obj[0])
-            naam = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_NAAM']}"][0]', dc_json)[0])
-            beperkingen = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_BEPERKINGEN']}"][0]', dc_json)[0])
-            omschrijving = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_OMSCHRIJVING']}"][0]', dc_json)[0])
-            rubriek = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_RUBRIEK']}"][0]', dc_json)[0])
-            domein = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_DOMEIN']}"][0]', dc_json)[0])
-            full_url = str(jsonpath.findall(f'$..["{result}"]["fullurl"]', dc_json)[0])
 
-            graph = graph + make_dataset_description(full_url, beperkingen, endpoint, domein, naam, rubriek, omschrijving)
+    q_results = dc_json['query']['results']
+
+    if q_results and len(q_results) > 0:
+        for result in q_results:
+            endpoint_obj = jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_ENDPOINT']}"][0]', dc_json)
+            if endpoint_obj:
+                endpoint = str(endpoint_obj[0])
+                naam = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_NAAM']}"][0]', dc_json)[0])
+                beperkingen = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_BEPERKINGEN']}"][0]', dc_json)[0])
+                omschrijving = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_OMSCHRIJVING']}"][0]', dc_json)[0])
+                rubriek = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_RUBRIEK']}"][0]', dc_json)[0])
+                domein = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_DOMEIN']}"][0]', dc_json)[0])
+                full_url = str(jsonpath.findall(f'$..["{result}"]["fullurl"]', dc_json)[0])
+
+                graph = graph + make_dataset_description(full_url, beperkingen, endpoint, domein, naam, rubriek, omschrijving)
     return graph
 
 def make_dataset_description(full_url: str,
