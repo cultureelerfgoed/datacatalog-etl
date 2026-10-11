@@ -31,6 +31,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Run unit tests
+      run: |
+        python -m pytest tests/
     - name: Get latest datacatalog 
       run: |
         python src/datacatalog_service.py

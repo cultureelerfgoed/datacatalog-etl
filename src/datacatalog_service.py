@@ -5,14 +5,16 @@ from typing import Iterable
 import requests
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, SDO, XSD
+from requests.exceptions import InvalidURL, ConnectTimeout
 import yaml
 import endpoint_info_service
 import uritools
+import jsonpath
 
 CONFIG_PATH = os.getenv('CONFIG_PATH', 'config/config.yml')
 ENCODING = os.getenv('ENCODING', 'utf-8')
 GRAPH_ID = os.getenv('GRAPH_ID', 'default')
-ARTIFACT_PATH = os.getenv('ARTIFACT_PATH', 'datacatalog.json-ld')
+ARTIFACT_PATH = os.getenv('ARTIFACT_PATH', 'datacatalog.jsonld')
 OUTPUT_FILE_FORMAT = os.getenv('OUTPUT_FILE_FORMAT', 'json-ld')
 
 config = yaml.safe_load(open(CONFIG_PATH, encoding=ENCODING))
@@ -33,75 +35,84 @@ def get_mwquery_response_as_json(from_url: str, query: str):
         logger.warning('Invalid response: %s \n %s \n %s', response.text, response, str(je))
         raise je
 
-def parse_json_to_graph(dc_json: dict) -> Graph:
-    """ Return graph from query response as JSON dict """
-
+def parse_json_to_graph(dc_json: dict[str, str]) -> Graph:
     graph = uritools.get_organization(config['ORG_URI'], 
-                                        config['ORG_NAME'], 
-                                        config['ORG_SAME_AS'],
-                                        config['ORG_CONTACT_NAME'],
-                                        config['ORG_CONTACT_EMAIL'],
-                                        config['ORG_ISIL'],
-                                        config['ORG_ALTNAME'])
+                                            config['ORG_NAME'], 
+                                            config['ORG_SAME_AS'],
+                                            config['ORG_CONTACT_NAME'],
+                                            config['ORG_CONTACT_EMAIL'],
+                                            config['ORG_ISIL'],
+                                            config['ORG_ALTNAME'])
 
-    for result in dc_json['query']['results']:
-        if dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']]:
-            
-            # dataset definition
-            furl = dc_json['query']['results'][result]['fullurl']
-            dataset_node = uritools.get_object_uri(config['BASE_URI'], config['COLLECTION_ID'], furl, SDO.dataset)
-            dataset_properties = dc_json['query']['results'][result]['printouts']
-            endpoint = dataset_properties[config['KENNISBANK_ENDPOINT']][0]
+    q_results = dc_json['query']['results']
 
-            if any(word in dataset_properties[config['KENNISBANK_BEPERKINGEN']][0] for word in ['Nee', 'Geen']):
-                logger.info('Found dataset: %s with endpoint: %s', str(dataset_node), endpoint)
-                graph.add((dataset_node, RDF.type, SDO.Dataset))
-                graph.add((dataset_node, SDO.publisher, URIRef(config['ORG_URI'])))
-                
-                graph.add((dataset_node, SDO.name, get_literal_from_mw_response(dataset_properties, config['KENNISBANK_NAAM'])))
-                graph.add((dataset_node, SDO.description, get_literal_from_mw_response(dataset_properties, config['KENNISBANK_OMSCHRIJVING'])))
+    if q_results and len(q_results) > 0:
+        for result in q_results:
+            endpoint_obj = jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_ENDPOINT']}"][0]', dc_json)
+            if endpoint_obj:
+                endpoint = str(endpoint_obj[0])
+                naam = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_NAAM']}"][0]', dc_json)[0])
+                beperkingen = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_BEPERKINGEN']}"][0]', dc_json)[0])
+                omschrijving = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_OMSCHRIJVING']}"][0]', dc_json)[0])
+                rubriek = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_RUBRIEK']}"][0]', dc_json)[0])
+                domein = str(jsonpath.findall(f'$..["{result}"]["printouts"]["{config['KENNISBANK_DOMEIN']}"][0]', dc_json)[0])
+                full_url = str(jsonpath.findall(f'$..["{result}"]["fullurl"]', dc_json)[0])
 
-                term = uritools.get_term_uri_from_cht(dataset_properties[config['KENNISBANK_RUBRIEK']][0])
-                if term:
-                    graph.add((dataset_node, SDO.about, URIRef(term)))
+                graph = graph + make_dataset_description(full_url, beperkingen, endpoint, domein, naam, rubriek, omschrijving)
+    return graph
 
-                if 'Alle' not in dataset_properties[config['KENNISBANK_DOMEIN']][0]:
-                    spl_tags = try_safe_split_by_str(dataset_properties[config['KENNISBANK_DOMEIN']][0], ';')
-                    for keyword in spl_tags:
-                        graph.add((dataset_node, SDO.keywords, Literal(keyword, lang='nl')))
-                else:
-                    graph.add((dataset_node, SDO.keywords, Literal('Monumenten', lang='nl')))
-                    graph.add((dataset_node, SDO.keywords, Literal('Landschap', lang='nl')))
-                    graph.add((dataset_node, SDO.keywords, Literal('Kunstcollecties', lang='nl')))
-                    graph.add((dataset_node, SDO.keywords, Literal('Archeologie', lang='nl')))
-                    graph.add((dataset_node, SDO.keywords, Literal('Gebouwd', lang='nl')))
-                    graph.add((dataset_node, SDO.keywords, Literal('Roerend', lang='nl')))
+def make_dataset_description(full_url: str,
+                             beperkingen: str,
+                             endpoint: str,
+                             domein: str,
+                             naam: str,
+                             rubriek: str,
+                             omschrijving: str)  -> Graph:
+    graph = Graph()
+    if any(word in beperkingen for word in ['Nee', 'Geen']):
+        dataset_node = uritools.get_object_uri(config['BASE_URI'], config['COLLECTION_ID'], full_url, SDO.dataset)
+        logger.info('Found dataset: %s with endpoint: %s', str(dataset_node), endpoint)
+        graph.add((dataset_node, RDF.type, SDO.Dataset))
+        graph.add((dataset_node, SDO.publisher, URIRef(config['ORG_URI'])))
+        graph.add((dataset_node, SDO.name, Literal(naam, lang='nl')))
+        graph.add((dataset_node, SDO.description, Literal(omschrijving, lang='nl')))
 
-                graph.remove((dataset_node, None, Literal('')))
-                data_dl = uritools.get_object_uri(config['BASE_URI'], config['COLLECTION_ID'], furl, SDO.DataDownload)
-                graph.add((data_dl, RDF.type, SDO.DataDownload))
-                graph.add((data_dl, SDO.usageInfo, URIRef('https://www.w3.org/TR/sparql11-protocol/')))
-                # https://api.linkeddata.cultureelerfgoed.nl/queries/thesauri/Query-2/5/run?zoektermlabel=Gebouwd+Erfgoed
-                endpoint = Literal(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0], datatype=XSD.anyURI)
-                #endpoint = URIRef(dc_json['query']['results'][result]['printouts'][config['KENNISBANK_ENDPOINT']][0])
-                graph.add((data_dl, SDO.contentUrl, endpoint))
-                graph.add((data_dl, SDO.description, Literal(f'Sparql-endpoint van {dataset_properties[config['KENNISBANK_NAAM']][0]} op de Linked-Data Voorziening van de RCE.')))
-                graph.add((dataset_node, SDO.distribution, data_dl))
-                graph.add((dataset_node, SDO.creator, URIRef(config['ORG_URI'])))
-                meta_graph = endpoint_info_service.get_dataset_metadata(str(endpoint), dataset_node, data_dl)
-                graph = graph + meta_graph
-            
+        term = uritools.get_term_uri_from_cht(rubriek)
+        if term:
+            graph.add((dataset_node, SDO.about, URIRef(term)))
+
+        if 'Alle' not in domein:
+            spl_tags = try_safe_split_by_str(domein, ';')
+            for keyword in spl_tags:
+                graph.add((dataset_node, SDO.keywords, Literal(keyword, lang='nl')))
+        else:
+            graph.add((dataset_node, SDO.keywords, Literal('Monumenten', lang='nl')))
+            graph.add((dataset_node, SDO.keywords, Literal('Landschap', lang='nl')))
+            graph.add((dataset_node, SDO.keywords, Literal('Kunstcollecties', lang='nl')))
+            graph.add((dataset_node, SDO.keywords, Literal('Archeologie', lang='nl')))
+            graph.add((dataset_node, SDO.keywords, Literal('Gebouwd', lang='nl')))
+            graph.add((dataset_node, SDO.keywords, Literal('Roerend', lang='nl')))
+
+        graph.remove((dataset_node, None, Literal('')))
+        data_dl = uritools.get_object_uri(config['BASE_URI'], config['COLLECTION_ID'], full_url, SDO.DataDownload)
+        graph.add((data_dl, RDF.type, SDO.DataDownload))
+        graph.add((data_dl, SDO.usageInfo, URIRef('https://www.w3.org/TR/sparql11-protocol/')))
+        endpoint = Literal(endpoint, datatype=XSD.anyURI)
+        graph.add((data_dl, SDO.contentUrl, endpoint))
+        graph.add((data_dl, SDO.description, Literal(f'Sparql-endpoint van {naam} op de Linked-Data Voorziening van de RCE.')))
+        graph.add((dataset_node, SDO.distribution, data_dl))
+        graph.add((dataset_node, SDO.creator, URIRef(config['ORG_URI'])))
+        try:
+            meta_graph = endpoint_info_service.get_dataset_metadata(endpoint, dataset_node, data_dl)
+            graph = graph + meta_graph
+        except (InvalidURL, ConnectTimeout) as iu:
+            logger.error('Unable to get endpoint info for %s, msg: %s', endpoint, iu)
     return graph
 
 def try_safe_split_by_str(val: str, delimiter: str) -> Iterable[str]:
     """ Method to delimit strings without raising an error """ 
     return filter(lambda c: c.isalnum(), val.split(delimiter))
     
-    
-def get_literal_from_mw_response(response: dict, fieldname: str, lang='nl') -> Literal:
-    """ returns literal with nl lang tag by default """
-    return Literal(response[fieldname][0], lang)
-
 def main():
     """ main runner for workflow """
     logging.basicConfig(
