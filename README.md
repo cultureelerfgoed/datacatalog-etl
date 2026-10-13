@@ -91,7 +91,6 @@ pip install -r requirements.txt
 ## Uitvoeren
 
 ```
-python src/generate_allowlist.py
 python src/datacatalog_service.py
 python src/validator.py --path 'artifact-data.jsonld' --method 'GET' --status 200
 ```
