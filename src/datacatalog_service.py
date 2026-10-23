@@ -4,12 +4,13 @@ import logging
 from typing import Iterable
 import requests
 from rdflib import Graph, Literal, URIRef
-from rdflib.namespace import RDF, SDO, XSD
+from rdflib.namespace import RDF, SDO
 from requests.exceptions import InvalidURL, ConnectTimeout
 import yaml
 import endpoint_info_service
 import uritools
 import jsonpath
+from static import KEYWORD_TERMS
 
 CONFIG_PATH = os.getenv('CONFIG_PATH', 'config/config.yml')
 ENCODING = os.getenv('ENCODING', 'utf-8')
@@ -70,7 +71,7 @@ def make_dataset_description(full_url: str,
                              omschrijving: str)  -> Graph:
     graph = Graph()
     if any(word in beperkingen for word in ['Nee', 'Geen']):
-        dataset_node = uritools.get_object_uri(config['BASE_URI'], config['COLLECTION_ID'], full_url, SDO.dataset)
+        dataset_node = uritools.get_object_uri(config['BASE_URI'], config['COLLECTION_ID'], full_url, SDO.Dataset)
         logger.info('Found dataset: %s with endpoint: %s', str(dataset_node), endpoint)
         graph.add((dataset_node, RDF.type, SDO.Dataset))
         graph.add((dataset_node, SDO.publisher, URIRef(config['ORG_URI'])))
@@ -84,24 +85,22 @@ def make_dataset_description(full_url: str,
         if 'Alle' not in domein:
             spl_tags = try_safe_split_by_str(domein, ';')
             for keyword in spl_tags:
-                graph.add((dataset_node, SDO.keywords, Literal(keyword, lang='nl')))
+                if KEYWORD_TERMS.get(keyword):
+                    graph.add((dataset_node, SDO.about, URIRef(KEYWORD_TERMS.get(keyword))))
         else:
-            graph.add((dataset_node, SDO.keywords, Literal('Monumenten', lang='nl')))
-            graph.add((dataset_node, SDO.keywords, Literal('Landschap', lang='nl')))
-            graph.add((dataset_node, SDO.keywords, Literal('Kunstcollecties', lang='nl')))
-            graph.add((dataset_node, SDO.keywords, Literal('Archeologie', lang='nl')))
-            graph.add((dataset_node, SDO.keywords, Literal('Gebouwd', lang='nl')))
-            graph.add((dataset_node, SDO.keywords, Literal('Roerend', lang='nl')))
+            for iri in KEYWORD_TERMS.values():
+                graph.add((dataset_node, SDO.about, URIRef(iri)))
 
         graph.remove((dataset_node, None, Literal('')))
         data_dl = uritools.get_object_uri(config['BASE_URI'], config['COLLECTION_ID'], full_url, SDO.DataDownload)
         graph.add((data_dl, RDF.type, SDO.DataDownload))
         graph.add((data_dl, SDO.usageInfo, URIRef('https://www.w3.org/TR/sparql11-protocol/')))
-        endpoint = Literal(endpoint, datatype=XSD.anyURI)
-        graph.add((data_dl, SDO.contentUrl, endpoint))
+        graph.add((data_dl, SDO.contentUrl, URIRef(endpoint)))
         graph.add((data_dl, SDO.description, Literal(f'Sparql-endpoint van {naam} op de Linked-Data Voorziening van de RCE.')))
         graph.add((dataset_node, SDO.distribution, data_dl))
         graph.add((dataset_node, SDO.creator, URIRef(config['ORG_URI'])))
+        graph.add((dataset_node, SDO.includedDataCatalog, URIRef(config['DATACATALOG_IRI'])))
+        graph.add((dataset_node, SDO.mainEntityOfPage, dataset_node))
         try:
             meta_graph = endpoint_info_service.get_dataset_metadata(endpoint, dataset_node, data_dl)
             graph = graph + meta_graph

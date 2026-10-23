@@ -1,6 +1,8 @@
 import json
 import sys
 import os
+
+from rdflib import URIRef
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../src")
 import datacatalog_service
 from rdflib.namespace import SDO, RDF
@@ -53,6 +55,7 @@ def test_parse_json_to_graph_valid():
     '}'
 
     graph = datacatalog_service.parse_json_to_graph(json.loads(desc))
+    graph.print()
     assert len(list(graph.subjects(RDF.type, SDO.Dataset))) == 1
     assert len(list(graph.subjects(RDF.type, SDO.Organization))) == 1
     assert len(list(graph.subjects(RDF.type, SDO.DataDownload))) == 1
@@ -163,3 +166,54 @@ def test_parse_json_to_graph_beperkingen():
     assert len(list(graph.subjects(RDF.type, SDO.Organization))) == 1
     assert len(list(graph.subjects(RDF.type, SDO.DataDownload))) == 0
     assert len(list(graph.subjects(RDF.type, SDO.ContactPoint))) == 1
+
+def test_persistent_iri():
+    desc = \
+    '{' \
+    '"query": {' \
+    '    "results": {' \
+    '        "Dataset/105": {' \
+    '             "printouts": {' \
+    '                 "Status": [],' \
+    '                 "Batch": [],' \
+    '                 "Naam": ["Tbl Diersoort (standaard) (BoneInfo)" ],' \
+    '                 "Dataset type": [' \
+    '                    "Gestructureerd-hierarchisch"' \
+    '                 ],' \
+    '                 "Omschrijving": [' \
+    '                    "Deze dataset is een"' \
+    '                 ],' \
+    '                 "Zichtbaar in Erfgoedatlas": [' \
+    '                    "Nee"' \
+    '                 ],' \
+    '                 "Dataset": [],' \
+    '                 "Bronurl": [' \
+    '                     "https://www.cultureelerfgoed.nl/onderwerpen/bronnen-en-kaarten/overzicht/"' \
+    '                 ],' \
+    '                 "Dataset creatie": [' \
+    '                     "Inventarisatie"' \
+    '                 ],' \
+    '                 "Dataset domein": [' \
+    '                     "Archeologie"' \
+    '                 ],' \
+    '                 "Dataset rubriek": [' \
+    '                     "Archeologisch Erfgoed"' \
+    '                 ],' \
+    '                 "Dataset beperkingen": [' \
+    '                     "Nee"' \
+    '                 ],' \
+    '                 "Sparql-endpoint": [ "https://api.linkeddata.cultureelerfgoed.nl/datasets/rce/Rijksmonumenten-sdo/sparql" ]' \
+    '             },' \
+    '             "fulltext": "Dataset/105",' \
+    '             "fullurl": "https://kennis.cultureelerfgoed.nl/index.php/Dataset/105",' \
+    '             "namespace": "0",' \
+    '             "exists": "1",' \
+    '             "displaytitle": "Tbl Diersoort (standaard) (BoneInfo)"' \
+    '        }' \
+    '    }' \
+    '  }' \
+    '}'
+
+    graph = datacatalog_service.parse_json_to_graph(json.loads(desc))
+    assert (URIRef('https://linkeddata.cultureelerfgoed.nl/rce/datacatalog/id/dataset/51cf46fe-522b-390d-8620-ba777ccfc086') in graph.subjects(RDF.type, SDO.Dataset))
+    

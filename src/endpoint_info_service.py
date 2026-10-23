@@ -3,11 +3,7 @@ from datetime import datetime
 import requests
 from rdflib import Graph, Node, Literal, URIRef
 from rdflib.namespace import SDO, XSD
-
-LICENSES = {'CC BY-SA v4.0':    'https://creativecommons.org/licenses/by-sa/4.0/',
-            'CC BY':            'https://creativecommons.org/licenses/by/4.0/',
-            'CC0 1.0':          'https://creativecommons.org/publicdomain/zero/1.0/',
-            'default':          'https://creativecommons.org/licenses/by/4.0/'}
+from static import LICENSES, KEYWORD_TERMS
 
 def get_dataset_uri_by_endpoint(endpoint: str):
     """ Return uri of dataset based on uri of endpoint  """
@@ -25,7 +21,8 @@ def get_dataset_metadata(q_url: str, dataset_node: Node, distribution_node: Node
     published = datetime.strptime(item.get('lastGraphsUpdateTime'), timeformat_src)
     
     for tag in item.get('tags'):
-        graph.add((dataset_node, SDO.keywords, Literal(tag)))
+        if(KEYWORD_TERMS.get(tag)):
+            graph.add((dataset_node, SDO.about, URIRef(KEYWORD_TERMS.get(tag))))
 
     graph.add((dataset_node, SDO.license, URIRef(LICENSES[item.get('license', 'default')])))
     graph.add((dataset_node, SDO.dateCreated, Literal(created.date().isoformat(), datatype=XSD.date)))

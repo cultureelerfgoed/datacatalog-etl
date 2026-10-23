@@ -27,3 +27,6 @@ ORG_CONTACT_NAME: 'Infodesk van de RCE'
 ORG_CONTACT_EMAIL: 'thesauri@cultureelerfgoed.nl'
 ORG_ISIL: 'NL-AmfRCE'
 ORG_ALTNAME: 'Cultural Heritage Agency of the Netherlands'
+
+# Datacatalog IRI
+DATACATALOG_IRI: 'https://linkeddata.cultureelerfgoed.nl/rce/datacatalog/'
