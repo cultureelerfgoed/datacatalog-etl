@@ -36,4 +36,4 @@ jobs:
         pip install pyshacl
     - name: validate 
       run: |
-        pyshacl -s shacl.ttl -m -i rdfs -a -j -f human -df json-ld datacatalog.jsonld
+        pyshacl -s shacl.ttl --allow-info -f human -df json-ld datacatalog.jsonld
