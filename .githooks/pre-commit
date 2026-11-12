@@ -1,16 +1,27 @@
 #!/bin/sh
 
 current_branch=$(git symbolic-ref --short head)
-
 echo "you are on $current_branch, running tests.."
 
-# Activate venv
-if [[ "$OSTYPE" == "win32" ]]; then
+# check if virtual environment is available
+if [ -d ".venv" ]; then
+  echo "directory .venv exists."
+else
+  python -m venv .venv
+fi
+
+# Activate virtual environment
+if [[ "$OSTYPE" == "win32" ]] || [[ "$OSTYPE" == "msys" ]]; then
     source .venv/Scripts/activate
 else
     source .venv/bin/activate
-fi 
+fi
 
+# show which executable is being used
+echo "using python executable:"
+which python
+# install requirements
+pip install -r requirements.txt
 # Run tests
 python -m pytest tests/
 
@@ -18,8 +29,9 @@ python -m pytest tests/
 is_test_passed=$?
 
 if [[ $current_branch = "main" ]] && [ $is_test_passed -ne 0 ]; then
-    echo -e "Aborting push: Test failed."
+    echo -e "On main branch tests must pass. Aborting commit: Test failed."
     exit $is_test_passed
 else
+    echo -e "Allowing commit on non-main branch: Test failed."
     exit 0
 fi
