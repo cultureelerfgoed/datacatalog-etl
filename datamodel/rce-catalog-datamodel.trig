@@ -1,602 +1,1923 @@
-<https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/graphs/data-model> {
-
-    ### Categoriën van de properties ###
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-75e4a335-671a-4136-b6d6-348fa2d8b8cf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyGroup> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-75e4a335-671a-4136-b6d6-348fa2d8b8cf> <http://www.w3.org/2000/01/rdf-schema#label> "Kwaliteit" .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-8bdda5c9-ba74-4368-8f13-0efcd2e2104f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyGroup> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-8bdda5c9-ba74-4368-8f13-0efcd2e2104f> <http://www.w3.org/2000/01/rdf-schema#label> "Linked Data" .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyGroup> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> <http://www.w3.org/2000/01/rdf-schema#label> "Publicatie" .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-bc865dd2-12e0-450b-abad-937314bcca55> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyGroup> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-bc865dd2-12e0-450b-abad-937314bcca55> <http://www.w3.org/2000/01/rdf-schema#label> "Rollen" .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyGroup> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> <http://www.w3.org/2000/01/rdf-schema#label> "Algemeen" .
-    
-    ### Properties ###
-
-    # sparqlEndpoint — Sparql-endpoint waar deze dataset als linked data op te halen.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-07eba68f-40e4-4c52-91ec-04a7e09ce678> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-07eba68f-40e4-4c52-91ec-04a7e09ce678> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-07eba68f-40e4-4c52-91ec-04a7e09ce678> <http://www.w3.org/ns/shacl#description> "Sparql-endpoint waar deze dataset als linked data op te halen." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-07eba68f-40e4-4c52-91ec-04a7e09ce678> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-07eba68f-40e4-4c52-91ec-04a7e09ce678> <http://www.w3.org/ns/shacl#name> "sparqlEndpoint" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-07eba68f-40e4-4c52-91ec-04a7e09ce678> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-07eba68f-40e4-4c52-91ec-04a7e09ce678> <http://www.w3.org/ns/shacl#path> <https://www.w3.org/ns/dcat#accessURL> .
-
-    # LOD generiek model — Geeft aan of de dataset als linked data is gepubliceerd volgens een generiek model (zoals CEO of schema.org), in plaats van een eigen bronmodel.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-0f229139-dfbb-4443-ae17-b187888892fd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-0f229139-dfbb-4443-ae17-b187888892fd> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#boolean> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-0f229139-dfbb-4443-ae17-b187888892fd> <http://www.w3.org/ns/shacl#description> "Geeft aan of de dataset als linked data is gepubliceerd volgens een generiek model (zoals CEO of schema.org), in plaats van een eigen bronmodel." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-0f229139-dfbb-4443-ae17-b187888892fd> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-0f229139-dfbb-4443-ae17-b187888892fd> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-0f229139-dfbb-4443-ae17-b187888892fd> <http://www.w3.org/ns/shacl#name> "LOD generiek model" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-0f229139-dfbb-4443-ae17-b187888892fd> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-0f229139-dfbb-4443-ae17-b187888892fd> <http://www.w3.org/ns/shacl#path> <dsr:linkedOpenDataGeneriekModel> .
-
-    # beperkingen — Beperkingen van deze dataset.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-179d68e9-2a4b-4845-b7b8-d49efc7c8173> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-179d68e9-2a4b-4845-b7b8-d49efc7c8173> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-179d68e9-2a4b-4845-b7b8-d49efc7c8173> <http://www.w3.org/ns/shacl#description> "Beperkingen van deze dataset." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-179d68e9-2a4b-4845-b7b8-d49efc7c8173> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-179d68e9-2a4b-4845-b7b8-d49efc7c8173> <http://www.w3.org/ns/shacl#name> "beperkingen" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-179d68e9-2a4b-4845-b7b8-d49efc7c8173> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-179d68e9-2a4b-4845-b7b8-d49efc7c8173> <http://www.w3.org/ns/shacl#path> <http://purl.org/dc/terms/accessRights> .
-
-    # Type — Type dataset.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1c320d8e-15c4-4e11-b7da-fc85a67d71cd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1c320d8e-15c4-4e11-b7da-fc85a67d71cd> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1c320d8e-15c4-4e11-b7da-fc85a67d71cd> <http://www.w3.org/ns/shacl#description> "Type dataset." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1c320d8e-15c4-4e11-b7da-fc85a67d71cd> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1c320d8e-15c4-4e11-b7da-fc85a67d71cd> <http://www.w3.org/ns/shacl#minCount> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1c320d8e-15c4-4e11-b7da-fc85a67d71cd> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1c320d8e-15c4-4e11-b7da-fc85a67d71cd> <http://www.w3.org/ns/shacl#name> "Type" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1c320d8e-15c4-4e11-b7da-fc85a67d71cd> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1c320d8e-15c4-4e11-b7da-fc85a67d71cd> <http://www.w3.org/ns/shacl#path> <http://purl.org/dc/terms/type> .
-
-    # Omschrijving
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1e97b048-6926-4480-980f-ed4a2d12f804> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1e97b048-6926-4480-980f-ed4a2d12f804> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1e97b048-6926-4480-980f-ed4a2d12f804> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1e97b048-6926-4480-980f-ed4a2d12f804> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1e97b048-6926-4480-980f-ed4a2d12f804> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1e97b048-6926-4480-980f-ed4a2d12f804> <http://www.w3.org/ns/shacl#name> "Omschrijving" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1e97b048-6926-4480-980f-ed4a2d12f804> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1e97b048-6926-4480-980f-ed4a2d12f804> <http://www.w3.org/ns/shacl#path> <http://purl.org/dc/terms/description> .
-
-    # Naam — Voorkeursnaam van de begrippenlijst, bijvoorbeeld "Klasse AVG". Minimaal één naam in het Nederlands; een Engelse naam mag erbij.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-5d3cffbf-07c5-4921-bc46-fcd711411271> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-5d3cffbf-07c5-4921-bc46-fcd711411271> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-5d3cffbf-07c5-4921-bc46-fcd711411271> <http://www.w3.org/ns/shacl#description> "Voorkeursnaam van de begrippenlijst, bijvoorbeeld \"Klasse AVG\". Minimaal één naam in het Nederlands; een Engelse naam mag erbij." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-5d3cffbf-07c5-4921-bc46-fcd711411271> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-5d3cffbf-07c5-4921-bc46-fcd711411271> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-5d3cffbf-07c5-4921-bc46-fcd711411271> <http://www.w3.org/ns/shacl#name> "Naam" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-5d3cffbf-07c5-4921-bc46-fcd711411271> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-5d3cffbf-07c5-4921-bc46-fcd711411271> <http://www.w3.org/ns/shacl#path> <http://www.w3.org/2004/02/skos/core#prefLabel> .
-
-    # In begrippenlijst — De begrippenlijst waar dit begrip bij hoort, bijvoorbeeld Klasse AVG.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-6700ae58-6cb4-467e-a1c1-a0f7fb60d576> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-6700ae58-6cb4-467e-a1c1-a0f7fb60d576> <http://www.w3.org/ns/shacl#class> <http://www.w3.org/2004/02/skos/core#ConceptScheme> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-6700ae58-6cb4-467e-a1c1-a0f7fb60d576> <http://www.w3.org/ns/shacl#description> "De begrippenlijst waar dit begrip bij hoort, bijvoorbeeld Klasse AVG." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-6700ae58-6cb4-467e-a1c1-a0f7fb60d576> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-6700ae58-6cb4-467e-a1c1-a0f7fb60d576> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-6700ae58-6cb4-467e-a1c1-a0f7fb60d576> <http://www.w3.org/ns/shacl#name> "In begrippenlijst" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-6700ae58-6cb4-467e-a1c1-a0f7fb60d576> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-6700ae58-6cb4-467e-a1c1-a0f7fb60d576> <http://www.w3.org/ns/shacl#path> <http://www.w3.org/2004/02/skos/core#inScheme> .
-
-    # Mediatype — Het bestandsformaat waarin de data wordt aangeboden, bijvoorbeeld JSON-LD, CSV of Turtle.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ae7f5561-ab57-491c-9aca-2e5944805dc1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ae7f5561-ab57-491c-9aca-2e5944805dc1> <http://www.w3.org/ns/shacl#description> "Het bestandsformaat waarin de data wordt aangeboden, bijvoorbeeld JSON-LD, CSV of Turtle." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ae7f5561-ab57-491c-9aca-2e5944805dc1> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ae7f5561-ab57-491c-9aca-2e5944805dc1> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ae7f5561-ab57-491c-9aca-2e5944805dc1> <http://www.w3.org/ns/shacl#name> "Mediatype" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ae7f5561-ab57-491c-9aca-2e5944805dc1> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ae7f5561-ab57-491c-9aca-2e5944805dc1> <http://www.w3.org/ns/shacl#path> <http://www.w3.org/ns/dcat#mediaType> .
-
-    # url — URL van deze dataset.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> <http://www.w3.org/ns/shacl#description> "URL van deze dataset." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> <http://www.w3.org/ns/shacl#name> "url" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> <http://www.w3.org/ns/shacl#path> <https://www.w3.org/ns/dcat#landingPage> .
-
-    # Definitie — Uitleg wat het begrip betekent.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-d577f2d7-fcb6-4178-90d3-e69c1f42c4ba> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-d577f2d7-fcb6-4178-90d3-e69c1f42c4ba> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-d577f2d7-fcb6-4178-90d3-e69c1f42c4ba> <http://www.w3.org/ns/shacl#description> "Uitleg wat het begrip betekent." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-d577f2d7-fcb6-4178-90d3-e69c1f42c4ba> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-d577f2d7-fcb6-4178-90d3-e69c1f42c4ba> <http://www.w3.org/ns/shacl#name> "Definitie" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-d577f2d7-fcb6-4178-90d3-e69c1f42c4ba> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-d577f2d7-fcb6-4178-90d3-e69c1f42c4ba> <http://www.w3.org/ns/shacl#path> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/def/p-6c45fb1c-3b28-470a-8694-003523ddc184> .
-
-    # Code — Korte code, bijvoorbeeld “0”, “2” of “nvt".
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e255ff1f-f415-46d3-ae39-eed0abfa5d37> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e255ff1f-f415-46d3-ae39-eed0abfa5d37> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#string> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e255ff1f-f415-46d3-ae39-eed0abfa5d37> <http://www.w3.org/ns/shacl#description> "Korte code, bijvoorbeeld “0”, “2” of “nvt\"." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e255ff1f-f415-46d3-ae39-eed0abfa5d37> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e255ff1f-f415-46d3-ae39-eed0abfa5d37> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e255ff1f-f415-46d3-ae39-eed0abfa5d37> <http://www.w3.org/ns/shacl#name> "Code" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e255ff1f-f415-46d3-ae39-eed0abfa5d37> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e255ff1f-f415-46d3-ae39-eed0abfa5d37> <http://www.w3.org/ns/shacl#path> <http://www.w3.org/2004/02/skos/core#notation> .
-
-    # Naam — Voorkeursnaam van het begrip, bijvoorbeeld “Klasse 0 persoonsgegevens.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e354551b-1da6-41be-b3bd-8d9e58715c29> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e354551b-1da6-41be-b3bd-8d9e58715c29> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e354551b-1da6-41be-b3bd-8d9e58715c29> <http://www.w3.org/ns/shacl#description> "Voorkeursnaam van het begrip, bijvoorbeeld “Klasse 0 persoonsgegevens." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e354551b-1da6-41be-b3bd-8d9e58715c29> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e354551b-1da6-41be-b3bd-8d9e58715c29> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e354551b-1da6-41be-b3bd-8d9e58715c29> <http://www.w3.org/ns/shacl#name> "Naam" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e354551b-1da6-41be-b3bd-8d9e58715c29> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e354551b-1da6-41be-b3bd-8d9e58715c29> <http://www.w3.org/ns/shacl#path> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/def/p-f5dafd5b-f310-4437-a8a9-58beefea7d4b> .
-
-    # licentieWaaronderVrijgegeven — Licentie waaronder deze dataset wordt vrijgegeven.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#PropertyShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/ns/shacl#description> "Licentie waaronder deze dataset wordt vrijgegeven." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/ns/shacl#in> <https://pilot.rce.triply.cc/.well-known/genid/ae6f7225e5c59fc0369863f20f62bf11> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/ns/shacl#minLength> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/ns/shacl#name> "licentieWaaronderVrijgegeven" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> <http://www.w3.org/ns/shacl#path> <https://schema.org/license> .
-
-    # Open Data — Geeft aan of de data voldoet aan de definitie van open data: vrij toegankelijk en herbruikbaar onder een open licentie.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07a7d264e522726f670e14ba925ca4ae> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#boolean> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07a7d264e522726f670e14ba925ca4ae> <http://www.w3.org/ns/shacl#description> "Geeft aan of de data voldoet aan de definitie van open data: vrij toegankelijk en herbruikbaar onder een open licentie." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07a7d264e522726f670e14ba925ca4ae> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07a7d264e522726f670e14ba925ca4ae> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07a7d264e522726f670e14ba925ca4ae> <http://www.w3.org/ns/shacl#name> "Open Data" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07a7d264e522726f670e14ba925ca4ae> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07a7d264e522726f670e14ba925ca4ae> <http://www.w3.org/ns/shacl#path> <dsr:isDataOpenConformOpenData> .
-
-    # In Erfgoedatlas — Geeft aan of de dataset als kaartlaag in de Erfgoedatlas van de RCE wordt getoond.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07aaee53198df54404e2916b1d7e308b> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#boolean> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07aaee53198df54404e2916b1d7e308b> <http://www.w3.org/ns/shacl#description> "Geeft aan of de dataset als kaartlaag in de Erfgoedatlas van de RCE wordt getoond." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07aaee53198df54404e2916b1d7e308b> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07aaee53198df54404e2916b1d7e308b> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07aaee53198df54404e2916b1d7e308b> <http://www.w3.org/ns/shacl#name> "In Erfgoedatlas" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07aaee53198df54404e2916b1d7e308b> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/07aaee53198df54404e2916b1d7e308b> <http://www.w3.org/ns/shacl#path> <dsr:inErfgoedatlas> .
-
-    # Geeft aan of de afbeeldingen in de dataset via IIIF (International Image Interoperability Framework) beschikbaar zijn.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/11562851bdfe797720326c0ec4a594a8> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#boolean> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/11562851bdfe797720326c0ec4a594a8> <http://www.w3.org/ns/shacl#description> "Geeft aan of de afbeeldingen in de dataset via IIIF (International Image Interoperability Framework) beschikbaar zijn." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/11562851bdfe797720326c0ec4a594a8> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/11562851bdfe797720326c0ec4a594a8> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/11562851bdfe797720326c0ec4a594a8> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/11562851bdfe797720326c0ec4a594a8> <http://www.w3.org/ns/shacl#path> <dsr:ondersteuntIiif> .
-
-    # Precisie — Beoordeling van de precisie van de data: hoe gedetailleerd de gegevens zijn vastgelegd.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/12bc7fd1d26fe5eb70a0f0c9751bd77a> <http://www.w3.org/ns/shacl#description> "Beoordeling van de precisie van de data: hoe gedetailleerd de gegevens zijn vastgelegd." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/12bc7fd1d26fe5eb70a0f0c9751bd77a> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-75e4a335-671a-4136-b6d6-348fa2d8b8cf> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/12bc7fd1d26fe5eb70a0f0c9751bd77a> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/12bc7fd1d26fe5eb70a0f0c9751bd77a> <http://www.w3.org/ns/shacl#name> "Precisie" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/12bc7fd1d26fe5eb70a0f0c9751bd77a> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/12bc7fd1d26fe5eb70a0f0c9751bd77a> <http://www.w3.org/ns/shacl#path> <dsr:precisie> .
-
-    # Nauwkeurigheid — Beoordeling van de nauwkeurigheid van de data: in hoeverre de gegevens overeenkomen met de werkelijkheid.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/1bd92371a23ccab8ad9615be750a4f8e> <http://www.w3.org/ns/shacl#description> "Beoordeling van de nauwkeurigheid van de data: in hoeverre de gegevens overeenkomen met de werkelijkheid." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/1bd92371a23ccab8ad9615be750a4f8e> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-75e4a335-671a-4136-b6d6-348fa2d8b8cf> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/1bd92371a23ccab8ad9615be750a4f8e> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/1bd92371a23ccab8ad9615be750a4f8e> <http://www.w3.org/ns/shacl#name> "Nauwkeurigheid" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/1bd92371a23ccab8ad9615be750a4f8e> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/1bd92371a23ccab8ad9615be750a4f8e> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#nauwkeurigheid> .
-
-    # Beschikbaar in andere omgeving — Andere omgevingen of systemen waarin de data (ook) te raadplegen is.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/1f3d30b924bf1ebc4b566130f98909f9> <http://www.w3.org/ns/shacl#description> "Andere omgevingen of systemen waarin de data (ook) te raadplegen is." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/1f3d30b924bf1ebc4b566130f98909f9> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/1f3d30b924bf1ebc4b566130f98909f9> <http://www.w3.org/ns/shacl#name> "Beschikbaar in andere omgeving" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/1f3d30b924bf1ebc4b566130f98909f9> <http://www.w3.org/ns/shacl#path> <dsr:beschikbaarIn> .
-
-    # Mate waarin de dataset persoonsgegevens bevat, volgens de AVG-classificatie van de RCE. Intern gegeven, wordt nooit gepubliceerd.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/23869934234dc25e0855b85fb23fc719> <http://www.w3.org/ns/shacl#description> "Mate waarin de dataset persoonsgegevens bevat, volgens de AVG-classificatie van de RCE. Intern gegeven, wordt nooit gepubliceerd." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/23869934234dc25e0855b85fb23fc719> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/23869934234dc25e0855b85fb23fc719> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/23869934234dc25e0855b85fb23fc719> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/23869934234dc25e0855b85fb23fc719> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/23869934234dc25e0855b85fb23fc719> <http://www.w3.org/ns/shacl#path> <dsr:avgKlasse> .
-
-    # Data Steward — Functie van de datasteward die de beschrijving van deze dataset bijhoudt. Geen persoonsnaam.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2724204601dabda99664861b39255d92> <http://www.w3.org/ns/shacl#description> "Functie van de datasteward die de beschrijving van deze dataset bijhoudt. Geen persoonsnaam." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2724204601dabda99664861b39255d92> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-bc865dd2-12e0-450b-abad-937314bcca55> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2724204601dabda99664861b39255d92> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2724204601dabda99664861b39255d92> <http://www.w3.org/ns/shacl#name> "Data Steward" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2724204601dabda99664861b39255d92> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2724204601dabda99664861b39255d92> <http://www.w3.org/ns/shacl#path> <dsr:heeftDatasteward> .
-
-    # Interne toelichting bij de dataset, bijv. over beheer, bijzonderheden of afspraken. Wordt niet gepubliceerd.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2c2e47f95ce81aac2add58e2dc3dd7ba> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2c2e47f95ce81aac2add58e2dc3dd7ba> <http://www.w3.org/ns/shacl#description> "Interne toelichting bij de dataset, bijv. over beheer, bijzonderheden of afspraken. Wordt niet gepubliceerd." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2c2e47f95ce81aac2add58e2dc3dd7ba> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2c2e47f95ce81aac2add58e2dc3dd7ba> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2c2e47f95ce81aac2add58e2dc3dd7ba> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/2c2e47f95ce81aac2add58e2dc3dd7ba> <http://www.w3.org/ns/shacl#path> <http://www.w3.org/2004/02/skos/core#editorialNote> .
-
-    # Het datamodel of schema dat de data volgt, bijv. de CEO-ontologie, schema.org of een XSD.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/38d3bdb74f1cee91efa054cad5045330> <http://www.w3.org/ns/shacl#description> "Het datamodel of schema dat de data volgt, bijv. de CEO-ontologie, schema.org of een XSD." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/38d3bdb74f1cee91efa054cad5045330> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/38d3bdb74f1cee91efa054cad5045330> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/38d3bdb74f1cee91efa054cad5045330> <http://www.w3.org/ns/shacl#path> <http://purl.org/dc/terms/conformsTo> .
-
-    # Actualiteit — Beoordeling van de actualiteit van de data: in hoeverre de gegevens de huidige situatie weergeven.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/40dc9dd9337f9cf3e6d521135ca5e17c> <http://www.w3.org/ns/shacl#description> "Beoordeling van de actualiteit van de data: in hoeverre de gegevens de huidige situatie weergeven." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/40dc9dd9337f9cf3e6d521135ca5e17c> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-75e4a335-671a-4136-b6d6-348fa2d8b8cf> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/40dc9dd9337f9cf3e6d521135ca5e17c> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/40dc9dd9337f9cf3e6d521135ca5e17c> <http://www.w3.org/ns/shacl#name> "Actualiteit" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/40dc9dd9337f9cf3e6d521135ca5e17c> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/40dc9dd9337f9cf3e6d521135ca5e17c> <http://www.w3.org/ns/shacl#path> <dsr:actualiteit> .
-
-    # Openbaarheid — Mate waarin de data openbaar toegankelijk is: openbaar, beperkt (deels) of niet openbaar.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4291a44c1f0c5bb76588cd3f534e27f6> <http://www.w3.org/ns/shacl#description> "Mate waarin de data openbaar toegankelijk is: openbaar, beperkt (deels) of niet openbaar." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4291a44c1f0c5bb76588cd3f534e27f6> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4291a44c1f0c5bb76588cd3f534e27f6> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4291a44c1f0c5bb76588cd3f534e27f6> <http://www.w3.org/ns/shacl#name> "Openbaarheid" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4291a44c1f0c5bb76588cd3f534e27f6> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4291a44c1f0c5bb76588cd3f534e27f6> <http://www.w3.org/ns/shacl#path> <http://purl.org/dc/terms/accessRights> .
-
-    # Naam — Naam van de dataset, in het Nederlands én het Engels.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4a58a9501362534806f8727ee597d42c> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4a58a9501362534806f8727ee597d42c> <http://www.w3.org/ns/shacl#description> "Naam van de dataset, in het Nederlands én het Engels." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4a58a9501362534806f8727ee597d42c> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4a58a9501362534806f8727ee597d42c> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4a58a9501362534806f8727ee597d42c> <http://www.w3.org/ns/shacl#name> "Naam" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4a58a9501362534806f8727ee597d42c> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4a58a9501362534806f8727ee597d42c> <http://www.w3.org/ns/shacl#path> <http://purl.org/dc/terms/title> .
-
-    # In NDE Datasetregister — Geeft aan of de dataset is geregistreerd in het NDE Datasetregister.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4bd07c64fba78300792373934a144180> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#boolean> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4bd07c64fba78300792373934a144180> <http://www.w3.org/ns/shacl#description> "Geeft aan of de dataset is geregistreerd in het NDE Datasetregister." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4bd07c64fba78300792373934a144180> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-8bdda5c9-ba74-4368-8f13-0efcd2e2104f> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4bd07c64fba78300792373934a144180> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4bd07c64fba78300792373934a144180> <http://www.w3.org/ns/shacl#name> "In NDE Datasetregister" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4bd07c64fba78300792373934a144180> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4bd07c64fba78300792373934a144180> <http://www.w3.org/ns/shacl#path> <dsr:inNdeDatasetregister> .
-
-    # Functioneel Beheerder — Functie van de functioneel beheerder van het systeem waarin de dataset wordt beheerd. Geen persoonsnaam.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4dbff03455568abb26c516c0a8083989> <http://www.w3.org/ns/shacl#description> "Functie van de functioneel beheerder van het systeem waarin de dataset wordt beheerd. Geen persoonsnaam." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4dbff03455568abb26c516c0a8083989> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-bc865dd2-12e0-450b-abad-937314bcca55> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4dbff03455568abb26c516c0a8083989> <http://www.w3.org/ns/shacl#name> "Functioneel Beheerder" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4dbff03455568abb26c516c0a8083989> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4dbff03455568abb26c516c0a8083989> <http://www.w3.org/ns/shacl#path> <dsr:heeftFunctioneelBeheerder> .
-
-    # Origineel in — Systeem waarin het origineel (de gezaghebbende versie) van deze dataset wordt beheerd.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4ed8a669d6bafb3333aed3a9b17ca35b> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#boolean> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4ed8a669d6bafb3333aed3a9b17ca35b> <http://www.w3.org/ns/shacl#description> "Systeem waarin het origineel (de gezaghebbende versie) van deze dataset wordt beheerd." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4ed8a669d6bafb3333aed3a9b17ca35b> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4ed8a669d6bafb3333aed3a9b17ca35b> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4ed8a669d6bafb3333aed3a9b17ca35b> <http://www.w3.org/ns/shacl#name> "Origineel in" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4ed8a669d6bafb3333aed3a9b17ca35b> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/4ed8a669d6bafb3333aed3a9b17ca35b> <http://www.w3.org/ns/shacl#path> <dsr:isOrigineel> .
-
-    # Consistentie — Beoordeling van de consistentie van de data: in hoeverre de gegevens onderling en met andere bronnen tegenstrijdigheidsvrij zijn.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/54c01091037d2a310e16672186851ca8> <http://www.w3.org/ns/shacl#description> "Beoordeling van de consistentie van de data: in hoeverre de gegevens onderling en met andere bronnen tegenstrijdigheidsvrij zijn." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/54c01091037d2a310e16672186851ca8> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-75e4a335-671a-4136-b6d6-348fa2d8b8cf> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/54c01091037d2a310e16672186851ca8> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/54c01091037d2a310e16672186851ca8> <http://www.w3.org/ns/shacl#name> "Consistentie" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/54c01091037d2a310e16672186851ca8> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/54c01091037d2a310e16672186851ca8> <http://www.w3.org/ns/shacl#path> <dsr:consistentie> .
-
-    # Webpagina — Webpagina waar de dataset wordt beschreven of te raadplegen is, bedoeld voor mensen.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/572d4e421e5e6b9bc11d815e8a027112> <http://www.w3.org/ns/shacl#description> "Webpagina waar de dataset wordt beschreven of te raadplegen is, bedoeld voor mensen." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/572d4e421e5e6b9bc11d815e8a027112> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/572d4e421e5e6b9bc11d815e8a027112> <http://www.w3.org/ns/shacl#name> "Webpagina" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/572d4e421e5e6b9bc11d815e8a027112> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/572d4e421e5e6b9bc11d815e8a027112> <http://www.w3.org/ns/shacl#path> <http://www.w3.org/ns/dcat#landingPage> .
-
-    # Dataset type — Soort dataset volgens de RCE-indeling, bijv. thesaurus, beeldcollectie of geografisch informatiesysteem.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/599dcce2998a6b40b1e38e8c6006cb0a> <http://www.w3.org/ns/shacl#description> "Soort dataset volgens de RCE-indeling, bijv. thesaurus, beeldcollectie of geografisch informatiesysteem." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/599dcce2998a6b40b1e38e8c6006cb0a> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/599dcce2998a6b40b1e38e8c6006cb0a> <http://www.w3.org/ns/shacl#name> "Dataset type" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/599dcce2998a6b40b1e38e8c6006cb0a> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/599dcce2998a6b40b1e38e8c6006cb0a> <http://www.w3.org/ns/shacl#path> <dsr:datasettype> .
-
-    # Geeft aan of de dataset als linked open data is gepubliceerd, bijv. op de LDV.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/5a07b6f33c42b5397c54ef1b2e441c9d> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#boolean> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/5a07b6f33c42b5397c54ef1b2e441c9d> <http://www.w3.org/ns/shacl#description> "Geeft aan of de dataset als linked open data is gepubliceerd, bijv. op de LDV." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/5a07b6f33c42b5397c54ef1b2e441c9d> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-8bdda5c9-ba74-4368-8f13-0efcd2e2104f> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/5a07b6f33c42b5397c54ef1b2e441c9d> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/5a07b6f33c42b5397c54ef1b2e441c9d> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/5a07b6f33c42b5397c54ef1b2e441c9d> <http://www.w3.org/ns/shacl#path> <dsr:isLinkedOpenData> .
-
-    # Registernummer — Uniek nummer van de dataset in het RCE-datasetregister.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/619d67d860170ea99883215c65bda50f> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/619d67d860170ea99883215c65bda50f> <http://www.w3.org/ns/shacl#description> "Uniek nummer van de dataset in het RCE-datasetregister." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/619d67d860170ea99883215c65bda50f> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/619d67d860170ea99883215c65bda50f> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/619d67d860170ea99883215c65bda50f> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/619d67d860170ea99883215c65bda50f> <http://www.w3.org/ns/shacl#name> "Registernummer" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/619d67d860170ea99883215c65bda50f> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/619d67d860170ea99883215c65bda50f> <http://www.w3.org/ns/shacl#path> <http://purl.org/dc/terms/identifier> .
-
-    # Beheeromgeving — Technische omgeving of applicatie waarin de dataset wordt beheerd, bijv. PoolParty of ARCHIS.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/62353f63e8db1a443b4934d134d704b8> <http://www.w3.org/ns/shacl#description> "Technische omgeving of applicatie waarin de dataset wordt beheerd, bijv. PoolParty of ARCHIS." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/62353f63e8db1a443b4934d134d704b8> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/62353f63e8db1a443b4934d134d704b8> <http://www.w3.org/ns/shacl#name> "Beheeromgeving" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/62353f63e8db1a443b4934d134d704b8> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/62353f63e8db1a443b4934d134d704b8> <http://www.w3.org/ns/shacl#path> <dsr:beheeromgeving> .
-
-    # Hoe vaak de dataset wordt bijgewerkt.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/660ae1a03cd197e7be0dc0d681c6903e> <http://www.w3.org/ns/shacl#description> "Hoe vaak de dataset wordt bijgewerkt." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/660ae1a03cd197e7be0dc0d681c6903e> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/660ae1a03cd197e7be0dc0d681c6903e> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/660ae1a03cd197e7be0dc0d681c6903e> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/660ae1a03cd197e7be0dc0d681c6903e> <http://www.w3.org/ns/shacl#path> <http://purl.org/dc/terms/accrualPeriodicity> .
-
-    # Thesauri of andere woordsystemen die in deze dataset worden gebruikt, bijv. ABR of CHT. Verwijst naar die datasets in het register.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/6e7645018c3703b495f274b818ed19c2> <http://www.w3.org/ns/shacl#class> <https://www.w3.org/ns/dcat#Dataset> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/6e7645018c3703b495f274b818ed19c2> <http://www.w3.org/ns/shacl#description> "Thesauri of andere woordsystemen die in deze dataset worden gebruikt, bijv. ABR of CHT. Verwijst naar die datasets in het register." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/6e7645018c3703b495f274b818ed19c2> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/6e7645018c3703b495f274b818ed19c2> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/6e7645018c3703b495f274b818ed19c2> <http://www.w3.org/ns/shacl#path> <dsr:gebruiktWoordsysteem> .
-
-    # Woord- of datasysteem — Geeft aan of de dataset een woordsysteem (thesaurus, termenlijst) of een datasysteem (registratie van objecten) is.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7aa2680abd69fe0fffa9cb0592ca244d> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7aa2680abd69fe0fffa9cb0592ca244d> <http://www.w3.org/ns/shacl#description> "Geeft aan of de dataset een woordsysteem (thesaurus, termenlijst) of een datasysteem (registratie van objecten) is." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7aa2680abd69fe0fffa9cb0592ca244d> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7aa2680abd69fe0fffa9cb0592ca244d> <http://www.w3.org/ns/shacl#in> <https://pilot.rce.triply.cc/.well-known/genid/2b0223e7ca1f52f6ebe172fbb1f4b0b1> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7aa2680abd69fe0fffa9cb0592ca244d> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7aa2680abd69fe0fffa9cb0592ca244d> <http://www.w3.org/ns/shacl#name> "Woord- of datasysteem" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7aa2680abd69fe0fffa9cb0592ca244d> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7aa2680abd69fe0fffa9cb0592ca244d> <http://www.w3.org/ns/shacl#path> <dsr:systeemsoort> .
-
-    # Prioriteit — Prioriteit die de RCE aan deze dataset toekent voor beheer en verbetering.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7b8150f10214ea605537e5835addfc98> <http://www.w3.org/ns/shacl#description> "Prioriteit die de RCE aan deze dataset toekent voor beheer en verbetering." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7b8150f10214ea605537e5835addfc98> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7b8150f10214ea605537e5835addfc98> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7b8150f10214ea605537e5835addfc98> <http://www.w3.org/ns/shacl#name> "Prioriteit" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7b8150f10214ea605537e5835addfc98> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7b8150f10214ea605537e5835addfc98> <http://www.w3.org/ns/shacl#path> <dsr:prioriteit> .
-
-    # Rubriek
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7cc4b945409bbbb88d94b72110552f11> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7cc4b945409bbbb88d94b72110552f11> <http://www.w3.org/ns/shacl#name> "Rubriek" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/7cc4b945409bbbb88d94b72110552f11> <http://www.w3.org/ns/shacl#path> <https://www.w3.org/ns/dcat#theme> .
-
-    # Compleetheid — Heeft kwalitatieve compleetheid, aangeduid als IST..SOLL notatie.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/821531a4cb3d43241e92a175957c93ae> <http://www.w3.org/ns/shacl#description> "Heeft kwalitatieve compleetheid, aangeduid als IST..SOLL notatie." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/821531a4cb3d43241e92a175957c93ae> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-75e4a335-671a-4136-b6d6-348fa2d8b8cf> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/821531a4cb3d43241e92a175957c93ae> <http://www.w3.org/ns/shacl#name> "Compleetheid" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/821531a4cb3d43241e92a175957c93ae> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/821531a4cb3d43241e92a175957c93ae> <http://www.w3.org/ns/shacl#path> <https://www.w3.org/TR/vocab-dqv/#dqv:hasQualityAnnotation> .
-
-    # Data Eigenaar
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/8f0f96f9732b6df5fac9cadee996a199> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-bc865dd2-12e0-450b-abad-937314bcca55> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/8f0f96f9732b6df5fac9cadee996a199> <http://www.w3.org/ns/shacl#name> "Data Eigenaar" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/8f0f96f9732b6df5fac9cadee996a199> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/8f0f96f9732b6df5fac9cadee996a199> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#dataEigenaar> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/938b76d24ad1deb588352949ce4fc4c2> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/938b76d24ad1deb588352949ce4fc4c2> <http://www.w3.org/ns/shacl#path> <https://www.w3.org/TR/prov-o/#wasGeneratedBy> .
-
-    # waarTeVinden
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/980e009bff89ba03107fd1e91f0f1088> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/980e009bff89ba03107fd1e91f0f1088> <http://www.w3.org/ns/shacl#name> "waarTeVinden" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/980e009bff89ba03107fd1e91f0f1088> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#waarTeVinden> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/993a0b6c9a744ece6c5fc39f54bb1722> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/993a0b6c9a744ece6c5fc39f54bb1722> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#huidigBronsysteem> .
-
-    # Status
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/9acb44549b41563697bb490144ec6258> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/9acb44549b41563697bb490144ec6258> <http://www.w3.org/ns/shacl#name> "Status" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/9acb44549b41563697bb490144ec6258> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#status> .
-
-    # Domein
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/a3bdbe7c5655bcf50e17f3c47a6f72ee> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/a3bdbe7c5655bcf50e17f3c47a6f72ee> <http://www.w3.org/ns/shacl#name> "Domein" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/a3bdbe7c5655bcf50e17f3c47a6f72ee> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#IRI> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/a3bdbe7c5655bcf50e17f3c47a6f72ee> <http://www.w3.org/ns/shacl#path> <https://www.w3.org/ns/dcat#keyword> .
-
-    # CHOI Object — CHO, KENNIS, ZAAK, THESAURUS, Bibliografische gegevens, Afbeeldingen
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/ad18d258bebb011d0b5b9a4c5191d9fa> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/ad18d258bebb011d0b5b9a4c5191d9fa> <http://www.w3.org/ns/shacl#description> "CHO, KENNIS, ZAAK, THESAURUS, Bibliografische gegevens, Afbeeldingen" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/ad18d258bebb011d0b5b9a4c5191d9fa> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/ad18d258bebb011d0b5b9a4c5191d9fa> <http://www.w3.org/ns/shacl#in> <https://pilot.rce.triply.cc/.well-known/genid/e723d0e59e162c2177d838517073bee9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/ad18d258bebb011d0b5b9a4c5191d9fa> <http://www.w3.org/ns/shacl#maxCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/ad18d258bebb011d0b5b9a4c5191d9fa> <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/ad18d258bebb011d0b5b9a4c5191d9fa> <http://www.w3.org/ns/shacl#name> "CHOI Object" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/ad18d258bebb011d0b5b9a4c5191d9fa> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/ad18d258bebb011d0b5b9a4c5191d9fa> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#choiObject> .
-
-    # Paginanaam
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/afcc405630d87335c1222c6b7cb1745c> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/afcc405630d87335c1222c6b7cb1745c> <http://www.w3.org/ns/shacl#name> "Paginanaam" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/afcc405630d87335c1222c6b7cb1745c> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#paginanaam> .
-
-    # Applicatie URL
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/b0b9dbf7bbf46eb2032c89baba1e6341> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/b0b9dbf7bbf46eb2032c89baba1e6341> <http://www.w3.org/ns/shacl#name> "Applicatie URL" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/b0b9dbf7bbf46eb2032c89baba1e6341> <http://www.w3.org/ns/shacl#path> <https://www.w3.org/ns/dcat#accessURL> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/bd1761b7fdb242d1d4ddcc53fd551270> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/bd1761b7fdb242d1d4ddcc53fd551270> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#oorspronkelijkeBron> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-41f92b57-0199-46a1-8919-524e631ef8c1> <http://datashapes.org/dash#stem> "rce:datacatalog/id/distribution/" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-41f92b57-0199-46a1-8919-524e631ef8c1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#NodeShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-41f92b57-0199-46a1-8919-524e631ef8c1> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-07eba68f-40e4-4c52-91ec-04a7e09ce678> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-41f92b57-0199-46a1-8919-524e631ef8c1> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ae7f5561-ab57-491c-9aca-2e5944805dc1> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-41f92b57-0199-46a1-8919-524e631ef8c1> <http://www.w3.org/ns/shacl#targetClass> <https://www.w3.org/ns/dcat#Distribution> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-8716eed4-08f0-4f9c-8d16-ac8143d66187> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#NodeShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-8716eed4-08f0-4f9c-8d16-ac8143d66187> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-0f229139-dfbb-4443-ae17-b187888892fd> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-8716eed4-08f0-4f9c-8d16-ac8143d66187> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-33d51119-9242-411c-951d-0c89cacb7af4> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-c283593a-2ae1-49a5-8c3b-402f28da6d8e> <http://datashapes.org/dash#stem> "https://linkeddata.cultureelerfgoed.nl/rce/datacatalog/id/begrip/" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-c283593a-2ae1-49a5-8c3b-402f28da6d8e> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#NodeShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-c283593a-2ae1-49a5-8c3b-402f28da6d8e> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-6700ae58-6cb4-467e-a1c1-a0f7fb60d576> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-c283593a-2ae1-49a5-8c3b-402f28da6d8e> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-d577f2d7-fcb6-4178-90d3-e69c1f42c4ba> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-c283593a-2ae1-49a5-8c3b-402f28da6d8e> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e255ff1f-f415-46d3-ae39-eed0abfa5d37> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-c283593a-2ae1-49a5-8c3b-402f28da6d8e> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-e354551b-1da6-41be-b3bd-8d9e58715c29> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-c283593a-2ae1-49a5-8c3b-402f28da6d8e> <http://www.w3.org/ns/shacl#targetClass> <http://www.w3.org/2004/02/skos/core#Concept> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-da534139-c3a5-4e0a-aa99-ce598b76db56> <http://datashapes.org/dash#stem> "https://linkeddata.cultureelerfgoed.nl/rce/datacatalog/id/begrippenlijst/" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-da534139-c3a5-4e0a-aa99-ce598b76db56> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#NodeShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-da534139-c3a5-4e0a-aa99-ce598b76db56> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-5d3cffbf-07c5-4921-bc46-fcd711411271> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-da534139-c3a5-4e0a-aa99-ce598b76db56> <http://www.w3.org/ns/shacl#targetClass> <http://www.w3.org/2004/02/skos/core#ConceptScheme> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-dab08e36-7365-4715-a9d2-e81735f68c11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#NodeShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-dab08e36-7365-4715-a9d2-e81735f68c11> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-8a825736-5e36-44ee-991f-46e1f3fe2c3d> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-dab08e36-7365-4715-a9d2-e81735f68c11> <http://www.w3.org/ns/shacl#targetClass> <https://www.w3.org/ns/dcat#Catalog> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-db1df3b3-d620-4f35-bdb2-fad3f58c185d> <http://datashapes.org/dash#stem> "rce:datacatalog/id/dataset/" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-db1df3b3-d620-4f35-bdb2-fad3f58c185d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#NodeShape> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-db1df3b3-d620-4f35-bdb2-fad3f58c185d> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-179d68e9-2a4b-4845-b7b8-d49efc7c8173> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-db1df3b3-d620-4f35-bdb2-fad3f58c185d> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1c320d8e-15c4-4e11-b7da-fc85a67d71cd> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-db1df3b3-d620-4f35-bdb2-fad3f58c185d> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-1e97b048-6926-4480-980f-ed4a2d12f804> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-db1df3b3-d620-4f35-bdb2-fad3f58c185d> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-cc7f35e0-ea01-4fb8-8fd8-b60237b85b9b> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-db1df3b3-d620-4f35-bdb2-fad3f58c185d> <http://www.w3.org/ns/shacl#property> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/p-ef392153-33fd-41cb-9f6e-53f129271631> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c-db1df3b3-d620-4f35-bdb2-fad3f58c185d> <http://www.w3.org/ns/shacl#targetClass> <https://www.w3.org/ns/dcat#Dataset> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c2054dd9478d1d89cc4e5661e79eda30> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/c2054dd9478d1d89cc4e5661e79eda30> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#soortGeometrie> .
-
-    # APM code
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/cac6e35e62f7a7c3f909f2ec7f74d1bf> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/cac6e35e62f7a7c3f909f2ec7f74d1bf> <http://www.w3.org/ns/shacl#name> "APM code" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/cac6e35e62f7a7c3f909f2ec7f74d1bf> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#apmCode> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/caf0ed7169f0e7e161e87bb362a7bd85> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#date> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/caf0ed7169f0e7e161e87bb362a7bd85> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/caf0ed7169f0e7e161e87bb362a7bd85> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/caf0ed7169f0e7e161e87bb362a7bd85> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#datumOpnameInRegister> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/d128451227a86395e561eb1868bb8a4a> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-
-    # Batch
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/d265aed699f7409ac0ec6fe07ee9cb11> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/d265aed699f7409ac0ec6fe07ee9cb11> <http://www.w3.org/ns/shacl#name> "Batch" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/d265aed699f7409ac0ec6fe07ee9cb11> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#batch> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/d69886238772d75e05becec1bd16ccf6> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#boolean> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/d69886238772d75e05becec1bd16ccf6> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-8bdda5c9-ba74-4368-8f13-0efcd2e2104f> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/d69886238772d75e05becec1bd16ccf6> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/d69886238772d75e05becec1bd16ccf6> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#pidGebruik> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-04cb1a8fe43547b682c2ed964c99fed1> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-29e36e9fbb0dd4d5babc7ad5bcf720a2> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-938b76d24ad1deb588352949ce4fc4c2> <http://www.w3.org/ns/shacl#path> <https://www.w3.org/TR/prov-o/#wasGeneratedBy> .
-
-    # Domein
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-a3bdbe7c5655bcf50e17f3c47a6f72ee> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-a3bdbe7c5655bcf50e17f3c47a6f72ee> <http://www.w3.org/ns/shacl#name> "Domein" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-a3bdbe7c5655bcf50e17f3c47a6f72ee> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#domein> .
-
-    # Indien gepubliceerd, hoe? LOD, dump, excel, pdf, etc
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-a4d3e3f02c500c00184b35b29fa4ca93> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-a4d3e3f02c500c00184b35b29fa4ca93> <http://www.w3.org/ns/shacl#name> "Indien gepubliceerd, hoe? LOD, dump, excel, pdf, etc" .
-
-    # Beperkingen
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-ae0d8f92f6a6da1d39720f11c47840ea> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-ae0d8f92f6a6da1d39720f11c47840ea> <http://www.w3.org/ns/shacl#name> "Beperkingen" .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-b0b9dbf7bbf46eb2032c89baba1e6341> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-b2b7e5f27dd19a46e91b52ae58af8b9f> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-bd1761b7fdb242d1d4ddcc53fd551270> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-c2054dd9478d1d89cc4e5661e79eda30> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-caf0ed7169f0e7e161e87bb362a7bd85> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-caf0ed7169f0e7e161e87bb362a7bd85> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#datumOpnameInRegister> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-d128451227a86395e561eb1868bb8a4a> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-d128451227a86395e561eb1868bb8a4a> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#informatiestructuur> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-d7cfafabe12c1f589d939d54ba23b4db> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-d7cfafabe12c1f589d939d54ba23b4db> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#herkomstRceDerdenOnbekend> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-d8f993429ed76914296e27994a8ed548> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#boolean> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-d8f993429ed76914296e27994a8ed548> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-ac6e6650-5880-41c1-b15f-639a22ad3b80> .
-
-    # Als er een wettelijke grondslag is, welke?
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-deb6aca242e4725269427f269fbbf401> <http://www.w3.org/ns/shacl#description> "Als er een wettelijke grondslag is, welke?" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-deb6aca242e4725269427f269fbbf401> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-deb6aca242e4725269427f269fbbf401> <http://www.w3.org/ns/shacl#minCount> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-deb6aca242e4725269427f269fbbf401> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#wettelijkeGrondslag> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-e5871720c6db2ec8230528024ceaf0aa> <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#boolean> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-e5871720c6db2ec8230528024ceaf0aa> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-8bdda5c9-ba74-4368-8f13-0efcd2e2104f> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/dsrv-e5871720c6db2ec8230528024ceaf0aa> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#termenGebruik> .
-
-    # Master of reference data — Zie DAMA DMBok voor definitie, pag. 347.
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/f0ea0825fcc42d26e4c3e5cc0e5d2108> <http://www.w3.org/ns/shacl#description> "Zie DAMA DMBok voor definitie, pag. 347." .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/f0ea0825fcc42d26e4c3e5cc0e5d2108> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/f0ea0825fcc42d26e4c3e5cc0e5d2108> <http://www.w3.org/ns/shacl#in> <https://pilot.rce.triply.cc/.well-known/genid/75eabeae39653c4cbe015a544814799c> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/f0ea0825fcc42d26e4c3e5cc0e5d2108> <http://www.w3.org/ns/shacl#name> "Master of reference data" .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/f0ea0825fcc42d26e4c3e5cc0e5d2108> <http://www.w3.org/ns/shacl#nodeKind> <http://www.w3.org/ns/shacl#Literal> .
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/f0ea0825fcc42d26e4c3e5cc0e5d2108> <http://www.w3.org/ns/shacl#path> <https://linkeddata.cultureelerfgoed.nl/def/datasetregister#masterOfReferenceData> .
-
-    <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/fb88ddc8f7156309fba820d0f0ac1876> <http://www.w3.org/ns/shacl#group> <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/shp/propertyGroup/gp-def320ea-3e9b-4f94-9e6e-254907eca9e9> .
-
-    ### Toegestane waardes voor properties. ###
-
-    <http://www.w3.org/2004/02/skos/core#Concept> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
-    <http://www.w3.org/2004/02/skos/core#Concept> <http://www.w3.org/2000/01/rdf-schema#comment> "Begrip uit een begrippenlijst (SKOS concept), bijvoorbeeld \"Klasse 0 persoonsgegevens\" in de lijst Klasse AVG." .
-    <http://www.w3.org/2004/02/skos/core#Concept> <http://www.w3.org/2000/01/rdf-schema#label> "Begrip" .
-
-    <http://www.w3.org/2004/02/skos/core#ConceptScheme> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
-    <http://www.w3.org/2004/02/skos/core#ConceptScheme> <http://www.w3.org/2000/01/rdf-schema#label> "Begrippenlijst" .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/0d14c94bf787ef1c403275024549d1da> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "Cultuurhistorisch object"@nl .
-    <https://pilot.rce.triply.cc/.well-known/genid/0d14c94bf787ef1c403275024549d1da> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/aca9a428852bd34a0276d53498223ddf> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/2b0223e7ca1f52f6ebe172fbb1f4b0b1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "Woordsysteem"@nl .
-    <https://pilot.rce.triply.cc/.well-known/genid/2b0223e7ca1f52f6ebe172fbb1f4b0b1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/85aa1cd8124d1f763afce48049b59db6> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/2e92b6cdc1ceed22a3cfdb0febb6b154> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "http://rightsstatements.org/vocab/InC/1.0/"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
-    <https://pilot.rce.triply.cc/.well-known/genid/2e92b6cdc1ceed22a3cfdb0febb6b154> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/3d14a80aee25e26debf3bd6b068d91b2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "Zaak"@nl .
-    <https://pilot.rce.triply.cc/.well-known/genid/3d14a80aee25e26debf3bd6b068d91b2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/a00cec8e452562b3bb0be6eafe2b38c1> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/53fde4b0af4e419edde829d3ce45f07e> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "https://creativecommons.org/publicdomain/zero/1.0/"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
-    <https://pilot.rce.triply.cc/.well-known/genid/53fde4b0af4e419edde829d3ce45f07e> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/a6763a62d65697af801e3bd41991cb76> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/5d396f6a2372bfb80588f61f1f6507e0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "http://rightsstatements.org/vocab/UND/1.0/"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
-    <https://pilot.rce.triply.cc/.well-known/genid/5d396f6a2372bfb80588f61f1f6507e0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/2e92b6cdc1ceed22a3cfdb0febb6b154> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/6deed7e264db2cbd32fbfa3fa02e3375> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "Reference" .
-    <https://pilot.rce.triply.cc/.well-known/genid/6deed7e264db2cbd32fbfa3fa02e3375> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/75eabeae39653c4cbe015a544814799c> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "Master" .
-    <https://pilot.rce.triply.cc/.well-known/genid/75eabeae39653c4cbe015a544814799c> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/6deed7e264db2cbd32fbfa3fa02e3375> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/85aa1cd8124d1f763afce48049b59db6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "Datasysteem"@nl .
-    <https://pilot.rce.triply.cc/.well-known/genid/85aa1cd8124d1f763afce48049b59db6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/9c5de2c2ff9385f4cafd32049773443a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "Bibliografische gegevens"@nl .
-    <https://pilot.rce.triply.cc/.well-known/genid/9c5de2c2ff9385f4cafd32049773443a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/0d14c94bf787ef1c403275024549d1da> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/a00cec8e452562b3bb0be6eafe2b38c1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "Thesaurus"@nl .
-    <https://pilot.rce.triply.cc/.well-known/genid/a00cec8e452562b3bb0be6eafe2b38c1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/9c5de2c2ff9385f4cafd32049773443a> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/a6763a62d65697af801e3bd41991cb76> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "https://creativecommons.org/publicdomain/mark/1.0/"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
-    <https://pilot.rce.triply.cc/.well-known/genid/a6763a62d65697af801e3bd41991cb76> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/5d396f6a2372bfb80588f61f1f6507e0> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/aca9a428852bd34a0276d53498223ddf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "Afbeeldingen"@nl .
-    <https://pilot.rce.triply.cc/.well-known/genid/aca9a428852bd34a0276d53498223ddf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/dcdef7ccf19dbde9ab9346a4d01941e0> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/ae6f7225e5c59fc0369863f20f62bf11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "https://creativecommons.org/licenses/by/4.0/"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
-    <https://pilot.rce.triply.cc/.well-known/genid/ae6f7225e5c59fc0369863f20f62bf11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/53fde4b0af4e419edde829d3ce45f07e> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/dcdef7ccf19dbde9ab9346a4d01941e0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "test"@en .
-    <https://pilot.rce.triply.cc/.well-known/genid/dcdef7ccf19dbde9ab9346a4d01941e0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-
-    <https://pilot.rce.triply.cc/.well-known/genid/e723d0e59e162c2177d838517073bee9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "Kennis"@nl .
-    <https://pilot.rce.triply.cc/.well-known/genid/e723d0e59e162c2177d838517073bee9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <https://pilot.rce.triply.cc/.well-known/genid/3d14a80aee25e26debf3bd6b068d91b2> .
-
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcatap: <http://data.europa.eu/r5r/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dsr: <https://linkeddata.cultureelerfgoed.nl/def/datasetregister/> .
+@prefix dsrgrp: <https://linkeddata.cultureelerfgoed.nl/def/datasetregister/group/> .
+@prefix dsrsh: <https://linkeddata.cultureelerfgoed.nl/def/datasetregister/shape/> .
+@prefix eli: <http://data.europa.eu/eli/ontology#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix graph: <https://pilot.rce.triply.cc/rce:rce-catalog-ontwikkel/Data-Catalog/graphs/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+graph:data-model {
+    eli:LegalResource a rdfs:Class ;
+        rdfs:label "Legal resource"@en,
+            "Wet of regeling"@nl .
+
+    dct:Frequency a rdfs:Class ;
+        rdfs:label "Frequency (EU)"@en,
+            "Frequentie (EU)"@nl .
+
+    dct:LicenseDocument a rdfs:Class ;
+        rdfs:label "Licence"@en,
+            "Licentie"@nl .
+
+    <https://creativecommons.org/publicdomain/zero/1.0/> a dct:LicenseDocument ;
+        rdfs:label "CC0 1.0"@en,
+            "CC0 1.0"@nl .
+
+    <https://creativecommons.org/licenses/by/4.0/> a dct:LicenseDocument ;
+        rdfs:label "CC BY 4.0"@en,
+            "CC BY 4.0"@nl .
+
+    <https://creativecommons.org/licenses/by/3.0/> a dct:LicenseDocument ;
+        rdfs:label "CC BY 3.0"@en,
+            "CC BY 3.0"@nl .
+
+    <https://creativecommons.org/licenses/by-sa/4.0/> a dct:LicenseDocument ;
+        rdfs:label "CC BY-SA 4.0"@en,
+            "CC BY-SA 4.0"@nl .
+
+    <https://creativecommons.org/publicdomain/mark/1.0/> a dct:LicenseDocument ;
+        rdfs:label "Public Domain Mark 1.0"@en,
+            "Public Domain Mark 1.0"@nl .
+
+    <http://rightsstatements.org/vocab/UND/1.0/> a dct:LicenseDocument ;
+        rdfs:label "Copyright Undetermined (RS)"@en,
+            "Copyright Undetermined (RS)"@nl .
+
+    <http://rightsstatements.org/vocab/InC/1.0/> a dct:LicenseDocument ;
+        rdfs:label "In Copyright (RS)"@en,
+            "In Copyright (RS)"@nl .
+
+    dct:MediaTypeOrExtent a rdfs:Class ;
+        rdfs:label "File format"@en,
+            "Bestandsformaat"@nl .
+
+    dct:RightsStatement a rdfs:Class ;
+        rdfs:label "Access right (EU)"@en,
+            "Toegangsrecht (EU)"@nl .
+
+    dct:Standard a rdfs:Class ;
+        rdfs:label "Exchange model / standard"@en,
+            "Uitwisselmodel / standaard"@nl .
+
+    skos:Concept a rdfs:Class ;
+        rdfs:label "Concept"@en,
+            "Begrip"@nl .
+
+    skos:ConceptScheme a rdfs:Class ;
+        rdfs:label "Concept scheme"@en,
+            "Begrippenlijst"@nl .
+
+    vcard:Organization a rdfs:Class ;
+        rdfs:label "Contact point"@en,
+            "Contactpunt"@nl .
+
+    dcat:Catalog a rdfs:Class ;
+        rdfs:label "Catalogue"@en,
+            "Catalogus"@nl ;
+        rdfs:comment "Dataset register of the RCE."@en,
+            "Datasetregister van de RCE."@nl .
+
+    dcat:Dataset a rdfs:Class ;
+        rdfs:label "Dataset"@en,
+            "Dataset"@nl ;
+        rdfs:comment "Coherent set of RCE data forming a database or standing on its own, regardless of format or storage."@en,
+            "Samenhangende set gegevens van de RCE die een database vormt of op zichzelf staat, ongeacht vorm of opslag."@nl .
+
+    dcat:Distribution a rdfs:Class ;
+        rdfs:label "Distribution"@en,
+            "Distributie"@nl ;
+        rdfs:comment "Form in which the dataset is available (application, publication, SPARQL endpoint)."@en,
+            "Vorm waarin de dataset beschikbaar is (applicatie, publicatie, SPARQL-endpoint)."@nl .
+
+    foaf:Organization a rdfs:Class ;
+        rdfs:label "Organisation"@en,
+            "Organisatie"@nl .
+
+    dsr:intern a rdf:Property ;
+        rdfs:label "Internal"@en,
+            "Intern"@nl ;
+        rdfs:comment "Annotation on a property shape: true = internal management information that is never published (e.g. in the public catalogue or DCAT-AP-NL export)."@en,
+            "Annotatie op een property shape: true = intern beheergegeven dat nooit wordt gepubliceerd (bijv. in de publieke catalogus of de DCAT-AP-NL-export)."@nl ;
+        rdfs:domain sh:PropertyShape ;
+        rdfs:range xsd:boolean .
+
+    dsr:Beperking a rdfs:Class ;
+        rdfs:label "Restriction"@en,
+            "Beperking"@nl ;
+        rdfs:comment "Restrictions on retrieving the data."@en,
+            "Beperkingen bij het ophalen van de data."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:ChoiObject a rdfs:Class ;
+        rdfs:label "Architecture object"@en,
+            "Architectuurobject"@nl ;
+        rdfs:comment "Classification according to the architecture: CHO, KNOWLEDGE, CASE, THESAURUS, bibliographic data, images."@en,
+            "Indeling conform architectuur: CHO, KENNIS, ZAAK, THESAURUS, Bibliografische gegevens, Afbeeldingen."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Creatieproces a rdfs:Class ;
+        rdfs:label "Creation process"@en,
+            "Creatieproces"@nl ;
+        rdfs:comment "Business process in which the data is created, changed or managed."@en,
+            "Bedrijfsproces waarin de data wordt gecreëerd, gewijzigd of beheerd."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Datasettype a rdfs:Class ;
+        rdfs:label "Dataset type"@en,
+            "Datasettype"@nl ;
+        rdfs:comment "Type of data in the dataset."@en,
+            "Type data in de dataset."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Domein a rdfs:Class ;
+        rdfs:label "Domain"@en,
+            "Domein"@nl ;
+        rdfs:comment "Heritage domain of the dataset."@en,
+            "Erfgoeddomein van de dataset."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Functie a rdfs:Class ;
+        rdfs:label "Function"@en,
+            "Functie"@nl ;
+        rdfs:comment "Function (role) within the RCE, e.g. Head of Archaeology."@en,
+            "Functie (rol) binnen de RCE, bijvoorbeeld Hoofd Archeologie."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Herkomst a rdfs:Class ;
+        rdfs:label "Origin"@en,
+            "Herkomst"@nl ;
+        rdfs:comment "Origin of the data: RCE, third parties, unknown."@en,
+            "Herkomst van de data: RCE, derden, onbekend."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Informatiestructuur a rdfs:Class ;
+        rdfs:label "Information structure"@en,
+            "Informatiestructuur"@nl ;
+        rdfs:comment "How the data is structured."@en,
+            "Wijze waarop de data gestructureerd is."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:KlasseAvg a rdfs:Class ;
+        rdfs:label "GDPR class"@en,
+            "Klasse AVG"@nl ;
+        rdfs:comment "GDPR classification of personal data (annex 1)."@en,
+            "AVG-classificatie van persoonsgegevens (bijlage 1)."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Kwaliteitsscore a rdfs:Class ;
+        rdfs:label "Quality score"@en,
+            "Kwaliteitsscore"@nl ;
+        rdfs:comment "Score per quality dimension (0 = not assessed, 1 = low, 2 = medium, 3 = high)."@en,
+            "Score per kwaliteitsdimensie (0 = niet beoordeeld, 1 = laag, 2 = gemiddeld, 3 = hoog)."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Prioriteit a rdfs:Class ;
+        rdfs:label "Priority"@en,
+            "Prioriteit"@nl ;
+        rdfs:comment "Importance of the dataset for the RCE: high, medium, low; * = still to be done (annex 2)."@en,
+            "Belang van de dataset voor de RCE: hoog, gemiddeld, laag; * = moet nog (bijlage 2)."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Publicatievorm a rdfs:Class ;
+        rdfs:label "Publication form"@en,
+            "Publicatievorm"@nl ;
+        rdfs:comment "How the data is published on the web (LOD, web service, website)."@en,
+            "Wijze waarop de data op het web is gepubliceerd (LOD, webservice, website)."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Rubriek a rdfs:Class ;
+        rdfs:label "Category"@en,
+            "Rubriek"@nl ;
+        rdfs:comment "RCE category (Knowledge base)."@en,
+            "RCE-rubriek (Kennisbank)."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:SoortGeometrie a rdfs:Class ;
+        rdfs:label "Geometry type"@en,
+            "Soort geometrie"@nl ;
+        rdfs:comment "None, line, point, polygon, indirect geometry."@en,
+            "Geen, lijn, punt, vlak, indirecte geometrie."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Systeem a rdfs:Class ;
+        rdfs:label "System"@en,
+            "Systeem"@nl ;
+        rdfs:comment "Application or technical environment in which data is managed or occurs."@en,
+            "Applicatie of technische omgeving waarin data wordt beheerd of voorkomt."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsr:Systeemsoort a rdfs:Class ;
+        rdfs:label "Word or data system"@en,
+            "Woord- of datasysteem"@nl ;
+        rdfs:comment "Master table as word system or data system."@en,
+            "Stamtabel als woordsysteem of datasysteem."@nl ;
+        rdfs:subClassOf skos:Concept .
+
+    dsrsh:begrip a sh:NodeShape ;
+        rdfs:label "Concept"@en,
+            "Begrip"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-in-scheme,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label ;
+        sh:targetClass skos:Concept .
+
+    dsrsh:begrippenlijst a sh:NodeShape ;
+        rdfs:label "Concept scheme"@en,
+            "Begrippenlijst"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/" ;
+        sh:property dsrsh:begrippenlijst-definition,
+            dsrsh:begrippenlijst-pref-label ;
+        sh:targetClass skos:ConceptScheme .
+
+    dsrsh:beperking a sh:NodeShape ;
+        rdfs:label "Restriction"@en,
+            "Beperking"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:beperking-in-scheme ;
+        sh:targetClass dsr:Beperking .
+
+    dsrsh:bestandsformaat a sh:NodeShape ;
+        rdfs:label "File format"@en,
+            "Bestandsformaat"@nl ;
+        sh:property dsrsh:bestandsformaat-label ;
+        sh:targetClass dct:MediaTypeOrExtent .
+
+    dsrsh:catalogus a sh:NodeShape ;
+        rdfs:label "Catalogue"@en,
+            "Catalogus"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/catalogus/" ;
+        sh:property dsrsh:catalog-contact-point,
+            dsrsh:catalog-dataset,
+            dsrsh:catalog-description,
+            dsrsh:catalog-publisher,
+            dsrsh:catalog-title ;
+        sh:targetClass dcat:Catalog .
+
+    dsrsh:choi-object a sh:NodeShape ;
+        rdfs:label "Architecture object"@en,
+            "Architectuurobject"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:choi-object-in-scheme ;
+        sh:targetClass dsr:ChoiObject .
+
+    dsrsh:contactpunt a sh:NodeShape ;
+        rdfs:label "Contact point"@en,
+            "Contactpunt"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/contactpunt/" ;
+        sh:property dsrsh:contactpunt-fn,
+            dsrsh:contactpunt-has-email,
+            dsrsh:contactpunt-has-url ;
+        sh:targetClass vcard:Organization .
+
+    dsrsh:creatieproces a sh:NodeShape ;
+        rdfs:label "Creation process"@en,
+            "Creatieproces"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:creatieproces-in-scheme ;
+        sh:targetClass dsr:Creatieproces .
+
+    dsrsh:dataset a sh:NodeShape ;
+        rdfs:label "Dataset"@en,
+            "Dataset"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/dataset/" ;
+        sh:property dsrsh:dataset-access-rights,
+            dsrsh:dataset-accrual-periodicity,
+            dsrsh:dataset-actualiteit,
+            dsrsh:dataset-apm-code,
+            dsrsh:dataset-applicable-legislation,
+            dsrsh:dataset-avg-klasse,
+            dsrsh:dataset-batch,
+            dsrsh:dataset-beheeromgeving,
+            dsrsh:dataset-beperking,
+            dsrsh:dataset-beschikbaar-in,
+            dsrsh:dataset-bronsysteem,
+            dsrsh:dataset-choi-object,
+            dsrsh:dataset-compleetheid,
+            dsrsh:dataset-conforms-to,
+            dsrsh:dataset-consistentie,
+            dsrsh:dataset-contact-point,
+            dsrsh:dataset-creatieproces,
+            dsrsh:dataset-creator,
+            dsrsh:dataset-dataeigenaar,
+            dsrsh:dataset-datasettype,
+            dsrsh:dataset-datasteward,
+            dsrsh:dataset-datum-opname-in-register,
+            dsrsh:dataset-description,
+            dsrsh:dataset-distribution,
+            dsrsh:dataset-domein,
+            dsrsh:dataset-duplicaat-in,
+            dsrsh:dataset-editorial-note,
+            dsrsh:dataset-elementtype,
+            dsrsh:dataset-functioneel-beheerder,
+            dsrsh:dataset-gepubliceerd-op-het-web,
+            dsrsh:dataset-herkomst,
+            dsrsh:dataset-identifier,
+            dsrsh:dataset-in-archief,
+            dsrsh:dataset-in-erfgoedatlas,
+            dsrsh:dataset-in-nde-datasetregister,
+            dsrsh:dataset-informatiestructuur,
+            dsrsh:dataset-is-linked-open-data,
+            dsrsh:dataset-master-of-referencedata,
+            dsrsh:dataset-is-open-data,
+            dsrsh:dataset-is-origineel,
+            dsrsh:dataset-landing-page,
+            dsrsh:dataset-license,
+            dsrsh:dataset-nauwkeurigheid,
+            dsrsh:dataset-ondersteunt-iiif,
+            dsrsh:dataset-oorspronkelijke-bron,
+            dsrsh:dataset-origineel-in,
+            dsrsh:dataset-paginanaam,
+            dsrsh:dataset-pid-gebruik,
+            dsrsh:dataset-precisie,
+            dsrsh:dataset-prioriteit,
+            dsrsh:dataset-publicatievorm,
+            dsrsh:dataset-publisher,
+            dsrsh:dataset-rubriek,
+            dsrsh:dataset-soort-geometrie,
+            dsrsh:dataset-status,
+            dsrsh:dataset-systeemsoort,
+            dsrsh:dataset-termen-gebruik,
+            dsrsh:dataset-theme,
+            dsrsh:dataset-title,
+            dsrsh:dataset-volgt-generiek-lod-model,
+            dsrsh:dataset-waar-te-vinden,
+            dsrsh:dataset-wettelijke-grondslag,
+            dsrsh:dataset-woordsysteem,
+            dsrsh:dataset-woordsysteem-toelichting ;
+        sh:targetClass dcat:Dataset .
+
+    dsrsh:datasettype a sh:NodeShape ;
+        rdfs:label "Dataset type"@en,
+            "Datasettype"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:datasettype-in-scheme ;
+        sh:targetClass dsr:Datasettype .
+
+    dsrsh:distributie a sh:NodeShape ;
+        rdfs:label "Distribution"@en,
+            "Distributie"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/distributie/" ;
+        sh:property dsrsh:distribution-access-url,
+            dsrsh:distribution-description,
+            dsrsh:distribution-format,
+            dsrsh:distribution-license,
+            dsrsh:distribution-media-type,
+            dsrsh:distribution-title ;
+        sh:targetClass dcat:Distribution .
+
+    dsrsh:domein a sh:NodeShape ;
+        rdfs:label "Domain"@en,
+            "Domein"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:domein-in-scheme ;
+        sh:targetClass dsr:Domein .
+
+    dsrsh:functie a sh:NodeShape ;
+        rdfs:label "Function"@en,
+            "Functie"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:functie-in-scheme ;
+        sh:targetClass dsr:Functie .
+
+    dsrsh:herkomst a sh:NodeShape ;
+        rdfs:label "Origin"@en,
+            "Herkomst"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:herkomst-in-scheme ;
+        sh:targetClass dsr:Herkomst .
+
+    dsrsh:informatiestructuur a sh:NodeShape ;
+        rdfs:label "Information structure"@en,
+            "Informatiestructuur"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:informatiestructuur-in-scheme ;
+        sh:targetClass dsr:Informatiestructuur .
+
+    dsrsh:klasse-avg a sh:NodeShape ;
+        rdfs:label "GDPR class"@en,
+            "Klasse AVG"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:klasse-avg-in-scheme ;
+        sh:targetClass dsr:KlasseAvg .
+
+    dsrsh:kwaliteitsscore a sh:NodeShape ;
+        rdfs:label "Quality score"@en,
+            "Kwaliteitsscore"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:kwaliteitsscore-in-scheme ;
+        sh:targetClass dsr:Kwaliteitsscore .
+
+    dsrsh:organisatie a sh:NodeShape ;
+        rdfs:label "Organisation"@en,
+            "Organisatie"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/organisatie/" ;
+        sh:property dsrsh:organisatie-name ;
+        sh:targetClass foaf:Organization .
+
+    dsrsh:prioriteit a sh:NodeShape ;
+        rdfs:label "Priority"@en,
+            "Prioriteit"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:prioriteit-in-scheme ;
+        sh:targetClass dsr:Prioriteit .
+
+    dsrsh:publicatievorm a sh:NodeShape ;
+        rdfs:label "Publication form"@en,
+            "Publicatievorm"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:publicatievorm-in-scheme ;
+        sh:targetClass dsr:Publicatievorm .
+
+    dsrsh:rubriek a sh:NodeShape ;
+        rdfs:label "Category"@en,
+            "Rubriek"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:rubriek-in-scheme ;
+        sh:targetClass dsr:Rubriek .
+
+    dsrsh:soort-geometrie a sh:NodeShape ;
+        rdfs:label "Geometry type"@en,
+            "Soort geometrie"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:soort-geometrie-in-scheme ;
+        sh:targetClass dsr:SoortGeometrie .
+
+    dsrsh:standaard a sh:NodeShape ;
+        rdfs:label "Exchange model / standard"@en,
+            "Uitwisselmodel / standaard"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/standaard/" ;
+        sh:property dsrsh:standaard-label ;
+        sh:targetClass dct:Standard .
+
+    dsrsh:systeem a sh:NodeShape ;
+        rdfs:label "System"@en,
+            "Systeem"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:systeem-in-scheme ;
+        sh:targetClass dsr:Systeem .
+
+    dsrsh:systeemsoort a sh:NodeShape ;
+        rdfs:label "Word or data system"@en,
+            "Woord- of datasysteem"@nl ;
+        dash:stem "https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrip/" ;
+        sh:property dsrsh:begrip-definition,
+            dsrsh:begrip-notation,
+            dsrsh:begrip-pref-label,
+            dsrsh:systeemsoort-in-scheme ;
+        sh:targetClass dsr:Systeemsoort .
+
+    dsrsh:wet a sh:NodeShape ;
+        rdfs:label "Legal resource"@en,
+            "Wet of regeling"@nl ;
+        sh:property dsrsh:wet-label ;
+        sh:targetClass eli:LegalResource .
+
+    dsrsh:begrip-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept scheme the concept belongs to."@en,
+            "Begrippenlijst waartoe het begrip behoort."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:begrippenlijst-definition a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Description of the concept scheme."@en,
+            "Omschrijving van de begrippenlijst."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:name "Definition"@en,
+            "Definitie"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 2 ;
+        sh:path skos:definition .
+
+    dsrsh:begrippenlijst-pref-label a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Name of the concept scheme."@en,
+            "Naam van de begrippenlijst."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Name"@en,
+            "Naam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 1 ;
+        sh:path skos:prefLabel .
+
+    dsrsh:beperking-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Restriction."@en,
+            "Begrip hoort in de lijst Beperking."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/b3e2a969-721c-5570-ba08-af020d073d02> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:bestandsformaat-label a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Name of the file format."@en,
+            "Naam van bestandsformaat."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Name"@en,
+            "Naam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 1 ;
+        sh:path rdfs:label .
+
+    dsrsh:catalog-contact-point a sh:PropertyShape ;
+        sh:class vcard:Organization ;
+        sh:description "Contact point; mandatory in DCAT-AP-NL 3.0."@en,
+            "Contactpunt; verplicht in DCAT-AP-NL 3.0."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Contact point"@en,
+            "Contactpunt"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path dcat:contactPoint .
+
+    dsrsh:catalog-dataset a sh:PropertyShape ;
+        sh:class dcat:Dataset ;
+        sh:description "Datasets in the catalogue."@en,
+            "Datasets in de catalogus."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Dataset"@en,
+            "Dataset"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 5 ;
+        sh:path dcat:dataset .
+
+    dsrsh:catalog-description a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Description of the catalogue."@en,
+            "Omschrijving van de catalogus."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Description"@en,
+            "Omschrijving"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 2 ;
+        sh:path dct:description .
+
+    dsrsh:catalog-publisher a sh:PropertyShape ;
+        sh:class foaf:Organization ;
+        sh:description "Publisher of the catalogue."@en,
+            "Uitgever van de catalogus."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+        sh:name "Publisher"@en,
+            "Uitgever"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 3 ;
+        sh:path dct:publisher .
+
+    dsrsh:catalog-title a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Name of the catalogue."@en,
+            "Naam van de catalogus."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Name"@en,
+            "Naam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 1 ;
+        sh:path dct:title .
+
+    dsrsh:choi-object-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Architecture object."@en,
+            "Begrip hoort in de lijst Architectuurobject."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/8bb121bb-e41b-5475-b6df-e9203b5d72f8> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:contactpunt-fn a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Name of the contact point."@en,
+            "Naam van het contactpunt."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Name"@en,
+            "Naam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 1 ;
+        sh:path vcard:fn .
+
+    dsrsh:contactpunt-has-email a sh:PropertyShape ;
+        sh:description "E-mail address (mailto:)."@en,
+            "E-mailadres (mailto:)."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:name "E-mail"@en,
+            "E-mail"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 2 ;
+        sh:path vcard:hasEmail .
+
+    dsrsh:contactpunt-has-url a sh:PropertyShape ;
+        sh:description "Website of the contact point."@en,
+            "Website van het contactpunt."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:name "Website"@en,
+            "Website"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 3 ;
+        sh:path vcard:hasURL .
+
+    dsrsh:creatieproces-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Creation process."@en,
+            "Begrip hoort in de lijst Creatieproces."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/a6a922c9-ed6c-5d35-a442-0d43beee7666> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:dataset-access-rights a sh:PropertyShape ;
+        sh:class dct:RightsStatement ;
+        sh:description "Is the data currently public: yes = PUBLIC, partly = RESTRICTED, no = NON_PUBLIC. Not about whether it should become public."@en,
+            "Is de data nu openbaar: Ja = PUBLIC, Deels = RESTRICTED, Nee = NON_PUBLIC. Gaat niet over of het openbaar zou moeten worden."@nl ;
+        sh:group dsrgrp:publicatie ;
+        sh:in _:N98687280423848b78073ffc96f8bef4f ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+        sh:name "Access rights"@en,
+            "Openbaarheid"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 14 ;
+        sh:path dct:accessRights .
+
+    dsrsh:dataset-accrual-periodicity a sh:PropertyShape ;
+        sh:class dct:Frequency ;
+        sh:description "How often the dataset is updated (as needed = IRREG, none = NEVER, unknown = UNKNOWN)."@en,
+            "Mate waarin de dataset wordt bijgewerkt (Indien nodig = IRREG, Geen = NEVER, Onbekend = UNKNOWN)."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:in _:Ne6be01940c15431ebdad6a3f5e493692 ;
+        sh:maxCount 1 ;
+        sh:name "Update frequency"@en,
+            "Updatefrequentie"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 33 ;
+        sh:path dct:accrualPeriodicity .
+
+    dsrsh:dataset-actualiteit a sh:PropertyShape ;
+        sh:class dsr:Kwaliteitsscore ;
+        sh:description "Extent to which the data is temporally up to date."@en,
+            "Mate waarin de gegevens temporeel overeenkomen met de werkelijkheid."@nl ;
+        sh:group dsrgrp:kwaliteit ;
+        sh:maxCount 1 ;
+        sh:name "Currency"@en,
+            "Actualiteit"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 47 ;
+        sh:path dsr:heeftActualiteit .
+
+    dsrsh:dataset-apm-code a sh:PropertyShape ;
+        dsr:intern true ;
+        sh:datatype xsd:string ;
+        sh:description "Code from Application Portfolio Management (Mavim). Does not resolve directly to the correct application. Internal; never published."@en,
+            "Code uit Applicatie Portfolio Management (Mavim). Resolveert niet direct naar de juiste applicatie. Intern gegeven, wordt niet gepubliceerd."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "APM code"@en,
+            "APM-code"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 22 ;
+        sh:path dsr:apmCode ;
+        sh:pattern "^APM[0-9]{5}$" .
+
+    dsrsh:dataset-applicable-legislation a sh:PropertyShape ;
+        sh:class eli:LegalResource ;
+        sh:description "Law or regulation prescribing the dataset (ELI IRI)."@en,
+            "Wet of regelgeving die de dataset voorschrijft (ELI-IRI)."@nl ;
+        sh:group dsrgrp:publicatie ;
+        sh:name "Applicable legislation"@en,
+            "Welke wettelijke grondslag"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 20 ;
+        sh:path dcatap:applicableLegislation .
+
+    dsrsh:dataset-avg-klasse a sh:PropertyShape ;
+        dsr:intern true ;
+        sh:class dsr:KlasseAvg ;
+        sh:description "Classification of personal data under the GDPR (annex 1). Internal; never published."@en,
+            "Classificatie persoonsgegevens volgens de AVG (bijlage 1). Intern gegeven, wordt niet gepubliceerd."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+        sh:name "GDPR class"@en,
+            "Klasse AVG"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 25 ;
+        sh:path dsr:heeftAvgKlasse .
+
+    dsrsh:dataset-batch a sh:PropertyShape ;
+        dsr:intern true ;
+        sh:datatype xsd:string ;
+        sh:description "Batch for placement on the Knowledge base. Internal; never published."@en,
+            "Batch voor plaatsing op de Kennisbank. Intern gegeven, wordt niet gepubliceerd."@nl ;
+        sh:group dsrgrp:kennisbank ;
+        sh:maxCount 1 ;
+        sh:name "Batch"@en,
+            "Batch"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 64 ;
+        sh:path dsr:batch .
+
+    dsrsh:dataset-beheeromgeving a sh:PropertyShape ;
+        sh:class dsr:Systeem ;
+        sh:description "Technical environment in which the dataset is managed and possibly edited, e.g. PoolParty or ARCHIS."@en,
+            "Technische omgeving waarin de dataset wordt beheerd en eventueel bewerkt, bijv. PoolParty of ARCHIS."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "(Technical) management environment"@en,
+            "(Technische) beheeromgeving"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 27 ;
+        sh:path dsr:heeftBeheeromgeving .
+
+    dsrsh:dataset-beperking a sh:PropertyShape ;
+        sh:class dsr:Beperking ;
+        sh:description "Restrictions on retrieving the data, or whether it is unavailable."@en,
+            "Beperkingen bij het ophalen van de data, of dat deze niet beschikbaar is."@nl ;
+        sh:group dsrgrp:publicatie ;
+        sh:name "Restrictions"@en,
+            "Beperkingen"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 16 ;
+        sh:path dsr:heeftBeperking .
+
+    dsrsh:dataset-beschikbaar-in a sh:PropertyShape ;
+        sh:datatype xsd:string ;
+        sh:description "Other (technical) environments where the data is made available (actual data, not a reference)."@en,
+            "In welke (technische) omgeving de data verder nog ontsloten is (reële data, geen verwijzing)."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Availability in other environment(s)"@en,
+            "Beschikbaarheid in andere omgeving(en)"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 44 ;
+        sh:path dsr:beschikbaarIn .
+
+    dsrsh:dataset-bronsysteem a sh:PropertyShape ;
+        sh:class dsr:Systeem ;
+        sh:description "Application in which the data is currently managed."@en,
+            "Applicatie waarin de data op dit moment beheerd wordt."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Current source system"@en,
+            "Huidige bronsysteem"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 26 ;
+        sh:path dsr:heeftBronsysteem .
+
+    dsrsh:dataset-choi-object a sh:PropertyShape ;
+        sh:class dsr:ChoiObject ;
+        sh:description "Classification according to the architecture."@en,
+            "Indeling conform de architectuur."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "CHO, KNOWLEDGE, CASE, THESAURUS, …"@en,
+            "CHO, KENNIS, ZAAK, THESAURUS, …"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 36 ;
+        sh:path dsr:heeftChoiObject .
+
+    dsrsh:dataset-compleetheid a sh:PropertyShape ;
+        sh:class dsr:Kwaliteitsscore ;
+        sh:description "Extent to which the full expected dataset is present."@en,
+            "Mate waarin de volledige verwachte dataset aanwezig is."@nl ;
+        sh:group dsrgrp:kwaliteit ;
+        sh:maxCount 1 ;
+        sh:name "Completeness"@en,
+            "Compleetheid"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 48 ;
+        sh:path dsr:heeftCompleetheid .
+
+    dsrsh:dataset-conforms-to a sh:PropertyShape ;
+        sh:class dct:Standard ;
+        sh:description "Data model or schema the data follows for exchange (e.g. SIKB, LDV, CEO ontology, schema.org or an XSD). Empty = none or unknown."@en,
+            "Datamodel of schema dat de data bij uitwisseling volgt (bijv. SIKB, LDV, CEO-ontologie, schema.org of een XSD). Leeg = geen of onbekend."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Exchange model"@en,
+            "Uitwisselmodel"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 35 ;
+        sh:path dct:conformsTo .
+
+    dsrsh:dataset-consistentie a sh:PropertyShape ;
+        sh:class dsr:Kwaliteitsscore ;
+        sh:description "Extent to which the same codes and references are used throughout the dataset."@en,
+            "Mate waarin door de hele dataset dezelfde coderingen en verwijzingen worden gebruikt."@nl ;
+        sh:group dsrgrp:kwaliteit ;
+        sh:maxCount 1 ;
+        sh:name "Consistency"@en,
+            "Consistentie"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 49 ;
+        sh:path dsr:heeftConsistentie .
+
+    dsrsh:dataset-contact-point a sh:PropertyShape ;
+        sh:class vcard:Organization ;
+        sh:description "Contact details for questions about the dataset; mandatory in DCAT-AP-NL 3.0."@en,
+            "Contactgegevens voor vragen over de dataset; verplicht in DCAT-AP-NL 3.0."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Contact point"@en,
+            "Contactpunt"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 13 ;
+        sh:path dcat:contactPoint .
+
+    dsrsh:dataset-creatieproces a sh:PropertyShape ;
+        sh:class dsr:Creatieproces ;
+        sh:description "Business process in which the data is created, changed or managed (current and target situation still mixed)."@en,
+            "Bedrijfsproces waarin de data gecreëerd, gewijzigd of beheerd wordt (IST en SOLL lopen nog door elkaar)."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Creation process"@en,
+            "Creatieproces"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 29 ;
+        sh:path dsr:heeftCreatieproces .
+
+    dsrsh:dataset-creator a sh:PropertyShape ;
+        sh:class foaf:Organization ;
+        sh:description "Organisation that created the dataset; mandatory in DCAT-AP-NL 3.0."@en,
+            "Organisatie die de dataset heeft gemaakt; verplicht in DCAT-AP-NL 3.0."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Creator"@en,
+            "Maker"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 12 ;
+        sh:path dct:creator .
+
+    dsrsh:dataset-dataeigenaar a sh:PropertyShape ;
+        dsr:intern true ;
+        sh:class dsr:Functie ;
+        sh:description "Function of the role that owns the data. Internal; never published."@en,
+            "Functie van de rol die eigenaar is van de data. Intern gegeven, wordt niet gepubliceerd."@nl ;
+        sh:group dsrgrp:rollen ;
+        sh:name "Data owner"@en,
+            "Dataeigenaar"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 58 ;
+        sh:path dsr:heeftDataeigenaar .
+
+    dsrsh:dataset-datasettype a sh:PropertyShape ;
+        sh:class dsr:Datasettype ;
+        sh:description "Type of data in the dataset."@en,
+            "Type data waar het in de dataset om gaat."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:name "Type"@en,
+            "Type"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path dsr:heeftDatasettype .
+
+    dsrsh:dataset-datasteward a sh:PropertyShape ;
+        dsr:intern true ;
+        sh:class dsr:Functie ;
+        sh:description "Function of the role responsible on behalf of the business for the content of the dataset. No personal name. Internal; never published."@en,
+            "Functie van de rol die namens de business verantwoordelijk is voor de inhoud van de dataset. Geen persoonsnaam. Intern gegeven, wordt niet gepubliceerd."@nl ;
+        sh:group dsrgrp:rollen ;
+        sh:name "Data steward"@en,
+            "Datasteward"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 59 ;
+        sh:path dsr:heeftDatasteward .
+
+    dsrsh:dataset-datum-opname-in-register a sh:PropertyShape ;
+        sh:datatype xsd:date ;
+        sh:description "Date the dataset was added to the register (older than 2017: 2012-01-01)."@en,
+            "Dag waarop de dataset in het register is opgenomen (ouder dan 2017: 2012-01-01)."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:maxCount 1 ;
+        sh:name "Date added to register"@en,
+            "Datum opname in register"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 24 ;
+        sh:path dsr:datumOpnameInRegister .
+
+    dsrsh:dataset-description a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Explanation of the content of the dataset."@en,
+            "Duiding van de inhoud van de dataset."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Description"@en,
+            "Omschrijving"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 3 ;
+        sh:path dct:description .
+
+    dsrsh:dataset-distribution a sh:PropertyShape ;
+        sh:class dcat:Distribution ;
+        sh:description "Form in which the dataset is available: application, publication or SPARQL endpoint."@en,
+            "Vorm waarin de dataset beschikbaar is: applicatie, publicatie of SPARQL-endpoint."@nl ;
+        sh:group dsrgrp:publicatie ;
+        sh:name "Distribution"@en,
+            "Distributie"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 21 ;
+        sh:path dcat:distribution .
+
+    dsrsh:dataset-domein a sh:PropertyShape ;
+        sh:class dsr:Domein ;
+        sh:description "Domain of the dataset: archaeology, built heritage, art collections, landscape, maritime, monuments, movable heritage."@en,
+            "Domein waaronder de dataset valt: Archeologie, Gebouwd, Kunstcollecties, Landschap, Maritiem, Monumenten, Roerend."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:name "Domain"@en,
+            "Domein"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 5 ;
+        sh:path dsr:heeftDomein .
+
+    dsrsh:dataset-duplicaat-in a sh:PropertyShape ;
+        sh:class dsr:Systeem ;
+        sh:description "Application in which the original dataset has been duplicated and possibly extended or changed."@en,
+            "Applicatie waarin de originele dataset is verdubbeld en mogelijk aangevuld of aangepast."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Duplicate in"@en,
+            "Duplicaat in"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 38 ;
+        sh:path dsr:heeftDuplicaatIn .
+
+    dsrsh:dataset-editorial-note a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Remarks on the use of the dataset."@en,
+            "Opmerkingen over het gebruik van de dataset."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:name "General note"@en,
+            "Algemene toelichting"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 10 ;
+        sh:path skos:editorialNote .
+
+    dsrsh:dataset-elementtype a sh:PropertyShape ;
+        dsr:intern true ;
+        sh:datatype xsd:string ;
+        sh:description "Element type for placement on the Knowledge base. Internal; never published."@en,
+            "Elementtype voor plaatsing op de Kennisbank. Intern gegeven, wordt niet gepubliceerd."@nl ;
+        sh:group dsrgrp:kennisbank ;
+        sh:maxCount 1 ;
+        sh:name "Element type"@en,
+            "Elementtype"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 62 ;
+        sh:path dsr:elementtype .
+
+    dsrsh:dataset-functioneel-beheerder a sh:PropertyShape ;
+        dsr:intern true ;
+        sh:class dsr:Functie ;
+        sh:description "Function of the role responsible for the application in which the dataset is created and stored (see BTO list). No personal name. Internal; never published."@en,
+            "Functie van de rol die verantwoordelijk is voor de applicatie waarin de dataset wordt gecreëerd en bewaard (zie BTO-lijst). Geen persoonsnaam. Intern gegeven, wordt niet gepubliceerd."@nl ;
+        sh:group dsrgrp:rollen ;
+        sh:name "Functional administrator"@en,
+            "Functioneel beheerder"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 60 ;
+        sh:path dsr:heeftFunctioneelBeheerder .
+
+    dsrsh:dataset-gepubliceerd-op-het-web a sh:PropertyShape ;
+        sh:datatype xsd:string ;
+        sh:description "Factual statement whether the RCE has made the data available on the web."@en,
+            "Feitelijke vaststelling of de data door de RCE op het web beschikbaar is gesteld."@nl ;
+        sh:group dsrgrp:publicatie ;
+        sh:in _:N2d3d8e7624dc4c34b7897b49762222d9 ;
+        sh:maxCount 1 ;
+        sh:name "Published on the web"@en,
+            "Gepubliceerd op het web"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 17 ;
+        sh:path dsr:gepubliceerdOpHetWeb .
+
+    dsrsh:dataset-herkomst a sh:PropertyShape ;
+        sh:class dsr:Herkomst ;
+        sh:description "Where the data comes from: RCE, third parties or unknown."@en,
+            "Waar de data vandaan komt: RCE, derden of onbekend."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Origin"@en,
+            "Herkomst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 28 ;
+        sh:path dsr:heeftHerkomst .
+
+    dsrsh:dataset-identifier a sh:PropertyShape ;
+        sh:datatype xsd:string ;
+        sh:description "Unique number within the dataset register; also used for numbering on the Knowledge base."@en,
+            "Uniek nummer binnen het datasetregister; ook gebruikt voor de nummering op de Kennisbank."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+        sh:name "Register number"@en,
+            "Registernummer"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 1 ;
+        sh:path dct:identifier ;
+        sh:pattern "^[0-9]+$" .
+
+    dsrsh:dataset-in-archief a sh:PropertyShape ;
+        sh:datatype xsd:string ;
+        sh:description "Location of analogue records in the RCE archive (e.g. RCE-095)."@en,
+            "Locatie van analoge stukken in het archief van de RCE (bijv. RCE-095)."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "In archive"@en,
+            "In archief"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 45 ;
+        sh:path dsr:inArchief .
+
+    dsrsh:dataset-in-erfgoedatlas a sh:PropertyShape ;
+        sh:datatype xsd:string ;
+        sh:description "Is the dataset shown as a map layer in the RCE Heritage Atlas (Erfgoedatlas)."@en,
+            "Wordt de dataset als kaartlaag in de Erfgoedatlas van de RCE getoond."@nl ;
+        sh:group dsrgrp:linked-data ;
+        sh:in _:N34f172f860284bd69c17796facbc3b25 ;
+        sh:maxCount 1 ;
+        sh:name "In Heritage Atlas"@en,
+            "In Erfgoedatlas"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 57 ;
+        sh:path dsr:inErfgoedatlas .
+
+    dsrsh:dataset-in-nde-datasetregister a sh:PropertyShape ;
+        sh:datatype xsd:boolean ;
+        sh:description "Is the dataset included in the NDE Dataset Register. Empty = not applicable."@en,
+            "Is de dataset opgenomen in het NDE Datasetregister. Leeg = n.v.t."@nl ;
+        sh:group dsrgrp:linked-data ;
+        sh:maxCount 1 ;
+        sh:name "In NDE Dataset Register"@en,
+            "In NDE Datasetregister"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 55 ;
+        sh:path dsr:inNdeDatasetregister .
+
+    dsrsh:dataset-informatiestructuur a sh:PropertyShape ;
+        sh:class dsr:Informatiestructuur ;
+        sh:description "How the data is structured."@en,
+            "Wijze waarop de data gestructureerd is."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:maxCount 1 ;
+        sh:name "Information structure"@en,
+            "Informatiestructuur"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 30 ;
+        sh:path dsr:heeftInformatiestructuur .
+
+    dsrsh:dataset-is-linked-open-data a sh:PropertyShape ;
+        sh:datatype xsd:boolean ;
+        sh:description "Is the dataset available as Linked Open Data."@en,
+            "Is de dataset beschikbaar als Linked Open Data."@nl ;
+        sh:group dsrgrp:linked-data ;
+        sh:maxCount 1 ;
+        sh:name "Linked Open Data"@en,
+            "Linked Open Data"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 51 ;
+        sh:path dsr:isLinkedOpenData .
+
+    dsrsh:dataset-master-of-referencedata a sh:PropertyShape ;
+        sh:datatype xsd:string ;
+        sh:description "Does the dataset concern master data or reference data (DAMA DMBoK p. 347). Empty = neither or unknown."@en,
+            "Betreft de dataset masterdata of referencedata (DAMA DMBok p. 347). Leeg = geen van beide of onbekend."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:in ( "Masterdata" "Referencedata" ) ;
+        sh:maxCount 1 ;
+        sh:name "Master or reference data"@en,
+            "Master- of referencedata"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 31 ;
+        sh:path dsr:masterOfReferencedata .
+
+    dsrsh:dataset-is-open-data a sh:PropertyShape ;
+        sh:datatype xsd:boolean ;
+        sh:description "Is the dataset open according to the data.overheid.nl definition."@en,
+            "Is de dataset open conform de definitie van data.overheid.nl."@nl ;
+        sh:group dsrgrp:publicatie ;
+        sh:maxCount 1 ;
+        sh:name "Open data"@en,
+            "Open data"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 15 ;
+        sh:path dsr:isOpenData .
+
+    dsrsh:dataset-is-origineel a sh:PropertyShape ;
+        sh:datatype xsd:boolean ;
+        sh:description "Does the dataset contain original data (the authentic source)."@en,
+            "Betreft de dataset originele data (de authentieke bron)."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:maxCount 1 ;
+        sh:name "Is original"@en,
+            "Is origineel"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 39 ;
+        sh:path dsr:isOrigineel .
+
+    dsrsh:dataset-license a sh:PropertyShape ;
+        sh:class dct:LicenseDocument ;
+        sh:defaultValue <https://creativecommons.org/publicdomain/zero/1.0/> ;
+        sh:description "Licence of the dataset description (metadata); mandatory in the NDE Dataset Register, preferably CC0. The licence of the data itself is recorded on the distribution."@en,
+            "Licentie van de datasetbeschrijving (metadata); verplicht in het NDE Datasetregister, bij voorkeur CC0. De licentie van de data zelf staat bij de distributie."@nl ;
+        sh:group dsrgrp:publicatie ;
+        sh:in ( <https://creativecommons.org/publicdomain/zero/1.0/> <https://creativecommons.org/licenses/by/4.0/> <https://creativecommons.org/licenses/by/3.0/> <https://creativecommons.org/licenses/by-sa/4.0/> <https://creativecommons.org/publicdomain/mark/1.0/> <http://rightsstatements.org/vocab/UND/1.0/> <http://rightsstatements.org/vocab/InC/1.0/> ) ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+        sh:name "Licence (metadata)"@en,
+            "Licentie (metadata)"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 14.5 ;
+        sh:path dct:license .
+
+    dsrsh:dataset-landing-page a sh:PropertyShape ;
+        sh:description "URL of the page where the data can be found."@en,
+            "URL van de pagina waar de data te vinden is."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:name "Landing page (url)"@en,
+            "Webpagina (url)"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 8 ;
+        sh:path dcat:landingPage .
+
+    dsrsh:dataset-nauwkeurigheid a sh:PropertyShape ;
+        sh:class dsr:Kwaliteitsscore ;
+        sh:description "Extent to which notation and content reflect reality/correctness."@en,
+            "In hoeverre notatie en inhoud de werkelijkheid/juistheid weergeven."@nl ;
+        sh:group dsrgrp:kwaliteit ;
+        sh:maxCount 1 ;
+        sh:name "Accuracy"@en,
+            "Nauwkeurigheid"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 46 ;
+        sh:path dsr:heeftNauwkeurigheid .
+
+    dsrsh:dataset-ondersteunt-iiif a sh:PropertyShape ;
+        sh:datatype xsd:boolean ;
+        sh:description "Are the images in the dataset offered via IIIF (International Image Interoperability Framework). Empty = not applicable."@en,
+            "Worden de afbeeldingen in de dataset aangeboden via IIIF (International Image Interoperability Framework). Leeg = n.v.t."@nl ;
+        sh:group dsrgrp:linked-data ;
+        sh:maxCount 1 ;
+        sh:name "IIIF"@en,
+            "IIIF"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 56 ;
+        sh:path dsr:ondersteuntIiif .
+
+    dsrsh:dataset-oorspronkelijke-bron a sh:PropertyShape ;
+        sh:datatype xsd:string ;
+        sh:description "Where the original source is: another system or the working method that produced the data."@en,
+            "Waar de oorspronkelijke bron zich bevindt: een ander systeem of de werkwijze die tot de data leidde."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Original source of the data"@en,
+            "Oorspronkelijke bron van de data"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 43 ;
+        sh:path dsr:oorspronkelijkeBron .
+
+    dsrsh:dataset-origineel-in a sh:PropertyShape ;
+        sh:class dsr:Systeem ;
+        sh:description "System holding the authentic source, if the dataset is derived."@en,
+            "Systeem waarin de authentieke bron zich bevindt, als de dataset afgeleid is."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Original in"@en,
+            "Origineel in"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 40 ;
+        sh:path dsr:heeftOrigineelIn .
+
+    dsrsh:dataset-paginanaam a sh:PropertyShape ;
+        dsr:intern true ;
+        sh:datatype xsd:string ;
+        sh:description "Page name for placement on the Knowledge base (e.g. Dataset/1). Internal; never published."@en,
+            "Paginanaam voor plaatsing op de Kennisbank (bijv. Dataset/1). Intern gegeven, wordt niet gepubliceerd."@nl ;
+        sh:group dsrgrp:kennisbank ;
+        sh:maxCount 1 ;
+        sh:name "Page name"@en,
+            "Paginanaam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 61 ;
+        sh:path dsr:paginanaam .
+
+    dsrsh:dataset-pid-gebruik a sh:PropertyShape ;
+        sh:datatype xsd:boolean ;
+        sh:description "Are persistent identifiers used. Empty = not applicable."@en,
+            "Wordt gebruikgemaakt van persistente identifiers. Leeg = n.v.t."@nl ;
+        sh:group dsrgrp:linked-data ;
+        sh:maxCount 1 ;
+        sh:name "Use of PIDs"@en,
+            "PID-gebruik"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 53 ;
+        sh:path dsr:pidGebruik .
+
+    dsrsh:dataset-precisie a sh:PropertyShape ;
+        sh:class dsr:Kwaliteitsscore ;
+        sh:description "Level of detail that can be expected from the data."@en,
+            "Mate van detail die van de gegevens verwacht kan worden."@nl ;
+        sh:group dsrgrp:kwaliteit ;
+        sh:maxCount 1 ;
+        sh:name "Precision"@en,
+            "Precisie"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 50 ;
+        sh:path dsr:heeftPrecisie .
+
+    dsrsh:dataset-prioriteit a sh:PropertyShape ;
+        dsr:intern true ;
+        sh:class dsr:Prioriteit ;
+        sh:description "Importance of the dataset for the RCE (annex 2). Internal; never published."@en,
+            "Belang van de dataset voor de RCE (bijlage 2). Intern gegeven, wordt niet gepubliceerd."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:maxCount 1 ;
+        sh:name "Priority category"@en,
+            "Categorie prioriteit"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 23 ;
+        sh:path dsr:heeftPrioriteit .
+
+    dsrsh:dataset-publicatievorm a sh:PropertyShape ;
+        sh:class dsr:Publicatievorm ;
+        sh:description "If published: in which way (LOD, web service, website)."@en,
+            "Indien gepubliceerd: op welke wijze (LOD, webservice, website)."@nl ;
+        sh:group dsrgrp:publicatie ;
+        sh:name "Publication form"@en,
+            "Publicatievorm"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 18 ;
+        sh:path dsr:heeftPublicatievorm .
+
+    dsrsh:dataset-publisher a sh:PropertyShape ;
+        sh:class foaf:Organization ;
+        sh:description "Organisation making the dataset available; mandatory in DCAT-AP-NL 3.0 (default: RCE)."@en,
+            "Organisatie die de dataset beschikbaar stelt; verplicht in DCAT-AP-NL 3.0 (standaard: RCE)."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Publisher"@en,
+            "Uitgever"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 11 ;
+        sh:path dct:publisher .
+
+    dsrsh:dataset-rubriek a sh:PropertyShape ;
+        sh:class dsr:Rubriek ;
+        sh:description "RCE category as used on the Knowledge base."@en,
+            "RCE-rubriek zoals gebruikt op de Kennisbank."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:name "Category"@en,
+            "Rubriek"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 6 ;
+        sh:path dsr:heeftRubriek .
+
+    dsrsh:dataset-soort-geometrie a sh:PropertyShape ;
+        sh:class dsr:SoortGeometrie ;
+        sh:description "Type of geometry in the dataset."@en,
+            "Soort geometrie in de dataset."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Geometry type"@en,
+            "Soort geometrie"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 34 ;
+        sh:path dsr:heeftSoortGeometrie .
+
+    dsrsh:dataset-status a sh:PropertyShape ;
+        dsr:intern true ;
+        sh:datatype xsd:string ;
+        sh:description "Status for placement on the Knowledge base (e.g. Publish). Internal; never published."@en,
+            "Status voor plaatsing op de Kennisbank (bijv. Publiceren). Intern gegeven, wordt niet gepubliceerd."@nl ;
+        sh:group dsrgrp:kennisbank ;
+        sh:maxCount 1 ;
+        sh:name "Status"@en,
+            "Status"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 63 ;
+        sh:path dsr:status .
+
+    dsrsh:dataset-systeemsoort a sh:PropertyShape ;
+        sh:class dsr:Systeemsoort ;
+        sh:description "Concerns master tables: word system or data system."@en,
+            "Gaat om stamtabellen: woordsysteem of datasysteem."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:maxCount 1 ;
+        sh:name "Word or data system"@en,
+            "Woord- of datasysteem"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 37 ;
+        sh:path dsr:heeftSysteemsoort .
+
+    dsrsh:dataset-termen-gebruik a sh:PropertyShape ;
+        sh:datatype xsd:boolean ;
+        sh:description "Are established terms used. Empty = not applicable."@en,
+            "Wordt gebruikgemaakt van vastgestelde termen. Leeg = n.v.t."@nl ;
+        sh:group dsrgrp:linked-data ;
+        sh:maxCount 1 ;
+        sh:name "Use of terms"@en,
+            "Termengebruik"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 54 ;
+        sh:path dsr:termenGebruik .
+
+    dsrsh:dataset-theme a sh:PropertyShape ;
+        sh:class skos:Concept ;
+        sh:description "Theme from the EU data-theme list; mandatory in DCAT-AP-NL 3.0."@en,
+            "Thema uit de EU-lijst data-theme; verplicht in DCAT-AP-NL 3.0."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:in _:Ne2256eb819d241f5b1c7522ab963d72b ;
+        sh:minCount 1 ;
+        sh:name "Theme (EU)"@en,
+            "Thema (EU)"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 7 ;
+        sh:path dcat:theme .
+
+    dsrsh:dataset-title a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Name by which the dataset is known."@en,
+            "Naam waaronder de dataset bekend is."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Name"@en,
+            "Naam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 2 ;
+        sh:path dct:title .
+
+    dsrsh:dataset-volgt-generiek-lod-model a sh:PropertyShape ;
+        sh:datatype xsd:boolean ;
+        sh:description "Is the dataset published as linked data following a generic model (e.g. CEO, schema.org, SKOS) instead of its own source model. Empty = not applicable."@en,
+            "Is de dataset als linked data gepubliceerd volgens een generiek model (bijv. CEO, schema.org, SKOS) in plaats van een eigen bronmodel. Leeg = n.v.t."@nl ;
+        sh:group dsrgrp:linked-data ;
+        sh:maxCount 1 ;
+        sh:name "Generic LOD model"@en,
+            "LOD generiek model"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 52 ;
+        sh:path dsr:volgtGeneriekLodModel .
+
+    dsrsh:dataset-waar-te-vinden a sh:PropertyShape ;
+        sh:datatype xsd:string ;
+        sh:description "Reference to where the data can be found, if open data (related to url)."@en,
+            "Verwijzing naar waar de data te vinden is, als het open data betreft (hoort bij url)."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:name "Where to find"@en,
+            "Waar te vinden"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 9 ;
+        sh:path dsr:waarTeVinden .
+
+    dsrsh:dataset-wettelijke-grondslag a sh:PropertyShape ;
+        sh:datatype xsd:boolean ;
+        sh:description "Is the existence of the dataset mentioned in law or other regulation."@en,
+            "Wordt het bestaan van de dataset genoemd in een wet of andere regelgeving."@nl ;
+        sh:group dsrgrp:publicatie ;
+        sh:maxCount 1 ;
+        sh:name "Legal basis"@en,
+            "Wettelijke grondslag"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 19 ;
+        sh:path dsr:wettelijkeGrondslag .
+
+    dsrsh:dataset-woordsysteem a sh:PropertyShape ;
+        sh:class dcat:Dataset ;
+        sh:description "Thesauri and other word systems (datasets in this register) applied in the dataset, e.g. ABR or CHT."@en,
+            "Thesauri en andere woordsystemen (datasets uit dit register) die in de dataset worden toegepast, bijv. ABR of CHT."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Applied word systems"@en,
+            "Toegepaste woordsystemen"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 41 ;
+        sh:path dsr:heeftWoordsysteem .
+
+    dsrsh:dataset-woordsysteem-toelichting a sh:PropertyShape ;
+        sh:datatype xsd:string ;
+        sh:description "Original text from the register, also for word systems not (yet) in the register. In brackets = desired but not applied."@en,
+            "Oorspronkelijke tekst uit het register, ook voor woordsystemen die (nog) geen dataset in het register zijn. Tussen haakjes = wenselijk maar niet toegepast."@nl ;
+        sh:group dsrgrp:beheer ;
+        sh:name "Applied word systems (text)"@en,
+            "Toegepaste woordsystemen (tekst)"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 42 ;
+        sh:path dsr:woordsysteemToelichting .
+
+    dsrsh:datasettype-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Dataset type."@en,
+            "Begrip hoort in de lijst Datasettype."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/6182e41a-e64e-5d69-91b3-5aeb0ac6f968> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:distribution-access-url a sh:PropertyShape ;
+        sh:description "URL giving access to the data: application URL, publication location or SPARQL endpoint. Mandatory in DCAT-AP."@en,
+            "URL waarmee de data te benaderen is: Applicatie URL, Waar wordt de data gepubliceerd, of het SPARQL-endpoint. Verplicht in DCAT-AP."@nl ;
+        sh:group dsrgrp:toegang ;
+        sh:minCount 1 ;
+        sh:name "Access URL"@en,
+            "Toegangs-URL"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 2 ;
+        sh:path dcat:accessURL .
+
+    dsrsh:distribution-title a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Name of the distribution, e.g. Application, Publication, SPARQL endpoint."@en,
+            "Naam van de distributie, bijv. Applicatie, Publicatie, SPARQL-endpoint."@nl ;
+        sh:group dsrgrp:toegang ;
+        sh:name "Name"@en,
+            "Naam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 1 ;
+        sh:path dct:title .
+
+    dsrsh:distribution-description a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Explanation of the distribution."@en,
+            "Toelichting op de distributie."@nl ;
+        sh:group dsrgrp:toegang ;
+        sh:name "Description"@en,
+            "Omschrijving"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 3 ;
+        sh:path dct:description .
+
+    dsrsh:distribution-format a sh:PropertyShape ;
+        sh:class dct:MediaTypeOrExtent ;
+        sh:description "Standard (non-proprietary) exchange formats (EU file type), see PSA Digital Exchange Platform § 7.1.3. Multiple values allowed."@en,
+            "Standaard (niet-proprietary) uitwisselformaten (EU file-type), zie PSA Digitaal Uitwisselplatform § 7.1.3. Meerdere waarden mogelijk."@nl ;
+        sh:group dsrgrp:formaat-licentie ;
+        sh:name "Technical exchange format"@en,
+            "Technisch uitwisselformaat"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path dct:format .
+
+    dsrsh:distribution-license a sh:PropertyShape ;
+        sh:class dct:LicenseDocument ;
+        sh:description "Licence under which the data itself (this distribution) is released; mandatory in DCAT-AP-NL 3.0."@en,
+            "Licentie waaronder de data zelf (deze distributie) is vrijgegeven; verplicht in DCAT-AP-NL 3.0."@nl ;
+        sh:group dsrgrp:formaat-licentie ;
+        sh:in ( <https://creativecommons.org/publicdomain/zero/1.0/> <https://creativecommons.org/licenses/by/4.0/> <https://creativecommons.org/licenses/by/3.0/> <https://creativecommons.org/licenses/by-sa/4.0/> <https://creativecommons.org/publicdomain/mark/1.0/> <http://rightsstatements.org/vocab/UND/1.0/> <http://rightsstatements.org/vocab/InC/1.0/> ) ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+        sh:name "Licence"@en,
+            "Licentie"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 6 ;
+        sh:path dct:license .
+
+    dsrsh:distribution-media-type a sh:PropertyShape ;
+        sh:description "IANA media type of the distribution."@en,
+            "IANA-mediatype van de distributie."@nl ;
+        sh:group dsrgrp:formaat-licentie ;
+        sh:maxCount 1 ;
+        sh:name "Media type"@en,
+            "Mediatype"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 5 ;
+        sh:path dcat:mediaType .
+
+    dsrsh:domein-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Domain."@en,
+            "Begrip hoort in de lijst Domein."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/aa4f05c8-ca71-557a-84d1-6b6f5f86dbc0> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:functie-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Function."@en,
+            "Begrip hoort in de lijst Functie."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/e96c42ff-274f-527e-8b0b-d91924212c81> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:herkomst-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Origin."@en,
+            "Begrip hoort in de lijst Herkomst."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/af3b7ff2-e96d-59e8-bdf2-453515a179e5> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:informatiestructuur-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Information structure."@en,
+            "Begrip hoort in de lijst Informatiestructuur."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/e0ee3260-1cb3-5856-a35d-4937b28e3bdd> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:klasse-avg-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme GDPR class."@en,
+            "Begrip hoort in de lijst Klasse AVG."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/fd775f06-1cb1-5b98-9ff4-cddffd41213e> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:kwaliteitsscore-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Quality score."@en,
+            "Begrip hoort in de lijst Kwaliteitsscore."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/24889502-4c93-5cf3-abb0-5c1ca68f8ce6> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:organisatie-name a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Name of the organisation."@en,
+            "Naam van de organisatie."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Name"@en,
+            "Naam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 1 ;
+        sh:path foaf:name .
+
+    dsrsh:prioriteit-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Priority."@en,
+            "Begrip hoort in de lijst Prioriteit."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/1d4a43b0-0325-5a77-8e2d-6b6a48ccf213> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:publicatievorm-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Publication form."@en,
+            "Begrip hoort in de lijst Publicatievorm."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/d4c595e7-4c42-5fab-b1bc-c4d68ca4ac91> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:rubriek-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Category."@en,
+            "Begrip hoort in de lijst Rubriek."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/4973202e-d32a-56a8-9fe3-10dc1a77b5fc> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:soort-geometrie-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Geometry type."@en,
+            "Begrip hoort in de lijst Soort geometrie."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/12e44cc0-8d8a-5ab2-a1af-d10881276abb> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:standaard-label a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Name of the exchange model / standard."@en,
+            "Naam van uitwisselmodel / standaard."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Name"@en,
+            "Naam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 1 ;
+        sh:path rdfs:label .
+
+    dsrsh:systeem-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme System."@en,
+            "Begrip hoort in de lijst Systeem."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/b770cc71-9d79-5a25-89e5-77f29fee699f> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:systeemsoort-in-scheme a sh:PropertyShape ;
+        sh:class skos:ConceptScheme ;
+        sh:description "Concept belongs to the scheme Word or data system."@en,
+            "Begrip hoort in de lijst Woord- of datasysteem."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:hasValue <https://linkeddata.cultureelerfgoed.nl/datacatalog/id/begrippenlijst/1434a77a-19cc-5286-ab16-08f03fe68b6d> ;
+        sh:minCount 1 ;
+        sh:name "In concept scheme"@en,
+            "In begrippenlijst"@nl ;
+        sh:nodeKind sh:IRI ;
+        sh:order 4 ;
+        sh:path skos:inScheme .
+
+    dsrsh:wet-label a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Name of the legal resource."@en,
+            "Naam van wet of regeling."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Name"@en,
+            "Naam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 1 ;
+        sh:path rdfs:label .
+
+    dsrgrp:formaat-licentie a sh:PropertyGroup ;
+        rdfs:label "Format and licence"@en,
+            "Formaat en licentie"@nl ;
+        sh:order 2 .
+
+    dsrgrp:rollen a sh:PropertyGroup ;
+        rdfs:label "Roles"@en,
+            "Rollen"@nl ;
+        sh:order 6 .
+
+    dsrgrp:kennisbank a sh:PropertyGroup ;
+        rdfs:label "Knowledge base"@en,
+            "Kennisbank"@nl ;
+        sh:order 7 .
+
+    dsrgrp:toegang a sh:PropertyGroup ;
+        rdfs:label "Access"@en,
+            "Toegang"@nl ;
+        sh:order 1 .
+
+    dsrgrp:kwaliteit a sh:PropertyGroup ;
+        rdfs:label "Quality"@en,
+            "Kwaliteit"@nl ;
+        sh:order 4 .
+
+    dsrgrp:linked-data a sh:PropertyGroup ;
+        rdfs:label "Linked Data"@en,
+            "Linked Data"@nl ;
+        sh:order 5 .
+
+    dsrgrp:publicatie a sh:PropertyGroup ;
+        rdfs:label "Publication"@en,
+            "Publicatie"@nl ;
+        sh:order 2 .
+
+    dsrsh:begrip-definition a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Definition of the concept."@en,
+            "Definitie van het begrip."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:name "Definition"@en,
+            "Definitie"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 3 ;
+        sh:path skos:definition .
+
+    dsrsh:begrip-notation a sh:PropertyShape ;
+        sh:datatype xsd:string ;
+        sh:description "Code or score."@en,
+            "Code of score."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:maxCount 1 ;
+        sh:name "Code"@en,
+            "Code"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 2 ;
+        sh:path skos:notation .
+
+    dsrsh:begrip-pref-label a sh:PropertyShape ;
+        sh:datatype rdf:langString ;
+        sh:description "Preferred label."@en,
+            "Voorkeursterm."@nl ;
+        sh:group dsrgrp:algemeen ;
+        sh:minCount 1 ;
+        sh:name "Name"@en,
+            "Naam"@nl ;
+        sh:nodeKind sh:Literal ;
+        sh:order 1 ;
+        sh:path skos:prefLabel .
+
+    dsrgrp:beheer a sh:PropertyGroup ;
+        rdfs:label "Management"@en,
+            "Beheer"@nl ;
+        sh:order 3 .
+
+    dsrgrp:algemeen a sh:PropertyGroup ;
+        rdfs:label "General"@en,
+            "Algemeen"@nl ;
+        sh:order 1 .
+
+    _:N025b62808ce549d6aba77071dabedf82 rdf:first <http://publications.europa.eu/resource/authority/frequency/ANNUAL> ;
+        rdf:rest _:Nea150b02b88b4a5f885d0cca6af3b636 .
+
+    _:N0b0de00ebe5e4197a4f794cb817db92d rdf:first "Nee" ;
+        rdf:rest _:N6842819c1bee4e7eb290d8b22ea1c0b9 .
+
+    _:N0d083fff94384defab4309f46b5e7b43 rdf:first <http://publications.europa.eu/resource/authority/frequency/WEEKLY> ;
+        rdf:rest _:Ne43a4c0084e64919ad8bed05d9bd182d .
+
+    _:N285b24e8e61e4573a6aa37b0bb702e1e rdf:first <http://publications.europa.eu/resource/authority/data-theme/TRAN> ;
+        rdf:rest _:Nf1ba601e16f64341b80e6ea74355c246 .
+
+    _:N2d3d8e7624dc4c34b7897b49762222d9 rdf:first "Ja" ;
+        rdf:rest _:N90ea7be7f3fa411089aa0652d07f6c1e .
+
+    _:N2e7a94f6d0d5449bb81ddd8f9b176dd8 rdf:first <http://publications.europa.eu/resource/authority/frequency/NEVER> ;
+        rdf:rest _:N709f733175954718b6c3d3169218b7c2 .
+
+    _:N34f172f860284bd69c17796facbc3b25 rdf:first "Ja" ;
+        rdf:rest _:N0b0de00ebe5e4197a4f794cb817db92d .
+
+    _:N3ebe4e6ad9a44a57a701bdcac322e90e rdf:first <http://publications.europa.eu/resource/authority/data-theme/GOVE> ;
+        rdf:rest _:N64dd4ac5883448a1a748ce8ffc8a7c9e .
+
+    _:N40ac69f65eda4ac1b4f8abb055890a38 rdf:first <http://publications.europa.eu/resource/authority/access-right/RESTRICTED> ;
+        rdf:rest _:N42ba529c9d894fa3ba5285cdfeea862d .
+
+    _:N42ba529c9d894fa3ba5285cdfeea862d rdf:first <http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC> ;
+        rdf:rest () .
+
+    _:N42c293e59cdb4b9bad33d12e75179f49 rdf:first <http://publications.europa.eu/resource/authority/data-theme/ECON> ;
+        rdf:rest _:Nd1abc087732047adacc3159455972ef4 .
+
+    _:N5ea5a24743634a5c833058a0ef7870cb rdf:first <http://publications.europa.eu/resource/authority/data-theme/ENVI> ;
+        rdf:rest _:N3ebe4e6ad9a44a57a701bdcac322e90e .
+
+    _:N64dd4ac5883448a1a748ce8ffc8a7c9e rdf:first <http://publications.europa.eu/resource/authority/data-theme/HEAL> ;
+        rdf:rest _:N9ea77633b36540f7ad4a4849f160ca9a .
+
+    _:N6842819c1bee4e7eb290d8b22ea1c0b9 rdf:first "Deels" ;
+        rdf:rest () .
+
+    _:N6a83d680e5f24c04b59e737638e87539 rdf:first <http://publications.europa.eu/resource/authority/data-theme/REGI> ;
+        rdf:rest _:N9addeeae6af14b118e0a8a467246fe1a .
+
+    _:N709f733175954718b6c3d3169218b7c2 rdf:first <http://publications.europa.eu/resource/authority/frequency/UNKNOWN> ;
+        rdf:rest () .
+
+    _:N8887f64e7dae4a28bb9b3bfd8db349dc rdf:first <http://publications.europa.eu/resource/authority/frequency/DAILY> ;
+        rdf:rest _:N0d083fff94384defab4309f46b5e7b43 .
+
+    _:N90ea7be7f3fa411089aa0652d07f6c1e rdf:first "Nee" ;
+        rdf:rest _:Na8170b7ac9cb4c3d96982213b7a4ba7c .
+
+    _:N98687280423848b78073ffc96f8bef4f rdf:first <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
+        rdf:rest _:N40ac69f65eda4ac1b4f8abb055890a38 .
+
+    _:N9addeeae6af14b118e0a8a467246fe1a rdf:first <http://publications.europa.eu/resource/authority/data-theme/SOCI> ;
+        rdf:rest _:Nb2a636411e034e6e8f2b8780ebc625b6 .
+
+    _:N9ea77633b36540f7ad4a4849f160ca9a rdf:first <http://publications.europa.eu/resource/authority/data-theme/INTR> ;
+        rdf:rest _:Nbeb02208d6a848d9808f0aa8db444d0a .
+
+    _:Na8170b7ac9cb4c3d96982213b7a4ba7c rdf:first "Deels" ;
+        rdf:rest () .
+
+    _:Nb2a636411e034e6e8f2b8780ebc625b6 rdf:first <http://publications.europa.eu/resource/authority/data-theme/TECH> ;
+        rdf:rest _:N285b24e8e61e4573a6aa37b0bb702e1e .
+
+    _:Nbb491eb2d512475990e52e6a16c8398b rdf:first <http://publications.europa.eu/resource/authority/data-theme/ENER> ;
+        rdf:rest _:N5ea5a24743634a5c833058a0ef7870cb .
+
+    _:Nbeb02208d6a848d9808f0aa8db444d0a rdf:first <http://publications.europa.eu/resource/authority/data-theme/JUST> ;
+        rdf:rest _:N6a83d680e5f24c04b59e737638e87539 .
+
+    _:Nc39654d64b1f44a0a4b273ec9c2ecaef rdf:first <http://publications.europa.eu/resource/authority/frequency/QUARTERLY> ;
+        rdf:rest _:N025b62808ce549d6aba77071dabedf82 .
+
+    _:Nd1abc087732047adacc3159455972ef4 rdf:first <http://publications.europa.eu/resource/authority/data-theme/EDUC> ;
+        rdf:rest _:Nbb491eb2d512475990e52e6a16c8398b .
+
+    _:Ne2256eb819d241f5b1c7522ab963d72b rdf:first <http://publications.europa.eu/resource/authority/data-theme/AGRI> ;
+        rdf:rest _:N42c293e59cdb4b9bad33d12e75179f49 .
+
+    _:Ne43a4c0084e64919ad8bed05d9bd182d rdf:first <http://publications.europa.eu/resource/authority/frequency/MONTHLY> ;
+        rdf:rest _:Nc39654d64b1f44a0a4b273ec9c2ecaef .
+
+    _:Ne6be01940c15431ebdad6a3f5e493692 rdf:first <http://publications.europa.eu/resource/authority/frequency/CONT> ;
+        rdf:rest _:N8887f64e7dae4a28bb9b3bfd8db349dc .
+
+    _:Nea150b02b88b4a5f885d0cca6af3b636 rdf:first <http://publications.europa.eu/resource/authority/frequency/IRREG> ;
+        rdf:rest _:N2e7a94f6d0d5449bb81ddd8f9b176dd8 .
+
+    _:Nf1ba601e16f64341b80e6ea74355c246 rdf:first <http://publications.europa.eu/resource/authority/data-theme/OP_DATPRO> ;
+        rdf:rest () .
 }
+
