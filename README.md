@@ -97,3 +97,9 @@ python src/validator.py --path 'artifact-data.jsonld' --method 'GET' --status 20
 ## Configureren
 
 De configuratiewaardes van de workflow kunnen aangepast worden in het bestand config/config.yml. Zie config/config.yml voor uitgebreidere documentatie over de mogelijkheden. Verdere configuratie staat in de workflow bestanden in .github/workflows/.
+
+## Valideren Datamodel
+
+```
+ python -c "from rdflib import Dataset; Dataset().parse('datamodel/rce-catalog-datamodel.trig', format='trig'); print('Valid TriG')"
+```
