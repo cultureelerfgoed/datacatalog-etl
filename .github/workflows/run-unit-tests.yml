@@ -1,7 +1,9 @@
-name: 'Run unit tests' 
+name: 'Run unit tests for PRs on main' 
 
 on:
-  pull_request: {}   
+  pull_request: 
+    branches:
+      - main   
 
 jobs:
   run-unit-tests:
