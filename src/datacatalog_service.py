@@ -85,8 +85,8 @@ def make_dataset_description(full_url: str,
         if 'Alle' not in domein:
             spl_tags = try_safe_split_by_str(domein, ';')
             for keyword in spl_tags:
-                if KEYWORD_TERMS.get(keyword):
-                    graph.add((dataset_node, SDO.about, URIRef(KEYWORD_TERMS.get(keyword))))
+                if KEYWORD_TERMS.get(keyword.lower()):
+                    graph.add((dataset_node, SDO.about, URIRef(KEYWORD_TERMS.get(keyword.lower()))))
         else:
             for iri in KEYWORD_TERMS.values():
                 graph.add((dataset_node, SDO.about, URIRef(iri)))

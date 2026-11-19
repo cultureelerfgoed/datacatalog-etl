@@ -55,7 +55,6 @@ def test_parse_json_to_graph_valid():
     '}'
 
     graph = datacatalog_service.parse_json_to_graph(json.loads(desc))
-    graph.print()
     assert len(list(graph.subjects(RDF.type, SDO.Dataset))) == 1
     assert len(list(graph.subjects(RDF.type, SDO.Organization))) == 1
     assert len(list(graph.subjects(RDF.type, SDO.DataDownload))) == 1
@@ -114,6 +113,55 @@ def test_parse_json_to_graph_no_endpoint():
     assert len(list(graph.subjects(RDF.type, SDO.DataDownload))) == 0
     assert len(list(graph.subjects(RDF.type, SDO.ContactPoint))) == 1
 
+def test_domein_to_about():
+    desc = \
+    '{' \
+    '"query": {' \
+    '    "results": {' \
+    '        "Dataset/115": {' \
+    '             "printouts": {' \
+    '                 "Status": [],' \
+    '                 "Batch": [],' \
+    '                 "Naam": ["Tbl Diersoort (standaard) (BoneInfo)" ],' \
+    '                 "Dataset type": [' \
+    '                    "Gestructureerd-hierarchisch"' \
+    '                 ],' \
+    '                 "Omschrijving": [' \
+    '                    "Deze dataset is een"' \
+    '                 ],' \
+    '                 "Zichtbaar in Erfgoedatlas": [' \
+    '                    "Nee"' \
+    '                 ],' \
+    '                 "Dataset": [],' \
+    '                 "Bronurl": [' \
+    '                     "https://www.cultureelerfgoed.nl/onderwerpen/bronnen-en-kaarten/overzicht/"' \
+    '                 ],' \
+    '                 "Dataset creatie": [' \
+    '                     "Inventarisatie"' \
+    '                 ],' \
+    '                 "Dataset domein": [' \
+    '                     "Archeologie"' \
+    '                 ],' \
+    '                 "Dataset rubriek": [' \
+    '                     "Archeologisch Erfgoed"' \
+    '                 ],' \
+    '                 "Dataset beperkingen": [' \
+    '                     "Nee"' \
+    '                 ],' \
+    '                 "Sparql-endpoint": [ "https://api.linkeddata.cultureelerfgoed.nl/datasets/thesauri/archeologischbasisregister/sparql" ]' \
+    '             },' \
+    '             "fulltext": "Dataset/115",' \
+    '             "fullurl": "https://kennis.cultureelerfgoed.nl/index.php/Dataset/115",' \
+    '             "namespace": "0",' \
+    '             "exists": "1",' \
+    '             "displaytitle": "Tbl Diersoort (standaard) (BoneInfo)"' \
+    '        }' \
+    '    }' \
+    '  }' \
+    '}'
+    graph = datacatalog_service.parse_json_to_graph(json.loads(desc))
+    assert URIRef('https://data.cultureelerfgoed.nl/term/id/cht/c32e9420-6176-42cc-a65c-25f671d1ec23') in list(graph.objects(None, SDO.about))
+    
 def test_parse_json_to_graph_beperkingen():
     desc = \
     '{' \
@@ -216,4 +264,3 @@ def test_persistent_iri():
 
     graph = datacatalog_service.parse_json_to_graph(json.loads(desc))
     assert (URIRef('https://linkeddata.cultureelerfgoed.nl/rce/datacatalog/id/dataset/51cf46fe-522b-390d-8620-ba777ccfc086') in graph.subjects(RDF.type, SDO.Dataset))
-    
