@@ -1,9 +1,14 @@
-name: 'Run unit tests for PRs on main' 
+name: 'Run .trig file validation for PRs on main' 
 
 on:
   pull_request: 
     branches:
       - main   
+      - editor-pilot
+  push: 
+    branches:
+      - main   
+      - editor-pilot
 
 jobs:
   run-unit-tests:
@@ -19,8 +24,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run unit tests 
+    - name: Run .trig validation for each file
       run: |
-        python -m pytest -s tests/
-        test_exit_code=$?
-        exit $is_test_passed
+        for file in datamodel/*.trig; do python -c "from rdflib import Dataset; Dataset().parse('$file', format='trig'); print('Valid TriG')"; done
